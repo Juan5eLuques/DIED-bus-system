@@ -3,7 +3,8 @@ package system.clases;
 import java.util.List;
 
 public class Autobus {
-
+	
+	public int id;
 	public String nombre;
 	public String color;
 	public int capacidadMaxima;
@@ -41,5 +42,28 @@ public class Autobus {
 		this.recorridoLinea = recorridoLinea;
 	}
 	
+	public void trayectoColectivo(List<Camino> unCamino) {
+		recorridoLinea = unCamino;
+	};
+
+	public void mostrarTrayecto() {
+		System.out.println("Recorrido " + this.nombre +"\n");
+		for (Camino camino : recorridoLinea) {
+			System.out.println(camino);
+		}
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	@Override
+	public String toString() {
+		return "Autobus [id=" + id + ", nombre=" + nombre + ", color=" + color + ", capacidadMaxima=" + capacidadMaxima
+				+ ", pasajeros=" + pasajeros + ", recorridoLinea=" + recorridoLinea + "]";
+	}
+	
 }
+
 

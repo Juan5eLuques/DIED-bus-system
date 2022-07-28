@@ -7,7 +7,6 @@ public class Parada {
 	private int nroCalle;
 	private String calle;
 	private boolean incidenciaEstado;
-	private Incidencia incidencia;
 	
 	
 	public Parada(int nroParada, int nroCalle, String nombre, boolean incidenciaEstado) {
@@ -57,15 +56,22 @@ public class Parada {
 		this.incidenciaEstado = incidenciaEstado;
 	}
 
-
-	public Incidencia getIncidencia() {
-		return incidencia;
+	public void registrarIncidencia() {
+		
 	}
-
-
-	public void setIncidencia(Incidencia incidencia) {
-		this.incidencia = incidencia;
+	
+	public Camino buscarRuta (Parada otraParada) {
+		return new Camino();
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Parada [nroParada=" + this.getNroParada() + ", nroCalle=" + this.getNroCalle() + ", calle=" + this.getCalle() + ", incidencia="
+				+ this.isIncidenciaEstado() + "]";
+	}
+	
+	public Parada() {
+		
+	}
 }
 
