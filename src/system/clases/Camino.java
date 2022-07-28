@@ -6,6 +6,7 @@ public class Camino {
 	private Parada fin;
 	private double distancia;
 	private double duracion;
+	private boolean activa;
 	
 	public Parada getInicio() {
 		return inicio;
@@ -32,14 +33,29 @@ public class Camino {
 		this.duracion = duracion;
 	}
 	
-	public Camino(Parada inicio, Parada fin, double distancia, double duracion) {
-		super();
-		this.inicio = inicio;
-		this.fin = fin;
-		this.distancia = distancia;
-		this.duracion = duracion;
+	public Camino() {};
+	
+	public Camino(Parada  i, Parada f) {
+		this.setInicio(i);
+		this.setFin(f);
 	}
 	
-	public Camino() {};
+	public Camino(Parada i, Parada  f, double distancia,double duracion, boolean activa) {
+		this.setInicio(i);
+		this.setFin(f);
+		this.setDistancia(distancia);
+		this.setDuracion(duracion);
+		this.activa = activa;
+	}
+	public boolean isActiva() {
+		return activa;
+	}
+	public void setActiva(boolean activa) {
+		this.activa = activa;
+	}
+	
+	public String toString() {
+		return "Inicio: " + this.inicio.toString()+"\n"+ "Final: " + this.fin.toString() + "\n" + "Distancia: " + this.distancia + " - Duracion: " + this.duracion + " - Activa: " + this.activa + "\n\n";
+	}
 	
 }
