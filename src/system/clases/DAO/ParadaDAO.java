@@ -10,26 +10,46 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import DTO.DTOParada;
+
 public class ParadaDAO {
 	
 	private Connection conn;
 	
-	public static void agregarParada(int nroParada,int nroCalle,String calle, boolean incidenciaEstado) {
+	public static void agregarParada(DTOParada nuevaParada) {
 		
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try {
 			PreparedStatement st = con.prepareStatement("INSERT INTO aplicacion_bus.parada VALUES (?, ?, ?, ?)");
-			st.setInt(1,nroParada);
-			st.setBoolean(2, incidenciaEstado);
-			st.setString(3, calle);
-			st.setInt(4, nroCalle);
+			st.setInt(1,nuevaParada.getNroParada());
+			st.setBoolean(2, nuevaParada.isIncidencia());
+			st.setString(3, nuevaParada.getCalle());
+			st.setInt(4, nuevaParada.getNroCalle());
 			st.executeUpdate();
 			st.close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static boolean paradaExiste(int nroParada) {
+		boolean ret= true;
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		try {
+			PreparedStatement st = con.prepareStatement("SELECT * from aplicacion_bus.parada WHERE id=(?");
+			st.setInt(1,nroParada);
+			ResultSet rs = st.executeQuery();
+			st.close();
+			
+			ret = rs.first();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return ret;
 	}
 	
 	public ArrayList<Parada> obtenerParadas(){
