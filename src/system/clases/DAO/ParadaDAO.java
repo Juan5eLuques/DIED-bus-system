@@ -36,18 +36,9 @@ public class ParadaDAO {
 	
 	public static boolean paradaExiste(int nroParada) {
 		boolean ret= true;
-		GestorDB gdb = GestorDB.getInstance();
-		Connection con = gdb.conec;
-		try {
-			PreparedStatement st = con.prepareStatement("SELECT * from aplicacion_bus.parada WHERE id=(?");
-			st.setInt(1,nroParada);
-			ResultSet rs = st.executeQuery();
-			st.close();
-			
-			ret = rs.first();
-		}
-		catch(Exception e) {
-			e.printStackTrace();
+		Parada existe = this.obtenerParada(nroParada);
+		if (existe != null){
+			ret = false;
 		}
 		return ret;
 	}

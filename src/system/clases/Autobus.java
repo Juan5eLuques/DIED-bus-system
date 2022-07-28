@@ -8,7 +8,7 @@ public class Autobus {
 	public String nombre;
 	public String color;
 	public int capacidadMaxima;
-	public int pasajeros;
+	public int asientos;
 	public List<Camino> recorridoLinea;	
 	
 	public String getNombre() {

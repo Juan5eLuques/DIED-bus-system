@@ -50,6 +50,43 @@ public class CaminoDAO {
 		}
 		return null;
 	}
+
+		public final ArrayList<Camino> obtenerCaminosDeUnaLinea(int idLinea){
+		ArrayList<Camino> listaCaminos = new ArrayList <Camino>();
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		try {
+			PreparedStatement st = con.prepareStatement("SELECT * FROM APLICACION_BUS.TRAYECTO where idLinea=?");
+			st.setInt(idLinea);
+			ResultSet rs = st.executeQuery();
+			ResutlSet rs2;
+			idTrayecto = rs.getInt("id");
+
+			con.prepareStatement ("SELECT * FROM APLICACION_BUS.CAMINOTRAYECTO where idTrayecto=? ORDER BY orden DESC");
+			st.setInt(idTrayecto);
+			rs = st.executeQuery();
+			Camino unCamino = new Camino();
+			while (rs.next){
+				con.prepareStatement ("SELECT * FROM APLICACION_BUS.CAMINO WHERE idOrigen=? AND idDestino =?");
+				st.setInt(1,rs.getInt("idOrigen"));
+				st.setInt(2,rs.getInt("idDestino"));
+				rs2 = st.executeQuery();
+				unCamino.setInicio(rs2.getInt("idOrigen"));
+				unCamino.setFin(rs2.getInt("idDestino"));
+				unCamino.setActiva(rs2.getBoolean("activa"));
+				unCamino.setDuracion(rs2.getDouble("duracion"));
+				unCamino.setDistancia(rs2.getDouble("distancia"));
+				listaCaminos.add(unCamino);
+			}
+			rs.close();
+			con.close();
+			return listaCaminos;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	
 	public Camino obtenerUnCamino(Parada inicio, Parada fin ) {
