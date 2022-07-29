@@ -13,7 +13,11 @@ public class AutobusEconomico extends Autobus {
 	public void setPasajerosParados(int pasajerosParados) {
 		this.pasajerosParados = pasajerosParados;
 	}
-	
+
+	public double porcentajeExtra (){
+		return porcentajePorServicio;
+	}
+
 	public void agregarPasajero() {
 		if (this.asientos < this.capacidadMaxima) asientos ++;
 		else {
