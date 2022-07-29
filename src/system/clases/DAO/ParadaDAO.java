@@ -32,6 +32,7 @@ public class ParadaDAO {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		con.close();
 	}
 	
 	public static boolean paradaExiste(int nroParada) {

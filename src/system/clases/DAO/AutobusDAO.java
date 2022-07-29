@@ -54,6 +54,24 @@ public class AutobusDAO {
 		}
 		return null;
     }
+
+	private int crearTrayecto(int idAutobus){
+		int id= 0; 
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		try{
+			PreparedStatement st = con.prepareStatement("INSERT INTO APLICACION_BUS.TRAYECTO (idLinea) values (?);");
+			st.setInt(idAutobus);
+			id = st.executeUpdate(Statement.RETURN_GENERATED_KEYS);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+	private void guardarTrayecto(int idAutobus, ArrayList<camino> listaCaminos){
+		int idTrayecto = crearTrayecto (idAutobus);
+		CaminoDAO.guardarTrayecto(listaCaminos, idTrayecto);
+	}
 	
 	public static void main (String argc[]) {
 		AutobusDAO prueba = new AutobusDAO();

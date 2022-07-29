@@ -14,7 +14,12 @@ public class AutobusSuperior extends Autobus{
 	public boolean isWifi() {
 		return wifi;
 	}
-	
+		public double porcentajeExtra (){
+		double ret = porcentajePorServicio;
+		if (aireAcondicionado) ret +=5;
+		if (wifi) ret +=5;
+		returt ret;
+	}
 	public void agregarPasajero() {
 		if (this.getCapacidadMaxima() < this.getPasajeros()) this.setPasajeros(asientos++);
 			else {

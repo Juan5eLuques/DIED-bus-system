@@ -3,13 +3,15 @@ package system.clases;
 import java.util.List;
 
 public class Autobus {
-	
-	public int id;
-	public String nombre;
-	public String color;
-	public int capacidadMaxima;
-	public int asientos;
-	public List<Camino> recorridoLinea;	
+	private static double montoPorKM = 1;
+	private static double porcentajePorServicio = 2;
+	private int id;
+	private String nombre;
+	private String color;
+	private int capacidadMaxima;
+	private int asientos;
+	private double precioBoleto;
+	private List<Camino> recorridoLinea;	
 	
 	public String getNombre() {
 		return nombre;
@@ -57,6 +59,21 @@ public class Autobus {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+		public double getPrecioBoleto() {
+		return precioBoleto;
+	}
+
+	public double porcentajeExtra ();
+
+	public void setPrecioBoleto() {
+		double precio;
+		double distancia = listaCaminos.stream()
+		.map(unCamino -> unCamino.getDistancia())
+		.reduce(0,(acum, unaDist) -> acum + unaDist);
+
+		precio = distancia * (1+(porcentajeExtra()/100));
+		return precio;
 	}
 	@Override
 	public String toString() {
