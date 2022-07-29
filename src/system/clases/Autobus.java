@@ -67,13 +67,11 @@ public class Autobus {
 	public double porcentajeExtra ();
 
 	public void setPrecioBoleto() {
-		double precio;
 		double distancia = listaCaminos.stream()
 		.map(unCamino -> unCamino.getDistancia())
 		.reduce(0,(acum, unaDist) -> acum + unaDist);
 
-		precio = distancia * (1+(porcentajeExtra()/100));
-		return precio;
+		precioBoleto = distancia * (1+(porcentajeExtra()/100));
 	}
 	@Override
 	public String toString() {
