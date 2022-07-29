@@ -57,22 +57,23 @@ public class CaminoDAO {
 		Connection con = gdb.conec;
 		try {
 			PreparedStatement st = con.prepareStatement("SELECT * FROM APLICACION_BUS.TRAYECTO where idLinea=?");
-			st.setInt(idLinea);
+			st.setInt(1, idLinea);
 			ResultSet rs = st.executeQuery();
-			ResutlSet rs2;
-			idTrayecto = rs.getInt("id");
+			ResultSet rs2;
+			int idTrayecto = rs.getInt("id");
 
 			con.prepareStatement ("SELECT * FROM APLICACION_BUS.CAMINOTRAYECTO where idTrayecto=? ORDER BY orden DESC");
-			st.setInt(idTrayecto);
+			st.setInt(1,idTrayecto);
 			rs = st.executeQuery();
 			Camino unCamino = new Camino();
-			while (rs.next){
+			while (rs.next()){
 				con.prepareStatement ("SELECT * FROM APLICACION_BUS.CAMINO WHERE idOrigen=? AND idDestino =?");
 				st.setInt(1,rs.getInt("idOrigen"));
 				st.setInt(2,rs.getInt("idDestino"));
 				rs2 = st.executeQuery();
-				unCamino.setInicio(rs2.getInt("idOrigen"));
-				unCamino.setFin(rs2.getInt("idDestino"));
+				
+				unCamino.setInicio(new ParadaDAO().obtenerParada(rs.getInt("idOrigen")));
+				unCamino.setInicio(new ParadaDAO().obtenerParada(rs.getInt("idDestino")));
 				unCamino.setActiva(rs2.getBoolean("activa"));
 				unCamino.setDuracion(rs2.getDouble("duracion"));
 				unCamino.setDistancia(rs2.getDouble("distancia"));
