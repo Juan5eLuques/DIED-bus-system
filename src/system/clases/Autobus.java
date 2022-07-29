@@ -30,10 +30,10 @@ public class Autobus {
 		this.capacidadMaxima = capacidadMaxima;
 	}
 	public int getPasajeros() {
-		return pasajeros;
+		return asientos;
 	}
 	public void setPasajeros(int pasajeros) {
-		this.pasajeros = pasajeros;
+		this.asientos = pasajeros;
 	}
 	public List<Camino> getRecorridoLinea() {
 		return recorridoLinea;
@@ -61,7 +61,7 @@ public class Autobus {
 	@Override
 	public String toString() {
 		return "Autobus [id=" + id + ", nombre=" + nombre + ", color=" + color + ", capacidadMaxima=" + capacidadMaxima
-				+ ", pasajeros=" + pasajeros + ", recorridoLinea=" + recorridoLinea + "]";
+				+ ", pasajeros=" + asientos + ", recorridoLinea=" + recorridoLinea + "]";
 	}
 	
 }

@@ -36,7 +36,7 @@ public class ParadaDAO {
 	
 	public static boolean paradaExiste(int nroParada) {
 		boolean ret= true;
-		Parada existe = this.obtenerParada(nroParada);
+		Parada existe = new ParadaDAO().obtenerParada(nroParada);
 		if (existe != null){
 			ret = false;
 		}
@@ -114,7 +114,7 @@ public class ParadaDAO {
 		//Eliminar una parada por ID
 		
 		ParadaDAO prueba = new ParadaDAO();
-		Parada nuevaParada = prueba.obtenerParada(2);
+		Parada nuevaParada = prueba.obtenerParada(3);
 		System.out.println(nuevaParada);
 		
 	}

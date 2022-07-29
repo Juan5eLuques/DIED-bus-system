@@ -4,32 +4,33 @@ import java.util.List;
 
 public class AutobusEconomico extends Autobus {
 
-	private double pasajerosParados;
+	private int pasajerosParados;
 
-	public double getPasajerosParados() {
+	public int getPasajerosParados() {
 		return pasajerosParados;
 	}
 
-	public void setPasajerosParados(double pasajerosParados) {
+	public void setPasajerosParados(int pasajerosParados) {
 		this.pasajerosParados = pasajerosParados;
 	}
 	
 	public void agregarPasajero() {
-		if (this.pasajeros < this.capacidadMaxima) pasajeros ++;
+		if (this.asientos < this.capacidadMaxima) asientos ++;
 		else {
-			if ((this.pasajeros + this.getPasajerosParados())< this.capacidadMaxima*1.4) setPasajerosParados(getPasajerosParados() + 1);
+			if ((this.asientos + this.getPasajerosParados())< this.capacidadMaxima*1.4) setPasajerosParados(getPasajerosParados() + 1);
 				else {
 				System.out.println("El colectivo alcanzo su capacidad maxima");
 				}
 		}
 	}
 
-	public AutobusEconomico (int id, String nombre, String color, int capacidadMaxima,List<Camino> recorrido) {
+	public AutobusEconomico (int id, String nombre, String color, int capacidadMaxima,List<Camino> recorrido, int parados) {
 		this.id = id;
 		this.nombre = nombre;
 		this.color = color;
 		this.capacidadMaxima = capacidadMaxima;
 		this.recorridoLinea = recorrido;
+		this.pasajerosParados = parados;
 	}
 	
 	public AutobusEconomico() {}
@@ -37,7 +38,7 @@ public class AutobusEconomico extends Autobus {
 	@Override
 	public String toString() {
 		return "AutobusEconomico [pasajerosParados=" + pasajerosParados + ", id=" + id + ", nombre=" + nombre
-				+ ", color=" + color + ", capacidadMaxima=" + capacidadMaxima + ", pasajeros=" + pasajeros
+				+ ", color=" + color + ", capacidadMaxima=" + capacidadMaxima + ", pasajeros=" + asientos
 				+ ", recorridoLinea=" + recorridoLinea + "]";
 	}
 	

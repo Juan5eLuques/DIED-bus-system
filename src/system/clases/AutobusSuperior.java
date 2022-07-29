@@ -16,7 +16,7 @@ public class AutobusSuperior extends Autobus{
 	}
 	
 	public void agregarPasajero() {
-		if (this.getCapacidadMaxima() < this.getPasajeros()) this.setPasajeros(pasajeros++);
+		if (this.getCapacidadMaxima() < this.getPasajeros()) this.setPasajeros(asientos++);
 			else {
 				System.out.println("El colectivo alcanzo su capacidad maxima");
 			}
@@ -34,7 +34,7 @@ public class AutobusSuperior extends Autobus{
 	@Override
 	public String toString() {
 		return "AutobusSuperior [aireAcondicionado=" + aireAcondicionado + ", wifi=" + wifi + ", id=" + id + ", nombre="
-				+ nombre + ", color=" + color + ", capacidadMaxima=" + capacidadMaxima + ", pasajeros=" + pasajeros
+				+ nombre + ", color=" + color + ", capacidadMaxima=" + capacidadMaxima + ", pasajeros=" + asientos
 				+ ", recorridoLinea=" + recorridoLinea + "]";
 	}
 	

@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import GUI.GUIAltaParada;
 import system.gestores.GestorDB;
 
 public class app {
@@ -95,6 +96,7 @@ public class app {
 			GestorDB gdb = GestorDB.getInstance();
 			Connection con = gdb.crearConexion();
 			JOptionPane.showMessageDialog(null, "Base de datos conectada.", "Conexión establecida", JOptionPane.INFORMATION_MESSAGE);
+			GUIAltaParada.main(args);
 			con.close();
 		} catch (ClassNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "No Hay Conexión con la Base de Datos.", "Error", JOptionPane.WARNING_MESSAGE);
