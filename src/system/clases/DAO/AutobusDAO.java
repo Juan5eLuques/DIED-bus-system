@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import system.clases.Autobus;
 import system.clases.AutobusEconomico;
 import system.clases.AutobusSuperior;
+import system.clases.Camino;
 import system.gestores.GestorDB;
 
 public class AutobusDAO {
@@ -61,14 +64,15 @@ public class AutobusDAO {
 		Connection con = gdb.conec;
 		try{
 			PreparedStatement st = con.prepareStatement("INSERT INTO APLICACION_BUS.TRAYECTO (idLinea) values (?);");
-			st.setInt(idAutobus);
-			id = st.executeUpdate(Statement.RETURN_GENERATED_KEYS);
+			st.setInt(1,idAutobus);
+			//id = st.executeUpdate(Statement.RETURN_GENERATED_KEYS);	
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}	
+		return id;
 	}
-	private void guardarTrayecto(int idAutobus, ArrayList<camino> listaCaminos){
+	private void guardarTrayecto(int idAutobus, ArrayList<Camino> listaCaminos){
 		int idTrayecto = crearTrayecto (idAutobus);
 		CaminoDAO.guardarTrayecto(listaCaminos, idTrayecto);
 	}

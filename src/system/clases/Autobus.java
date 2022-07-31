@@ -2,16 +2,16 @@ package system.clases;
 
 import java.util.List;
 
-public class Autobus {
-	private static double montoPorKM = 1;
-	private static double porcentajePorServicio = 2;
-	private int id;
-	private String nombre;
-	private String color;
-	private int capacidadMaxima;
-	private int asientos;
-	private double precioBoleto;
-	private List<Camino> recorridoLinea;	
+public abstract class Autobus {
+	protected static double montoPorKM = 1;
+	protected static double porcentajePorServicio = 2;
+	protected int id;
+	protected String nombre;
+	protected String color;
+	protected int capacidadMaxima;
+	protected int asientos;
+	protected double precioBoleto;
+	protected List<Camino> recorridoLinea;	
 	
 	public String getNombre() {
 		return nombre;
@@ -64,12 +64,12 @@ public class Autobus {
 		return precioBoleto;
 	}
 
-	public double porcentajeExtra ();
+	public abstract double porcentajeExtra ();
 
 	public void setPrecioBoleto() {
-		double distancia = listaCaminos.stream()
+		double distancia = recorridoLinea.stream()
 		.map(unCamino -> unCamino.getDistancia())
-		.reduce(0,(acum, unaDist) -> acum + unaDist);
+		.reduce(0.0,(acum, unaDist) -> acum + unaDist);
 
 		precioBoleto = distancia * (1+(porcentajeExtra()/100));
 	}

@@ -109,13 +109,13 @@ public class CaminoDAO {
 		return null;
 	}
 
-		public Camino obtenerCaminosDesdeParada(Parada inicio) {
+		public ArrayList<Camino> obtenerCaminosDesdeParada(Parada inicio) {
 		ArrayList<Camino> listaCaminos = new ArrayList <Camino>();
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try {
 			PreparedStatement st = con.prepareStatement("SELECT * FROM aplicacion_bus.camino WHERE idorigen=?");
-			st.getInt(1,inicio.getNroParada());
+			st.setInt(1,inicio.getNroParada());
 			ResultSet rs = st.executeQuery();
 			while (rs.next()){
 				Camino nuevoCamino = this.transformarACamino(rs);
@@ -131,22 +131,35 @@ public class CaminoDAO {
 		return listaCaminos;
 	}
 
-	public void guardarTrayecto(ArrayList<Camino> listaCaminos, int idTrayecto){
-		int orden = 1;
-		for (Camino unCamino:listaCaminos){
-		GestorDB gdb = GestorDB.getInstance();
-		Connection con = gdb.conec;
-		PreparedStatement st = con.prepareStatement("INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (?,?,?,?)");
-		st.setInt(1, unCamino.getInicio.getNroParada);
-		st.setInt(2, unCamino.getFin.getNroParada);
-		st.setInt(3, idTrayecto);
-		st.setInt(4, orden);
-		st.executeUpdate();
-		orden ++;
-		}
-		st.close();
-		con.close();
-	}
+		public static void guardarTrayecto(ArrayList<Camino> listaCaminos, int idTrayecto){
+			int orden = 1;
+			GestorDB gdb = GestorDB.getInstance();
+			Connection con = gdb.conec;
+			for (Camino unCamino:listaCaminos){
+				PreparedStatement st;
+				try {
+					st = con.prepareStatement("INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (?,?,?,?)");
+					st.setInt(1, unCamino.getInicio().getNroParada());
+					st.setInt(2, unCamino.getFin().getNroParada());
+					st.setInt(3, idTrayecto);
+					st.setInt(4, orden);
+					st.executeUpdate();
+					orden ++;
+				} 
+				catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					try {
+						con.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+			}
+
 	
 	public static void main(String[] argc) {
 		

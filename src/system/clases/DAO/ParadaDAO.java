@@ -28,11 +28,12 @@ public class ParadaDAO {
 			st.setInt(4, nuevaParada.getNroCalle());
 			st.executeUpdate();
 			st.close();
+			con.close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		con.close();
+
 	}
 	
 	public static boolean paradaExiste(int nroParada) {
