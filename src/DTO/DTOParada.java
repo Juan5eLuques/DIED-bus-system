@@ -5,7 +5,7 @@ public class DTOParada {
 	private int nroParada;
 	private int nroCalle;
 	private String calle;
-	private boolean incidencia;
+	private boolean activa;
 	
 	public int getNroParada() {
 		return nroParada;
@@ -25,11 +25,11 @@ public class DTOParada {
 	public void setCalle(String calle) {
 		this.calle = calle;
 	}
-	public boolean isIncidencia() {
-		return incidencia;
+	public boolean isActiva() {
+		return activa;
 	}
-	public void setIncidencia(boolean incidenciaEstado) {
-		this.incidencia = incidenciaEstado;
+	public void setIncidencia(boolean activa) {
+		this.activa = activa;
 	}
 	
 }

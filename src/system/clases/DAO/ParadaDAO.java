@@ -23,7 +23,7 @@ public class ParadaDAO {
 		try {
 			PreparedStatement st = con.prepareStatement("INSERT INTO aplicacion_bus.parada VALUES (?, ?, ?, ?)");
 			st.setInt(1,nuevaParada.getNroParada());
-			st.setBoolean(2, nuevaParada.isIncidencia());
+			st.setBoolean(2, nuevaParada.isActiva());
 			st.setString(3, nuevaParada.getCalle());
 			st.setInt(4, nuevaParada.getNroCalle());
 			st.executeUpdate();
@@ -39,7 +39,7 @@ public class ParadaDAO {
 	public static boolean paradaExiste(int nroParada) {
 		boolean ret= true;
 		Parada existe = new ParadaDAO().obtenerParada(nroParada);
-		if (existe != null){
+		if (existe.getNroParada() != -1){
 			ret = false;
 		}
 		return ret;
@@ -52,7 +52,7 @@ public class ParadaDAO {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try {
-			PreparedStatement st = con.prepareStatement("SELECT * FROM aplicacion_bus.parada VALUES");
+			PreparedStatement st = con.prepareStatement("SELECT * FROM APLICACION_BUS.PARADA");
 			ResultSet rs = st.executeQuery();
 			while(rs.next()) {
 				Parada parada = new Parada(rs.getInt("id"),rs.getInt("numero"),rs.getString("calle"),rs.getBoolean("activa"));
@@ -68,7 +68,7 @@ public class ParadaDAO {
 		return null;
 	}
 	
-	public void eliminarParada(int idParada) {
+	public static void eliminarParada(int idParada) {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try {
@@ -84,40 +84,45 @@ public class ParadaDAO {
 		}
 	}
 	
-	public Parada obtenerParada(int nroParada) {
+	public static Parada obtenerParada(int nroParada) {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
+		Parada paradaResult = new Parada();
+		paradaResult.setNroParada(-1);
 		try {
 			PreparedStatement st = con.prepareStatement("SELECT id, activa, calle, numero FROM aplicacion_bus.parada WHERE id=" + nroParada);
 			ResultSet rs = st.executeQuery();
-			if (rs.next()) {
-				Parada parada = new Parada(rs.getInt("id"),rs.getInt("numero"),rs.getString("calle"),rs.getBoolean("activa"));
-				return parada;
-			}
+				if (rs.next()) {
+					paradaResult.setNroParada(rs.getInt("id"));
+					paradaResult.setCalle(rs.getString("calle"));
+					paradaResult.setNroCalle(rs.getInt("numero"));
+					paradaResult.setIncidenciaEstado(rs.getBoolean("activa"));
+				}
+
 			rs.close();
 			con.close();
 		}
 		catch (Exception e ) {
 			e.printStackTrace();
 		}
-		return null;
+		return paradaResult;
 	}
 	
 	public static void main(String[] argc) { 
 		
 		//ObtenerParadas
 		
-		/*ParadaDAO prueba = new ParadaDAO();
+		ParadaDAO prueba = new ParadaDAO();
 		ArrayList<Parada> list;
 		list = prueba.obtenerParadas();
-		System.out.println(list);*/
+		System.out.println(list);
 		
 		
 		//Eliminar una parada por ID
 		
-		ParadaDAO prueba = new ParadaDAO();
+		/*ParadaDAO prueba = new ParadaDAO();
 		Parada nuevaParada = prueba.obtenerParada(3);
-		System.out.println(nuevaParada);
+		System.out.println(nuevaParada);*/
 		
 	}
 	

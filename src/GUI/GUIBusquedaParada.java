@@ -2,41 +2,39 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import DTO.DTOParada;
-import net.miginfocom.swing.MigLayout;
+import system.clases.Parada;
 import system.clases.DAO.ParadaDAO;
 import system.gestores.GestorParada;
-
-import javax.swing.JTextField;
-import java.awt.Component;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
 
-public class GUIAltaParada extends JFrame {
+public class GUIBusquedaParada extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField TFNroParada;
 	private JTextField TFCalle;
 	private JTextField TFNumero;
-
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUIAltaParada frame = new GUIAltaParada();
+					GUIBusquedaParada frame = new GUIBusquedaParada();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,8 +46,7 @@ public class GUIAltaParada extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUIAltaParada() {
-		setTitle("Dar de alta una parada");
+	public GUIBusquedaParada() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -58,33 +55,59 @@ public class GUIAltaParada extends JFrame {
 		
 		//TEXTFIELDS
 		TFNroParada = new JTextField();
+		TFNroParada.setBounds(15, 42, 86, 20);
 		TFNroParada.setColumns(10);
 		
 		TFCalle = new JTextField();
+		TFCalle.setEditable(false);
+		TFCalle.setBounds(15, 100, 86, 20);
 		TFCalle.setColumns(10);
 		
 		TFNumero = new JTextField();
+		TFNumero.setEditable(false);
+		TFNumero.setBounds(119, 100, 86, 20);
 		TFNumero.setColumns(10);
 		
 		//BOTONES
-		JButton btnAgregar = new JButton("Agregar");
-		ActionListener actionAgregar = e ->{
-			DTOParada nuevaParada = new DTOParada();
-			nuevaParada.setNroParada(Integer.parseInt(TFNroParada.getText()));
-			nuevaParada.setCalle(TFCalle.getText());
-			nuevaParada.setNroCalle(Integer.parseInt(TFNumero.getText()));
-			
-			GestorParada.agregarParada(nuevaParada); 
+		JButton btnEliminar = new JButton("Eliminar");
+		ActionListener actionEliminar = e -> {
+			ParadaDAO.eliminarParada(Integer.parseInt(TFNroParada.getText()));
 		};
-		btnAgregar.addActionListener(actionAgregar);
-		
+		btnEliminar.addActionListener(actionEliminar);
+		btnEliminar.setEnabled(false);
+
+		btnEliminar.setBounds(15, 138, 71, 23);		
 		JButton btnBack = new JButton("Atras");
+		btnBack.setBounds(119, 138, 59, 23);
 		
 		JLabel lblNroParada = new JLabel("Numero de parada");
+		lblNroParada.setBounds(15, 22, 89, 14);
 		
 		JLabel lblCalle = new JLabel("Calle");
+		lblCalle.setBounds(15, 80, 23, 14);
 		
 		JLabel lblNumero = new JLabel("Numero");
+		lblNumero.setBounds(119, 80, 37, 14);
+		contentPane.setLayout(null);
+		
+		JButton btnBuscar = new JButton("Buscar");
+
+		ActionListener actionBuscar = e ->{
+			System.out.println("Buscar parada nro: "+TFNroParada.getText()); //BORRAR
+			Parada paradaBuscada = ParadaDAO.obtenerParada(Integer.parseInt(TFNroParada.getText()));
+			if (paradaBuscada.getNroParada() == -1) {
+				System.out.println("No se encontro la parada");
+			}
+			else {
+				TFNumero.setText(Integer.toString(paradaBuscada.getNroCalle()));
+				TFCalle.setText(paradaBuscada.getCalle());
+				btnEliminar.setEnabled(true);
+				}
+		};
+		btnBuscar.addActionListener(actionBuscar); 
+		btnBuscar.setBounds(119, 41, 89, 23);
+		contentPane.add(btnBuscar);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -97,13 +120,13 @@ public class GUIAltaParada extends JFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(TFCalle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnAgregar))
+								.addComponent(btnEliminar))
 							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnBack)
 								.addComponent(lblNumero)
 								.addComponent(TFNumero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(221, Short.MAX_VALUE))
+					.addContainerGap(224, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -122,10 +145,13 @@ public class GUIAltaParada extends JFrame {
 						.addComponent(TFNumero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnAgregar)
+						.addComponent(btnEliminar)
 						.addComponent(btnBack))
 					.addContainerGap(95, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
+		
+		
 	}
+
 }

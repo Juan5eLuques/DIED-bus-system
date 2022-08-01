@@ -18,9 +18,9 @@ public class GestorParada {
 		return GParada;
 		}
 	
-	public/*boolean*/void agregarParada(DTOParada nuevaParada) {
+	public/*boolean*/static void agregarParada(DTOParada nuevaParada) {
 		if (!ParadaDAO.paradaExiste(nuevaParada.getNroParada())) {
-			//con el gestor de pantalla tirar error de que el nro de parada esta ocupado
+			System.out.println("Id actualmente en uso");
 		}
 		else {
 		ParadaDAO.agregarParada(nuevaParada);
