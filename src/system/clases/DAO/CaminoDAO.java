@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import DTO.DTOParada;
 import system.clases.Camino;
 import system.clases.Parada;
 import system.gestores.GestorDB;
