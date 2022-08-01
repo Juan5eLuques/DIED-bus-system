@@ -16,6 +16,7 @@ public class ParadaDAO {
 	
 	private Connection conn;
 	
+	//agrega una nueva parada
 	public static void agregarParada(DTOParada nuevaParada) {
 		
 		GestorDB gdb = GestorDB.getInstance();
@@ -36,6 +37,7 @@ public class ParadaDAO {
 
 	}
 	
+	//Chequea existencia de una parada
 	public static boolean paradaExiste(int nroParada) {
 		boolean ret= true;
 		Parada existe = new ParadaDAO().obtenerParada(nroParada);
@@ -45,6 +47,7 @@ public class ParadaDAO {
 		return ret;
 	}
 	
+	//Obtiene todas las paradas de la BD
 	public ArrayList<Parada> obtenerParadas(){
 		
 		ArrayList<Parada> lista = new ArrayList<Parada>();
@@ -68,6 +71,8 @@ public class ParadaDAO {
 		return null;
 	}
 	
+	//Elimina una parada con id : idParada. 
+	//Fixear comportamiento si no la puede eliminar (siempre tira el mensaje aun que si pueda eliminarla).
 	public static void eliminarParada(int idParada) {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
@@ -84,6 +89,7 @@ public class ParadaDAO {
 		}
 	}
 	
+	//Devuelve la parada con id nroParada. Si no encuentra parada con ese numero, devuelve una con nroParada = -1
 	public static Parada obtenerParada(int nroParada) {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
