@@ -27,4 +27,20 @@ public class GestorParada {
 		}
 	}
 
+	public static void eliminarParada (int idParada){
+		if (ParadaDAO.paradaExiste(idParada)){
+			ArrayList<Camino> listaCaminos = obtenerCaminosQueIncluyenParada (idParada);
+			if (listaCaminos.isEmpty()){
+				ParadaDAO.eliminarParada(idParada);
+			}
+			else{
+				//MSG::Hay caminos que incluyen la parada. Se eliminaran. Seguro ? 
+				GestorCamino.eliminarListaCaminos(listaCaminos);
+			}
+		}
+		else {
+			//MSG::No existe una parada con este id
+		}
+	}
+
 }
