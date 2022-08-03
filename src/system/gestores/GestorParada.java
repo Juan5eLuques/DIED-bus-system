@@ -1,7 +1,10 @@
 package system.gestores;
 
+import java.util.ArrayList;
+
 import DTO.DTOParada;
 import system.clases.DAO.ParadaDAO;
+import system.clases.Camino;
 
 public class GestorParada {
 	
@@ -29,7 +32,7 @@ public class GestorParada {
 
 	public static void eliminarParada (int idParada){
 		if (ParadaDAO.paradaExiste(idParada)){
-			ArrayList<Camino> listaCaminos = obtenerCaminosQueIncluyenParada (idParada);
+			ArrayList<Camino> listaCaminos = CaminoDAO.obtenerCaminosQueIncluyenParada(idParada);
 			if (listaCaminos.isEmpty()){
 				ParadaDAO.eliminarParada(idParada);
 			}

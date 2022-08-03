@@ -1,9 +1,12 @@
 package system.gestores;
 
+import java.util.ArrayList;
+
 import DTO.DTOCamino;
 import DTO.DTOParada;
 import system.clases.DAO.ParadaDAO;
 import system.clases.DAO.CaminoDAO;
+import system.clases.Camino;
 
 public class GestorCamino {
 	
@@ -20,7 +23,7 @@ public class GestorCamino {
 		return GCamino;
 		}
 
-        public static void eliminarCaminos (){
+        public static void eliminarCaminos (ArrayList<Camino> lista){
             
         }
 }
