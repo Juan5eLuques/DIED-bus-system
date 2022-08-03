@@ -8,13 +8,13 @@ public class DTOCamino {
 	private boolean activa;
 	
 	public int getIdOrigen() {
-		return inicio;
+		return idOrigen;
 	}
 	public void setIdOrigen(int idParada) {
 		this.idOrigen = idParada;
 	}
 	public int getIdDestino() {
-		return fin;
+		return idDestino;
 	}
 	public void setIdDestino(int idParada) {
 		this.idDestino = idParada;
