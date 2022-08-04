@@ -9,7 +9,7 @@ import system.clases.DAO.CaminoDAO;
 import system.clases.Camino;
 
 public class GestorCamino {
-	
+
 	//---------- Patron Singleton
 	private static GestorCamino GCamino ; // Patron Singleton -- Unica instancia tipo gestor creada.
 
@@ -21,9 +21,14 @@ public class GestorCamino {
 			GCamino = new GestorCamino();
 		}
 		return GCamino;
-		}
+	}
 
-        public static void eliminarCaminos (ArrayList<Camino> lista){
-            
-        }
+	public static void eliminarCaminos (ArrayList<DTOCamino> lista){
+
+	}
+	
+	public static ArrayList<DTOCamino> caminosQueInicianEnParada (int idParada){
+		return CaminoDAO.obtenerCaminosDesdeParada(idParada);
+	}
+
 }

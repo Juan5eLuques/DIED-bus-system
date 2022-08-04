@@ -2,9 +2,11 @@ package system.gestores;
 
 import java.util.ArrayList;
 
+import DTO.DTOCamino;
 import DTO.DTOParada;
+import system.clases.DAO.CaminoDAO;
 import system.clases.DAO.ParadaDAO;
-import system.clases.Camino;
+import system.clases.Parada;
 
 public class GestorParada {
 	
@@ -32,18 +34,22 @@ public class GestorParada {
 
 	public static void eliminarParada (int idParada){
 		if (ParadaDAO.paradaExiste(idParada)){
-			ArrayList<Camino> listaCaminos = CaminoDAO.obtenerCaminosQueIncluyenParada(idParada);
+			ArrayList<DTOCamino> listaCaminos = CaminoDAO.obtenerCaminosQueIncluyenParada(idParada);
 			if (listaCaminos.isEmpty()){
 				ParadaDAO.eliminarParada(idParada);
 			}
 			else{
 				//MSG::Hay caminos que incluyen la parada. Se eliminaran. Seguro ? 
-				GestorCamino.eliminarListaCaminos(listaCaminos);
+				GestorCamino.eliminarCaminos(listaCaminos);
 			}
 		}
 		else {
 			//MSG::No existe una parada con este id
 		}
+	}
+	
+	public static Parada obtenerParada(int idParada) {
+		return ParadaDAO.obtenerParada(idParada);
 	}
 
 }

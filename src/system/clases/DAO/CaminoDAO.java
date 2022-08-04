@@ -149,7 +149,7 @@ public class CaminoDAO {
 		return null;
 	}
 		//Devuelve un array de todos los caminos que tienen a la parada inicio como origen
-		public ArrayList<DTOCamino> obtenerCaminosDesdeParada(int idParada) {
+		public static ArrayList<DTOCamino> obtenerCaminosDesdeParada(int idParada) {
 		ArrayList<DTOCamino> listaCaminos = new ArrayList <DTOCamino>();
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
@@ -158,7 +158,7 @@ public class CaminoDAO {
 			st.setInt(1,idParada);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()){
-				DTOCamino nuevoCamino = this.transformarADTOCamino(rs);
+				DTOCamino nuevoCamino = transformarADTOCamino(rs);
 
 				listaCaminos.add(nuevoCamino);
 			}
@@ -171,7 +171,7 @@ public class CaminoDAO {
 		return listaCaminos;
 	}
 		//Devuelve un array de todos los caminos que tienen a la parada fin como destino
-			public ArrayList<DTOCamino> obtenerCaminosHastaParada(int idParada) {
+			public static ArrayList<DTOCamino> obtenerCaminosHastaParada(int idParada) {
 		ArrayList<DTOCamino> listaCaminos = new ArrayList <DTOCamino>();
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
@@ -180,7 +180,7 @@ public class CaminoDAO {
 			st.setInt(1,idParada);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()){
-				DTOCamino nuevoCamino = this.transformarADTOCamino(rs);
+				DTOCamino nuevoCamino = transformarADTOCamino(rs);
 
 				listaCaminos.add(nuevoCamino);
 			}
@@ -193,7 +193,7 @@ public class CaminoDAO {
 		return listaCaminos;
 	}
 
-		public ArrayList<DTOCamino> obtenerCaminosQueIncluyenParada(int idParada){
+		public static ArrayList<DTOCamino> obtenerCaminosQueIncluyenParada(int idParada){
 			ArrayList<DTOCamino> listaCaminos = new ArrayList<DTOCamino>();
 			listaCaminos.addAll(obtenerCaminosDesdeParada(idParada));
 			listaCaminos.addAll(obtenerCaminosHastaParada(idParada));
@@ -256,7 +256,7 @@ public class CaminoDAO {
 	}
 
 	//Elimina todos los caminos asociados a una parada
-	public void eliminarCaminosConParada (int idParada){
+	public static void eliminarCaminosConParada (int idParada){
 		ArrayList<DTOCamino> listaCaminos = null;
 		try {
 			listaCaminos = obtenerCaminosQueIncluyenParada(idParada);
