@@ -64,7 +64,7 @@ public class GestorDB {
 
 		Connection conexion = DriverManager.getConnection(URL, USER, PASS);
 		if (conexion != null){
-			System.out.print("Conexion establecida...\n\n");
+			//System.out.print("Conexion establecida...\n\n");
 			return conexion;
 
 		}
