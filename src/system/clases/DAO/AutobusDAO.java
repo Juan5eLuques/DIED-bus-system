@@ -15,6 +15,27 @@ import system.gestores.GestorDB;
 
 public class AutobusDAO {
 	
+	public ArrayList<Integer> obtenerCantidadDeLineas(){
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		ArrayList<Integer> idColectivos = new ArrayList<Integer>();
+		try {
+			PreparedStatement st = con.prepareStatement("SELECT id FROM aplicacion_bus.LINEA");
+			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				idColectivos.add(rs.getInt("id"));
+			}
+			con.close();
+			rs.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return idColectivos;
+	}
+	
+	
+	
 	public Autobus obtenerAutobus (int id){
 	
     	GestorDB gdb = GestorDB.getInstance();
@@ -79,7 +100,8 @@ public class AutobusDAO {
 	
 	public static void main (String argc[]) {
 		AutobusDAO prueba = new AutobusDAO();
-		System.out.println(prueba.obtenerAutobus(3));
+		System.out.println(prueba.obtenerCantidadDeLineas());
 	}
 	
 }
+ 

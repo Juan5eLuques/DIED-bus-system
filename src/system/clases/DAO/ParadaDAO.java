@@ -7,9 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
+import DTO.DTOCamino;
 import DTO.DTOParada;
 
 public class ParadaDAO {
@@ -47,6 +50,7 @@ public class ParadaDAO {
 		return ret;
 	}
 	
+	
 	//Obtiene todas las paradas de la BD
 	public ArrayList<Parada> obtenerParadas(){
 		
@@ -72,17 +76,20 @@ public class ParadaDAO {
 	}
 	
 	//Elimina una parada con id : idParada. 
-	//Fixear comportamiento si no la puede eliminar (siempre tira el mensaje aun que si pueda eliminarla).
 	public static void eliminarParada(int idParada) {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try {
 			PreparedStatement st = con.prepareStatement("DELETE FROM aplicacion_bus.parada WHERE id=" + idParada);
-			if(st.execute()!=true) {
+			int eliminado=st.executeUpdate();
+			if(!(eliminado>0)) {
 				JOptionPane.showMessageDialog(null, "Ocurrion un error, la <Parada> no existe.", "Error", JOptionPane.WARNING_MESSAGE);
-				st.close();
-				con.close();
 			}
+			else {
+				st = con.prepareStatement("SELECT * FROM aplicacion_bus.caminotrayecto");
+			}
+			st.close();
+			con.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -114,18 +121,80 @@ public class ParadaDAO {
 		return paradaResult;
 	}
 	
+	public static boolean paradaPerteneceATrayecto(int nroParada) {
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		Set<Integer> lineasQueIncluyenParada = new HashSet<Integer>();
+		
+		try {
+			
+			PreparedStatement st = con.prepareStatement("SELECT idTrayecto FROM aplicacion_bus.caminotrayecto WHERE idOrigen=? OR idDestino=?");
+			st.setInt(1, nroParada);
+			st.setInt(2, nroParada);
+			ResultSet rs = st.executeQuery();
+			
+			while(rs.next()) {
+				lineasQueIncluyenParada.add(rs.getInt("idTrayecto"));
+			}
+			
+			if (lineasQueIncluyenParada.size()==0) {
+				rs.close();
+				con.close();
+				return false;
+			}
+			
+			else {
+				for(Integer nroLinea : lineasQueIncluyenParada) {
+				reasignarParada(nroLinea,nroParada);
+				}
+				rs.close();
+				con.close();
+				return true;
+			}
+		}
+	
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
+	public static void reasignarParada(int nroLinea,int nroParada) {
+		Parada paradaEliminar = obtenerParada(nroParada);
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		try {
+			PreparedStatement st = con.prepareStatement("SELECT idOrigen FROM aplicacion_bus.caminotrayecto WHERE idTrayecto=? AND idDestino=?");
+			st.setInt(1, nroLinea);
+			st.setInt(2, nroParada);
+			ResultSet rs = st.executeQuery();
+			if(rs.next()) {
+				ArrayList<DTOCamino> listaCaminosDesdeOrigen=CaminoDAO.obtenerCaminosDesdeParada(rs.getInt("idOrigen"));
+				for(DTOCamino camino: listaCaminosDesdeOrigen) {
+					System.out.println("LINEA NUMERO: " + nroLinea + "\nCamino " + listaCaminosDesdeOrigen.indexOf(camino) + ": "+ camino.getIdOrigen() + " ---- " + camino.getIdDestino() +"\n");
+				}
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] argc) { 
 		
 		//ObtenerParadas
 		
 		ParadaDAO prueba = new ParadaDAO();
 		ArrayList<Parada> list;
-		list = prueba.obtenerParadas();
-		System.out.println(list);
+		/*list = prueba.obtenerParadas();
+		System.out.println(list);*/
 		
 		
 		//Eliminar una parada por ID
 		
+		//prueba.eliminarParada(210);
+		prueba.paradaPerteneceATrayecto(95);
 		/*ParadaDAO prueba = new ParadaDAO();
 		Parada nuevaParada = prueba.obtenerParada(3);
 		System.out.println(nuevaParada);*/

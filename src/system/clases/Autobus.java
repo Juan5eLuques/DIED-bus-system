@@ -2,6 +2,8 @@ package system.clases;
 
 import java.util.List;
 
+import DTO.DTOCamino;
+
 public abstract class Autobus {
 	protected static double montoPorKM = 1;
 	protected static double porcentajePorServicio = 2;
@@ -11,7 +13,7 @@ public abstract class Autobus {
 	protected int capacidadMaxima;
 	protected int asientos;
 	protected double precioBoleto;
-	protected List<Camino> recorridoLinea;	
+	protected List<DTOCamino> recorridoLinea;	
 	
 	public String getNombre() {
 		return nombre;
@@ -37,20 +39,20 @@ public abstract class Autobus {
 	public void setPasajeros(int pasajeros) {
 		this.asientos = pasajeros;
 	}
-	public List<Camino> getRecorridoLinea() {
+	public List<DTOCamino> getRecorridoLinea() {
 		return recorridoLinea;
 	}
-	public void setRecorridoLinea(List<Camino> recorridoLinea) {
+	public void setRecorridoLinea(List<DTOCamino> recorridoLinea) {
 		this.recorridoLinea = recorridoLinea;
 	}
 	
-	public void trayectoColectivo(List<Camino> unCamino) {
+	public void trayectoColectivo(List<DTOCamino> unCamino) {
 		recorridoLinea = unCamino;
 	};
 
 	public void mostrarTrayecto() {
 		System.out.println("Recorrido " + this.nombre +"\n");
-		for (Camino camino : recorridoLinea) {
+		for (DTOCamino camino : recorridoLinea) {
 			System.out.println(camino);
 		}
 	}
