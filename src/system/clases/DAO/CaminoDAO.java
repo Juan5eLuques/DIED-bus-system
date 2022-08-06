@@ -95,27 +95,25 @@ public class CaminoDAO {
 		//Primero obtiene el id del trayecto asociado a la linea de la tabla TRAYECTO.
 		//Segundo, obtiene la lista de caminos asociados al trayecto de la tabla CAMINOTRAYECTO.
 		//Por ultimo, transforma cada camino a objeto y lo guarda en el arreglo de retorno.
-		public final ArrayList<Camino> obtenerCaminosDeUnaLinea(int idLinea){
-		ArrayList<Camino> listaCaminos = new ArrayList <Camino>();
+	
+		public final static ArrayList<DTOCamino> obtenerCaminosDeUnaLinea(int idLinea){
+		ArrayList<DTOCamino> listaCaminos = new ArrayList <DTOCamino>();
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try {
 			PreparedStatement st = con.prepareStatement("SELECT * FROM APLICACION_BUS.TRAYECTO where idLinea=?");
 			st.setInt(1, idLinea);
+			int idTrayecto=-1;
 			ResultSet rs = st.executeQuery();
 			ResultSet rs2;
-			int idTrayecto = rs.getInt("id");
-
-			con.prepareStatement ("SELECT * FROM APLICACION_BUS.CAMINOTRAYECTO where idTrayecto=? ORDER BY orden DESC");
+			if(rs.next()) {
+			idTrayecto = rs.getInt("id");
+			}
+			st=con.prepareStatement ("SELECT * FROM APLICACION_BUS.CAMINOTRAYECTO where idTrayecto=? ORDER BY orden DESC");
 			st.setInt(1,idTrayecto);
-			rs = st.executeQuery();
-			while (rs.next()){
-				con.prepareStatement ("SELECT * FROM APLICACION_BUS.CAMINO WHERE idOrigen=? AND idDestino =?");
-				st.setInt(1,rs.getInt("idOrigen"));
-				st.setInt(2,rs.getInt("idDestino"));
-				rs2 = st.executeQuery();
-				
-				listaCaminos.add(transformarRsACamino(rs2));
+			rs2 = st.executeQuery();
+			while (rs2.next()){
+				listaCaminos.add((obtenerUnCamino(rs2.getInt("idOrigen"),rs2.getInt("idDestino"))));
 			}
 			rs.close();
 			con.close();
@@ -128,7 +126,7 @@ public class CaminoDAO {
 	}
 	
 	//Si existe, devuelve en camino que tiene como origen y destino las paradas pasadas. Si no existe, retorna null
-	public DTOCamino obtenerUnCamino(int idOrigen, int idDestino ) {
+	public static DTOCamino obtenerUnCamino(int idOrigen, int idDestino ) {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try {
@@ -137,7 +135,7 @@ public class CaminoDAO {
 			st.setInt(2, idDestino);
 			ResultSet rs = st.executeQuery();
 			if (rs.next()){
-				DTOCamino nuevoCamino = this.transformarADTOCamino(rs);
+				DTOCamino nuevoCamino = transformarADTOCamino(rs);
 				rs.close();
 				con.close();
 				return nuevoCamino;
@@ -266,21 +264,31 @@ public class CaminoDAO {
 		}
 		eliminarListaCaminos(listaCaminos);
 	}
-
+	
+	
 	
 	public static void main(String[] argc) {
 		
 		//Devuelve todos los caminos
 		
-		/*CaminoDAO prueba = new CaminoDAO();
-		ArrayList <Camino> lista = new ArrayList<Camino>();
+		CaminoDAO prueba = new CaminoDAO();
+		/*ArrayList <Camino> lista = new ArrayList<Camino>();
 		lista = prueba.obtenerCaminos();
 		System.out.println(lista);*/
 		
-		CaminoDAO prueba = new CaminoDAO();
-		DTOCamino camino= prueba.obtenerUnCamino(1, 2);
-		System.out.println(ParadaDAO.obtenerParada(camino.getIdOrigen()));
-		System.out.println(ParadaDAO.obtenerParada(camino.getIdDestino()));
+		/*CaminoDAO prueba = new CaminoDAO();
+		for (DTOCamino camino : prueba.obtenerCaminosDeUnaLinea(1)) {
+			System.out.println("IDOrigen: " + camino.getIdOrigen()+"\n" + "IDDestino: " + camino.getIdDestino()+"\n");
+		}*/
+		
+		ArrayList<DTOCamino> caminosDesde = obtenerCaminosDesdeParada(95);
+		
+		for(DTOCamino camino : caminosDesde) {
+			System.out.println("Camino " + caminosDesde.indexOf(camino) + ": " + camino.getIdOrigen() + camino.getIdDestino() );
+		}
+		
+		
+	
 	}
 	
 }

@@ -30,5 +30,14 @@ public class GestorCamino {
 	public static ArrayList<DTOCamino> caminosQueInicianEnParada (int idParada){
 		return CaminoDAO.obtenerCaminosDesdeParada(idParada);
 	}
+	
+	public static ArrayList<DTOCamino> trayectoLinea(int idLinea){
+		try {
+			return CaminoDAO.obtenerCaminosDeUnaLinea(idLinea);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
