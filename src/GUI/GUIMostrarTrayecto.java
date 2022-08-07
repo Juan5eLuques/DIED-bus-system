@@ -38,6 +38,10 @@ import java.awt.Insets;
 public class GUIMostrarTrayecto extends JFrame {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final static int CX = 100; //Corrimiento en X
 	private final static int CY = 100; //Corrimiento en Y
 	private final static int TPA = 8; //Tamaño punto anterior
@@ -134,7 +138,7 @@ public class GUIMostrarTrayecto extends JFrame {
 		});
 		
 	}
-	
+	//
 	private static void dibujarParadas(ArrayList<Parada> listaParadas, JPanel panel) {
 		ArrayList <Integer> posActual; 
 		ArrayList <Integer> posAnterior = null;
