@@ -6,6 +6,10 @@ public class DTOAutobus {
 	private String color;
 	private String tipo;
 	private int asientos;
+	private boolean aire;
+	private boolean wifi;
+	private int pasajerosextra;
+	
 	public int getId() {
 		return id;
 	}
@@ -35,6 +39,24 @@ public class DTOAutobus {
 	}
 	public void setAsientos(int asientos) {
 		this.asientos = asientos;
+	}
+	public boolean isAire() {
+		return aire;
+	}
+	public void setAire(boolean aire) {
+		this.aire = aire;
+	}
+	public boolean isWifi() {
+		return wifi;
+	}
+	public void setWifi(boolean wifi) {
+		this.wifi = wifi;
+	}
+	public int getPasajerosextra() {
+		return pasajerosextra;
+	}
+	public void setPasajerosextra(int pasajerosextra) {
+		this.pasajerosextra = pasajerosextra;
 	}
 
 }

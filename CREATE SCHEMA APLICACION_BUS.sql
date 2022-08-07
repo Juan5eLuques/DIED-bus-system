@@ -531,7 +531,7 @@ INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, act
 INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (114,65,200,2,'true');
 INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (113,46,200,2,'true');
 INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (112,25,200,2,'true');
-INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (112,6,200,2,'true');
+INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (111,6,200,2,'true');
 
 --Calle12 -> (Completo)
 INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (121,122,200,2,'true');
