@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import GUI.GUIMenu.BotonMenu;
-import GUI.GUIMenu.GUIMenuParadas;
 
 public class GUIMenu extends JFrame {
 
@@ -92,7 +91,7 @@ public class GUIMenu extends JFrame {
 		btnTrayectos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
-			GUIMenuParadas menuParada = new GUIMenuParadas(panelCentral);
+			JPMenuTrayecto menuParada = new JPMenuTrayecto(panelCentral);
 			panelLayout.add(menuParada, BorderLayout.CENTER);
 			menuParada.setVisible(true);
 			}
@@ -101,7 +100,7 @@ public class GUIMenu extends JFrame {
 		btnLineas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-			GUIMenuParadas menuParada = new GUIMenuParadas(panelCentral);
+				JPMenuLineas menuParada = new JPMenuLineas(panelCentral);
 			panelLayout.add(menuParada, BorderLayout.CENTER);
 			menuParada.setVisible(true);
 			}
@@ -110,7 +109,7 @@ public class GUIMenu extends JFrame {
 		btnParadas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-			GUIMenuParadas menuParada = new GUIMenuParadas(panelCentral);
+			JPMenuParadas menuParada = new JPMenuParadas(panelCentral);
 			panelLayout.add(menuParada, BorderLayout.CENTER);
 			menuParada.setVisible(true);
 			}
@@ -118,7 +117,7 @@ public class GUIMenu extends JFrame {
 		
 		btnIncidencias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			GUIMenuIncidencias menuParada = new GUIMenuIncidencias(panelCentral);
+			JPMenuIncidencias menuParada = new JPMenuIncidencias(panelCentral);
 			panelLayout.add(menuParada, BorderLayout.CENTER);
 			menuParada.setVisible(true);
 			}
@@ -169,9 +168,72 @@ public class GUIMenu extends JFrame {
 		}
 	}
 	
-	public class GUIMenuParadas extends JPanel {
+	
+public class JPMenuTrayecto extends JPanel {
 		
-		public GUIMenuParadas(JPanel panelManipular) {
+		public JPMenuTrayecto(JPanel panelManipular) {
+			
+			panelManipular.setVisible(false);
+			BotonAtras boton = new BotonAtras(true);
+			this.add(boton);
+			this.setBackground(new Color(32, 83, 117));
+			this.setLayout(null);
+			BotonMenu btnVerTrayecto = new BotonMenu("Ver Trayecto");
+			BotonMenu btnVerTodosLosTrayectos = new BotonMenu("Ver Todos Los Trayectos");
+			BotonMenu btnEliminarTrayecto = new BotonMenu("Eliminar Trayecto");
+			agregarBoton(130, this,btnVerTrayecto);
+			agregarBoton(190, this,btnVerTodosLosTrayectos);
+			agregarBoton(250, this,btnEliminarTrayecto);
+			
+			boton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					panelManipular.setVisible(true);
+					desabilitarMenu();
+				}
+			});
+		}
+		
+		public void desabilitarMenu() {
+			this.setVisible(false);
+		}
+		
+	}
+	
+	
+		public class JPMenuLineas extends JPanel {
+		
+		public JPMenuLineas(JPanel panelManipular) {
+			
+			panelManipular.setVisible(false);
+			BotonAtras boton = new BotonAtras(true);
+			this.add(boton);
+			this.setBackground(new Color(32, 83, 117));
+			this.setLayout(null);
+			BotonMenu btnVerLineas = new BotonMenu("Ver Lineas");
+			BotonMenu btnAgregarLineas = new BotonMenu("Agregar Linea");
+			BotonMenu btnEliminarLinea = new BotonMenu("Eliminar Linea");
+			agregarBoton(130, this,btnVerLineas);
+			agregarBoton(190, this,btnAgregarLineas);
+			agregarBoton(250, this,btnEliminarLinea);
+			
+			boton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					panelManipular.setVisible(true);
+					desabilitarMenu();
+				}
+			});
+		}
+		
+		public void desabilitarMenu() {
+			this.setVisible(false);
+		}
+		
+	}
+	
+	
+	public class JPMenuParadas extends JPanel {
+		
+		public JPMenuParadas(JPanel panelManipular) {
 			
 			panelManipular.setVisible(false);
 			BotonAtras boton = new BotonAtras(true);
@@ -180,20 +242,29 @@ public class GUIMenu extends JFrame {
 			this.setLayout(null);
 			BotonMenu btnverParadas = new BotonMenu("Ver Paradas");
 			BotonMenu btnbuscarParadas = new BotonMenu("Buscar Paradas");
+			BotonMenu btnEliminarParadas = new BotonMenu("Eliminar Paradas");
+			
 			agregarBoton(130, this,btnverParadas);
 			agregarBoton(190, this,btnbuscarParadas);
+			agregarBoton(250, this,btnEliminarParadas);
 			
 			boton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					panelManipular.setVisible(true);
+					desabilitarMenu();
 				}
 			});
 		}
+		
+		public void desabilitarMenu() {
+			this.setVisible(false);
+		}
+		
 	}
 	
-	public class GUIMenuIncidencias extends JPanel {
+	public class JPMenuIncidencias extends JPanel {
 		
-		public GUIMenuIncidencias(JPanel panelManipular) {
+		public JPMenuIncidencias(JPanel panelManipular) {
 			
 			panelManipular.setVisible(false);
 			BotonAtras boton = new BotonAtras(true);
@@ -210,8 +281,14 @@ public class GUIMenu extends JFrame {
 			boton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					panelManipular.setVisible(true);
+					desabilitarMenu();
 				}
 			});
+			
+			
+		}
+		public void desabilitarMenu() {
+			this.setVisible(false);
 		}
 	}
 	
