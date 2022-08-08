@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import DTO.DTOCamino;
 import system.clases.Parada;
+import system.clases.DAO.AutobusDAO;
 import system.clases.DAO.CaminoDAO;
 import system.clases.DAO.ParadaDAO;
 
@@ -38,10 +39,6 @@ import java.awt.Insets;
 public class GUIMostrarTrayecto extends JFrame {
 
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private final static int CX = 100; //Corrimiento en X
 	private final static int CY = 100; //Corrimiento en Y
 	private final static int TPA = 8; //Tamaño punto anterior
@@ -91,43 +88,47 @@ public class GUIMostrarTrayecto extends JFrame {
 		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		JLabel lblNewLabel = new JLabel("Trayectos");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 22));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.NORTH;
-		gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 0;
-		panel.add(lblNewLabel, gbc_lblNewLabel);
+		JLabel lblTitleTrayecto = new JLabel("Trayectos");
+		lblTitleTrayecto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitleTrayecto.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 22));
+		GridBagConstraints gbc_lblTitleTrayecto = new GridBagConstraints();
+		gbc_lblTitleTrayecto.anchor = GridBagConstraints.NORTH;
+		gbc_lblTitleTrayecto.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblTitleTrayecto.insets = new Insets(0, 0, 0, 5);
+		gbc_lblTitleTrayecto.gridx = 0;
+		gbc_lblTitleTrayecto.gridy = 0;
+		panel.add(lblTitleTrayecto, gbc_lblTitleTrayecto);
 		panel.setBackground(getForeground());
-		JComboBox ListaLineas = new JComboBox();
+		JComboBox btnListaLineas = new JComboBox();
 		GridBagConstraints gbc_ListaLineas = new GridBagConstraints();
 		gbc_ListaLineas.insets = new Insets(0, 0, 0, 5);
 		gbc_ListaLineas.fill = GridBagConstraints.BOTH;
 		gbc_ListaLineas.gridx = 6;
 		gbc_ListaLineas.gridy = 0;
-		panel.add(ListaLineas, gbc_ListaLineas);
-		ListaLineas.setBackground(Color.WHITE);
-		ListaLineas.setForeground(Color.BLACK);
-		ListaLineas.setToolTipText("");
-		ListaLineas.setSelectedIndex(0);
-		ListaLineas.setModel(new DefaultComboBoxModel(new String[] {"Autobus 1", "Autobus 2", "Autobus 3", "Autobus 4"}));
+		panel.add(btnListaLineas, gbc_ListaLineas);
+		
+		String listaIDLineas[] = new String[AutobusDAO.obtenerNombresDeLineas().size()];
+		AutobusDAO.obtenerNombresDeLineas().toArray(listaIDLineas);
 		
 		
+		btnListaLineas.setBackground(Color.WHITE);
+		btnListaLineas.setForeground(Color.BLACK);
+		btnListaLineas.setToolTipText("");
+		btnListaLineas.setModel(new DefaultComboBoxModel(listaIDLineas));
+		btnListaLineas.setSelectedIndex(1);
 		
-		JButton btnNewButton = new JButton("Mostrar");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton.gridx = 13;
-		gbc_btnNewButton.gridy = 0;
-		panel.add(btnNewButton, gbc_btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
+		
+		JButton btnMostrarTrayecto = new JButton("Mostrar");
+		GridBagConstraints gbc_btnMostrarTrayecto = new GridBagConstraints();
+		gbc_btnMostrarTrayecto.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnMostrarTrayecto.gridx = 13;
+		gbc_btnMostrarTrayecto.gridy = 0;
+		panel.add(btnMostrarTrayecto, gbc_btnMostrarTrayecto);
+		btnMostrarTrayecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
 				ArrayList<Parada> listaParadas = new ArrayList<Parada>();
-				int autobus = ListaLineas.getSelectedIndex();
+				int autobus = btnListaLineas.getSelectedIndex();
 				ArrayList<DTOCamino> camino = CaminoDAO.obtenerCaminosDeUnaLinea(autobus+1);
 				for(DTOCamino unCamino : camino ) {
 					listaParadas.add(ParadaDAO.obtenerParada(unCamino.getIdOrigen()));

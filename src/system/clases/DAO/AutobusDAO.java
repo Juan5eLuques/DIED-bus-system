@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import DTO.DTOAutobus;
 import system.clases.Autobus;
 import system.clases.AutobusEconomico;
 import system.clases.AutobusSuperior;
@@ -14,6 +15,29 @@ import system.clases.Camino;
 import system.gestores.GestorDB;
 
 public class AutobusDAO {
+	
+	public static ArrayList<String> obtenerNombresDeLineas(){
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		ArrayList<String> idColectivos = new ArrayList<String>();
+		try {
+			PreparedStatement st = con.prepareStatement("SELECT nombre FROM aplicacion_bus.LINEA");
+			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				idColectivos.add(rs.getString("nombre"));
+			}
+			con.close();
+			rs.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return idColectivos;
+	}
+	
+	public static void agregarAutobus(DTOAutobus autobus) {
+		
+	}
 	
 	public ArrayList<Integer> obtenerCantidadDeLineas(){
 		GestorDB gdb = GestorDB.getInstance();

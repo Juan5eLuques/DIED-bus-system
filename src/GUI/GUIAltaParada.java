@@ -1,26 +1,31 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.SystemColor;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import DTO.DTOParada;
-import net.miginfocom.swing.MigLayout;
 import system.clases.DAO.ParadaDAO;
 import system.gestores.GestorParada;
-
 import javax.swing.JTextField;
-import java.awt.Component;
+import javax.swing.SwingConstants;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GUIAltaParada extends JFrame {
 
@@ -49,33 +54,72 @@ public class GUIAltaParada extends JFrame {
 	 * Create the frame.
 	 */
 	public GUIAltaParada() {
-		setTitle("Dar de alta una parada");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 900, 700);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(70, 130, 180));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		GridBagLayout gbl_panelDeControl = new GridBagLayout();
+		gbl_panelDeControl.columnWidths = new int[]{149, 0, 0, 0, 0, 0, 24, 158, 0, 0, 0, 0, 0, 0, 0, 0, 235, 0};
+		gbl_panelDeControl.rowHeights = new int[]{20, 0};
+		gbl_panelDeControl.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelDeControl.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		
 		
 		//TEXTFIELDS
 		TFNroParada = new JTextField();
+		TFNroParada.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if(c <'0' || c > '9') e.consume();
+			}
+		});
 		TFNroParada.setColumns(10);
 		
 		TFCalle = new JTextField();
 		TFCalle.setColumns(10);
 		
 		TFNumero = new JTextField();
+		TFNumero.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if(c <'0' || c > '9') e.consume();
+			}
+			});
 		TFNumero.setColumns(10);
+		
 		
 		//BOTONES
 		JButton btnAgregar = new JButton("Agregar");
 		ActionListener actionAgregar = e ->{
+			
+			
+			if(TFNroParada.getText().length()==0 || TFNumero.getText().length()==0 || TFCalle.getText().length()==0) {
+				JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacios", "Error", JOptionPane.WARNING_MESSAGE);
+			}
+			
+			else {
+			
 			DTOParada nuevaParada = new DTOParada();
 			nuevaParada.setNroParada(Integer.parseInt(TFNroParada.getText()));
 			nuevaParada.setCalle(TFCalle.getText());
 			nuevaParada.setNroCalle(Integer.parseInt(TFNumero.getText()));
 			
-			GestorParada.agregarParada(nuevaParada); 
+			if(ParadaDAO.paradaExiste(nuevaParada.getNroParada())==true) {
+			JOptionPane.showMessageDialog(null, "El número de parada ingresado ya existe", "Error", JOptionPane.WARNING_MESSAGE);
+			}
+			else {
+				GestorParada.agregarParada(nuevaParada); 
+				JOptionPane.showMessageDialog(null, "Nueva parada registrada", "Exito", JOptionPane.OK_OPTION);
+				}
+			}
 		};
+		
+		
 		btnAgregar.addActionListener(actionAgregar);
 		
 		JButton btnBack = new JButton("Atras");
@@ -128,4 +172,6 @@ public class GUIAltaParada extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
 }
+

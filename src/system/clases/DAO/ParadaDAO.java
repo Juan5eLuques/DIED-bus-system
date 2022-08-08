@@ -41,14 +41,23 @@ public class ParadaDAO {
 	}
 	
 	//Chequea existencia de una parada
-	public static boolean paradaExiste(int nroParada) {
-		boolean ret= true;
-		Parada existe = new ParadaDAO().obtenerParada(nroParada);
-		if (existe.getNroParada() != -1){
-			ret = false;
+		public static boolean paradaExiste(int nroParada) {
+			GestorDB gdb = GestorDB.getInstance();
+			boolean existe = true;
+			Connection con = gdb.conec;
+			try {
+				PreparedStatement st = con.prepareStatement("SELECT id FROM aplicacion_bus.parada WHERE id=?");
+				st.setInt(1, nroParada);
+				ResultSet rs = st.executeQuery();
+				if(rs.next()) {
+					return true;
+				}		
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return false;
 		}
-		return ret;
-	}
 	
 	
 	//Obtiene todas las paradas de la BD
