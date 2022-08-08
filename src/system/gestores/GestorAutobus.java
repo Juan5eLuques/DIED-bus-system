@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import DTO.DTOAutobus;
 import DTO.DTOCamino;
+import system.clases.DAO.AutobusDAO;
 
 public class GestorAutobus {
 	
@@ -21,6 +22,6 @@ public class GestorAutobus {
 	}
 	
 	public static void crearAutobus(DTOAutobus datosAutobus, ArrayList<DTOCamino> trayecto) {
-		//COMPLETAR
+		AutobusDAO.agregarAutobus(datosAutobus);
 	}
 }
