@@ -23,7 +23,7 @@ public class GestorParada {
 		return GParada;
 		}
 	
-	public/*boolean*/static void agregarParada(DTOParada nuevaParada) {
+	public static /*boolean*/void agregarParada(DTOParada nuevaParada) {
 		ParadaDAO.agregarParada(nuevaParada);
 	}
 
@@ -45,6 +45,10 @@ public class GestorParada {
 	
 	public static Parada obtenerParada(int idParada) {
 		return ParadaDAO.obtenerParada(idParada);
+	}
+	
+	public static ArrayList<Parada> obtenerTodasLasParadas(){
+		return ParadaDAO.obtenerParadas();
 	}
 
 }

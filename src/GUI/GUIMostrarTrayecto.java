@@ -9,10 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import DTO.DTOCamino;
+import system.clases.Camino;
 import system.clases.Parada;
 import system.clases.DAO.AutobusDAO;
 import system.clases.DAO.CaminoDAO;
 import system.clases.DAO.ParadaDAO;
+import system.gestores.GestorCamino;
+import system.gestores.GestorParada;
 
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -23,6 +26,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import java.awt.ScrollPane;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import javax.swing.DefaultComboBoxModel;
 import java.awt.SystemColor;
@@ -41,8 +45,8 @@ public class GUIMostrarTrayecto extends JFrame {
 	
 	private final static int CX = 100; //Corrimiento en X
 	private final static int CY = 100; //Corrimiento en Y
-	private final static int TPA = 8; //Tamaño punto anterior
-	private final static int TPN = 12; //Tamaño punto nuevo
+	private final static int TPA = 8; //Tamaï¿½o punto anterior
+	private final static int TPN = 12; //Tamaï¿½o punto nuevo
 	
 	private JPanel contentPane;
 
@@ -151,18 +155,26 @@ public class GUIMostrarTrayecto extends JFrame {
 			posActual = ubicacion(unaParada);
 			
 			if (contador==listaParadas.size()) {
-				g.fillOval(CX+posActual.get(0)-((TPN-TPA)/2), CY+posActual.get(1)-((TPN-TPA)/2), TPN, TPN);
+				dibujarUnaParada(g, posActual, TPN);
 			}
 			else {
-				g.fillOval(CX+posActual.get(0), CY+posActual.get(1), TPA, TPA);
+				dibujarUnaParada(g, posActual, TPA);
 			}				
 			if (posAnterior != null){
-				g.drawLine(CX+posAnterior.get(0)+TPA/2, CY+posAnterior.get(1)+TPA/2, CX+posActual.get(0)+TPA/2, CY +posActual.get(1)+TPA/2);
+				dibujarUnCamino (g, posAnterior, posActual);
 			}
 			
 			posAnterior = posActual;
 			contador ++;
 		}
+	}
+	
+	private static void dibujarUnaParada (Graphics g, ArrayList<Integer> pos, int tam) {
+		g.fillOval(CX+pos.get(0)-((TPN-tam)/2), CY+pos.get(1)-((TPN-tam)/2), tam, tam);
+	}
+	
+	private static void dibujarUnCamino (Graphics g, ArrayList<Integer> posInicial, ArrayList<Integer> posFinal) {
+		g.drawLine(CX+posInicial.get(0)+TPA/2, CY+posInicial.get(1)+TPA/2, CX+posFinal.get(0)+TPA/2, CY +posFinal.get(1)+TPA/2);
 	}
 	
 	private static ArrayList<Integer> ubicacion(Parada parada) {
@@ -186,6 +198,32 @@ public class GUIMostrarTrayecto extends JFrame {
 		
 		
 		return null;
+	}
+	
+	private static void dibujarCiudad(JPanel panel) {
+		ArrayList<Parada> paradas = GestorParada.obtenerTodasLasParadas();
+		ArrayList<DTOCamino> DTOCaminos = GestorCamino.obtenerTodosLosCaminos();
+		ArrayList <Camino> caminos= new ArrayList<Camino>();
+		for (DTOCamino unDTOCamino:DTOCaminos) {
+			caminos.add(GestorCamino.trasformarDTOaCamino(unDTOCamino));
+		}
+		Graphics g = panel.getGraphics();
+		
+		for (Parada unaParada:paradas) {
+			ArrayList<Parada> paradasConectadas = 
+			(ArrayList<Parada>) caminos.stream()
+			.filter(unCamino -> unCamino.getInicio().getNroParada() == unaParada.getNroParada())
+			.map(unCamino -> unCamino.getFin())
+			.collect(Collectors.toList());
+			
+			ArrayList<Integer> posParada = ubicacion(unaParada);
+			dibujarUnaParada(g,posParada,TPA);
+			
+			for (Parada unaParadaConectada:paradasConectadas) {
+				ArrayList<Integer> posSiguiente = ubicacion(unaParadaConectada);
+				dibujarUnCamino(g,posParada,posSiguiente);
+			}
+		}
 	}
 
 }

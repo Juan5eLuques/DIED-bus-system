@@ -61,7 +61,7 @@ public class ParadaDAO {
 	
 	
 	//Obtiene todas las paradas de la BD
-	public ArrayList<Parada> obtenerParadas(){
+	public static ArrayList<Parada> obtenerParadas(){
 		
 		ArrayList<Parada> lista = new ArrayList<Parada>();
 		

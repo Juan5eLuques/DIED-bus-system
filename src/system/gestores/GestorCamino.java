@@ -1,5 +1,6 @@
 package system.gestores;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import DTO.DTOCamino;
@@ -35,6 +36,20 @@ public class GestorCamino {
 		try {
 			return CaminoDAO.obtenerCaminosDeUnaLinea(idLinea);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static ArrayList<DTOCamino> obtenerTodosLosCaminos(){
+		return CaminoDAO.obtenerTodosLosCaminos();
+	}
+	
+	public static Camino trasformarDTOaCamino(DTOCamino unCamino){
+		try {
+			return CaminoDAO.transformarACamino(unCamino);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

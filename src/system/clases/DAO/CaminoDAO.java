@@ -124,6 +124,28 @@ public class CaminoDAO {
 		}
 		return null;
 	}
+		
+		//Devuelve un array de todos los caminos en la base
+		public static ArrayList<DTOCamino> obtenerTodosLosCaminos() {
+			ArrayList<DTOCamino> listaCaminos = new ArrayList <DTOCamino>();
+			GestorDB gdb = GestorDB.getInstance();
+			Connection con = gdb.conec;
+			try {
+				PreparedStatement st = con.prepareStatement("SELECT * FROM aplicacion_bus.camino");
+				ResultSet rs = st.executeQuery();
+				while (rs.next()){
+					DTOCamino nuevoCamino = transformarADTOCamino(rs);
+
+					listaCaminos.add(nuevoCamino);
+				}
+				rs.close();
+				con.close();
+			}
+	catch (Exception e) {
+		e.printStackTrace();
+	}
+	return listaCaminos;
+}
 	
 	//Si existe, devuelve en camino que tiene como origen y destino las paradas pasadas. Si no existe, retorna null
 	public static DTOCamino obtenerUnCamino(int idOrigen, int idDestino ) {
