@@ -24,12 +24,7 @@ public class GestorParada {
 		}
 	
 	public/*boolean*/static void agregarParada(DTOParada nuevaParada) {
-		if (!ParadaDAO.paradaExiste(nuevaParada.getNroParada())) {
-			System.out.println("Id actualmente en uso");
-		}
-		else {
 		ParadaDAO.agregarParada(nuevaParada);
-		}
 	}
 
 	public static void eliminarParada (int idParada){
