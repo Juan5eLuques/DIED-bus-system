@@ -32,7 +32,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 
 public class GUIAltaLinea extends JFrame {
-
+//
 	private JPanel contentPane;
 	private JPanel panelDeControl;
 	private JPanel panelGrafo;
