@@ -51,14 +51,14 @@ public class GUIMenu extends JFrame {
 		JPanel panelSuperior = new JPanel();
 		panelLayout.add(panelSuperior, BorderLayout.NORTH);
 		panelSuperior.setBackground(new Color(17, 43, 60));
-	
+		
 		JLabel lblTitulo = new JLabel("SISTEMA AUTOBUS");
 		lblTitulo.setIconTextGap(15);
 		lblTitulo.setForeground(Color.white);
-		lblTitulo.setIcon(new ImageIcon("C:\\Users\\diosc\\Downloads\\icons8-autob\u00FAs-50.png"));
+		String dir = System.getProperty("user.dir");
+		lblTitulo.setIcon(new ImageIcon(dir +"\\iconos\\icons8-autob\u00FAs-50.png"));
 		lblTitulo.setFont(new Font("Ebrima", Font.BOLD, 38));
 		panelSuperior.add(lblTitulo);
-		
 		JPanel panelCentral = new JPanel();
 		panelCentral.setBackground(new Color(32, 83, 117));
 		panelCentral.setLayout(null);
@@ -135,8 +135,8 @@ public class GUIMenu extends JFrame {
 	public class BotonAtras extends JButton {
 		
 		public BotonAtras( boolean visible) {
-			
-			this.setIcon(new ImageIcon("C:\\Users\\diosc\\Downloads\\icons8-atr\u00E1s-64.png"));
+			String dir = System.getProperty("user.dir");
+			this.setIcon(new ImageIcon(dir + "\\iconos\\icons8-atr\u00E1s-64.png"));
 			this.setBounds(10, 35, 70, 70);
 			this.setBackground(null);
 			this.setBorderPainted(false);
