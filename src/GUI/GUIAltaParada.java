@@ -78,7 +78,7 @@ public class GUIAltaParada extends JFrame {
 		JLabel lblIcono = new JLabel("");
 		lblIcono.setHorizontalAlignment(SwingConstants.LEFT);
 		panelSuperior.add(lblIcono);
-		lblIcono.setIcon(new ImageIcon(dir +"\\iconos\\icons8-autob\u00FAs-50.png"));
+		lblIcono.setIcon(new ImageIcon(dir +"\\iconos\\iconBus.png"));
 		panelSuperior.add(lblTitulo);
 		JPanel panelCentral = new JPanel();
 		panelCentral.setBackground(new Color(32, 83, 117));
