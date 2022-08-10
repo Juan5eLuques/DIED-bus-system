@@ -3,6 +3,8 @@ package DTO;
 import java.util.Date;
 
 public class DTOIncidencia {
+	private int idIncidencia;
+	private int idParada;
 	private Date fechaInicio;
 	private Date fechaFin;
 	private String descripcion;
@@ -32,5 +34,18 @@ public class DTOIncidencia {
 	public void setEstadoActual(boolean estadoActual) {
 		this.estadoActual = estadoActual;
 	}
+	public int getIdIncidencia() {
+		return idIncidencia;
+	}
+	public void setIdIncidencia(int idIncidencia) {
+		this.idIncidencia = idIncidencia;
+	}
+	public int getIdParada() {
+		return idParada;
+	}
+	public void setIdParada(int idParada) {
+		this.idParada = idParada;
+	}
+	
 	
 }

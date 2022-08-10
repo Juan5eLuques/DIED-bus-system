@@ -15,7 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import GUI.Componentes.BotonAtras;
+import GUI.Componentes.BotonIcono;
 import GUI.Componentes.BotonMenu;
+import GUI.JPanels.Boleto.JPBoleto;
 import GUI.JPanels.Menu.JPMenuIncidencias;
 import GUI.JPanels.Menu.JPMenuLineas;
 import GUI.JPanels.Menu.JPMenuParada;
@@ -87,10 +89,15 @@ public class GUIMenu extends JFrame {
 		
 		BotonMenu btnIncidencias = new BotonMenu("Incidencias");
 		
+		BotonIcono botonBoleto = new BotonIcono("iconBoleto.png");
+		botonBoleto.setBounds(700,455,100,100);
+		panelCentral.add(botonBoleto);
+		
 		agregarBoton(130, panelCentral,btnTrayectos);
 		agregarBoton(190, panelCentral,btnLineas);
 		agregarBoton(250, panelCentral,btnParadas);
 		agregarBoton(310, panelCentral,btnIncidencias);
+		
 		
 		
 		btnTrayectos.addActionListener(new ActionListener() {
@@ -123,9 +130,18 @@ public class GUIMenu extends JFrame {
 		
 		btnIncidencias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			JPMenuIncidencias menuParada = new JPMenuIncidencias(panelCentral);
-			panelLayout.add(menuParada, BorderLayout.CENTER);
-			menuParada.setVisible(true);
+			JPMenuIncidencias MenuIncidencias = new JPMenuIncidencias(panelCentral, panelLayout,lblTitulo);
+			panelLayout.add(MenuIncidencias, BorderLayout.CENTER);
+			MenuIncidencias.setVisible(true);
+			}
+		});
+		
+		botonBoleto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			JPBoleto comprarBoleto = new JPBoleto(panelCentral, panelLayout,lblTitulo, botonBoleto);
+			panelLayout.add(comprarBoleto, BorderLayout.CENTER);
+			comprarBoleto.setVisible(true);
+			botonBoleto.setVisible(false);
 			}
 		});
 		
