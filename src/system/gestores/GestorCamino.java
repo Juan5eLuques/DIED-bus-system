@@ -39,5 +39,9 @@ public class GestorCamino {
 		}
 		return null;
 	}
+	
+	public static ArrayList<DTOCamino> obtenerCaminos() {
+		return CaminoDAO.obtenerCaminos();
+	}
 
 }

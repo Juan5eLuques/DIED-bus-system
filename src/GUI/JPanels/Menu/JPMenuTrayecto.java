@@ -4,10 +4,12 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonMenu;
+import GUI.JPanels.Trayecto.JPMostrarTrayecto;
 
 public class JPMenuTrayecto extends JPanel {
 	
@@ -16,7 +18,7 @@ public class JPMenuTrayecto extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public JPMenuTrayecto(JPanel panelManipular) {
+	public JPMenuTrayecto(JPanel panelManipular, JPanel panelContent, JLabel lblTitulo) {
 		
 		panelManipular.setVisible(false);
 		BotonAtras boton = new BotonAtras(true);
@@ -37,6 +39,17 @@ public class JPMenuTrayecto extends JPanel {
 			}
 		});
 		
+		
+		btnVerTrayecto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JPMostrarTrayecto panelVerTrayectos= new JPMostrarTrayecto(getPanel(), lblTitulo);
+				panelContent.add(panelVerTrayectos);
+				desabilitarMenu();
+				lblTitulo.setText("VER TRAYECTOS");
+				panelVerTrayectos.setVisible(true);
+			}
+		});
+		
 	}
 	
 	public void agregarBoton(int ubicacionInicialEnY, JPanel panel, BotonMenu boton) {
@@ -46,6 +59,9 @@ public class JPMenuTrayecto extends JPanel {
 	
 	public void desabilitarMenu() {
 		this.setVisible(false);
+	}
+	public JPanel getPanel() {
+		return this;
 	}
 	
 }

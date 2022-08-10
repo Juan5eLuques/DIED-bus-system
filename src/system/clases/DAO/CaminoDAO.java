@@ -52,7 +52,7 @@ public class CaminoDAO {
 	}*/
 
 		//Dado un DTO de un camino, lo transforma a objeto camino y lo devuelve
-		public static Camino transformarACamino(DTOCamino unCamino) throws SQLException {
+		public static Camino transformarACamino(DTOCamino unCamino) {
 		Camino nuevoCamino = new Camino();
 		Parada paradaInicio = new ParadaDAO().obtenerParada(unCamino.getIdOrigen());
 		Parada paradaFinal = new ParadaDAO().obtenerParada(unCamino.getIdDestino());
@@ -70,15 +70,15 @@ public class CaminoDAO {
 	}
 	
 	//Obtiene todos los caminos de la DB
-	public final ArrayList<Camino> obtenerCaminos(){
-		ArrayList<Camino> listaCaminos = new ArrayList <Camino>();
+	public static final ArrayList<DTOCamino> obtenerCaminos(){
+		ArrayList<DTOCamino> listaCaminos = new ArrayList <DTOCamino>();
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try {
 			PreparedStatement st = con.prepareStatement("SELECT * FROM aplicacion_bus.camino");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				Camino nuevoCamino = this.transformarRsACamino(rs);
+				DTOCamino nuevoCamino = transformarADTOCamino(rs);
 				
 				listaCaminos.add(nuevoCamino);
 			}
