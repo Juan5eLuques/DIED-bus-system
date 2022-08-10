@@ -169,7 +169,7 @@ public class GUIAltaLinea extends JFrame {
 		btnCargarRecorrido.setBounds(433, 44, 115, 23);
 		panelGrafo.add(btnCargarRecorrido);
 		
-		ActionListener actionCrearLinea = e ->{ // IMPORTANTE COMPLETAR
+		ActionListener actionCrearLinea = e ->{
 			GestorAutobus.crearAutobus(DatosLinea, listaCaminos);
 			
 		};

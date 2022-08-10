@@ -1,5 +1,6 @@
 package system.clases;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import DTO.DTOCamino;
@@ -30,7 +31,7 @@ public class AutobusEconomico extends Autobus {
 		}
 	}
 
-	public AutobusEconomico (int id, String nombre, String color, int capacidadMaxima,List<DTOCamino> recorrido, int parados) {
+	public AutobusEconomico (int id, String nombre, String color, int capacidadMaxima,ArrayList<DTOCamino> recorrido, int parados) {
 		this.id = id;
 		this.nombre = nombre;
 		this.color = color;

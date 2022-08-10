@@ -2,10 +2,12 @@ package system.gestores;
 
 import java.util.ArrayList;
 
+import DTO.DTOAutobus;
 import DTO.DTOCamino;
 import DTO.DTOParada;
 import system.clases.DAO.ParadaDAO;
 import system.clases.DAO.CaminoDAO;
+import system.clases.Autobus;
 import system.clases.Camino;
 
 public class GestorCamino {

@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import DTO.DTOAutobus;
 import system.clases.AutobusEconomico;
 import system.clases.AutobusSuperior;
 import system.clases.Camino;
+import system.gestores.GestorCamino;
 import system.gestores.GestorDB;
 import system.interfaces.AutobusInterfaceDAO;
 
@@ -39,11 +41,13 @@ public class AutobusSuperiorDAO implements AutobusInterfaceDAO <AutobusSuperior>
 	public static AutobusSuperior obtenerAutobus(int idAutobus) {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
+		AutobusSuperior ret = new AutobusSuperior();
 		try {
 			PreparedStatement st = con.prepareStatement("SELECT * FROM aplicacion_bus.linea WHERE id="+idAutobus );
 			ResultSet rs = st.executeQuery();
 			if (rs.next()) {
-				return transformarA_Autobus(rs);
+				ret = transformarA_Autobus(rs);
+				ret.setRecorridoLinea(GestorCamino.trayectoLinea(idAutobus));
 			}
 			rs.close();
 			con.close();
@@ -51,7 +55,7 @@ public class AutobusSuperiorDAO implements AutobusInterfaceDAO <AutobusSuperior>
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return ret;
 	}
 	
 	@Override
@@ -101,6 +105,18 @@ public class AutobusSuperiorDAO implements AutobusInterfaceDAO <AutobusSuperior>
 		
 	}
 	
+	public static DTOAutobus transformarADTO (AutobusSuperior unAutobus) {
+		DTOAutobus ret = new DTOAutobus();
+		ret.setAire(unAutobus.isAireAcondicionado());
+		ret.setWifi(unAutobus.isWifi());
+		ret.setAsientos(unAutobus.getPasajeros());
+		ret.setColor(unAutobus.getColor());
+		ret.setId(unAutobus.getId());
+		ret.setNombre(unAutobus.getNombre());
+		ret.setPasajerosextra(0);
+		ret.setTipo("Superior");
+		return ret;
+	}
 
 	public static void main(String[] argc) {
 		AutobusSuperiorDAO prueba = new AutobusSuperiorDAO();
