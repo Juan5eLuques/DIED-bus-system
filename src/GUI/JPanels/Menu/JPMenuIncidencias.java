@@ -4,10 +4,13 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonMenu;
+import GUI.JPanels.Linea.JPEliminarLinea;
+import GUI.JPanels.Incidencia.JPVerIncidencias;
 
 public class JPMenuIncidencias extends JPanel {
 	
@@ -16,7 +19,7 @@ public class JPMenuIncidencias extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public JPMenuIncidencias(JPanel panelManipular) {
+	public JPMenuIncidencias(JPanel panelManipular,JPanel panelContent, JLabel lblTitulo) {
 		
 		panelManipular.setVisible(false);
 		BotonAtras boton = new BotonAtras(true);
@@ -37,6 +40,16 @@ public class JPMenuIncidencias extends JPanel {
 			}
 		});
 		
+		btnVerIncidencias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JPVerIncidencias panelEliminarLinea = new JPVerIncidencias(getPanel(), lblTitulo);
+				panelContent.add(panelEliminarLinea);
+				desabilitarMenu();
+				lblTitulo.setText("Incidencias");
+				panelEliminarLinea.setVisible(true);
+			}
+		});
+		
 		
 	}
 	
@@ -47,5 +60,8 @@ public class JPMenuIncidencias extends JPanel {
 	
 	public void desabilitarMenu() {
 		this.setVisible(false);
+	}
+	public JPanel getPanel() {
+		return this;
 	}
 }

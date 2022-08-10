@@ -32,25 +32,6 @@ public class CaminoDAO {
 		return null;
 	}
 
-	//Dado un resultset de un camino, lo transforma a objeto camino y lo devuelve
-	/*public Camino transformarACamino(ResultSet rs) throws SQLException {
-		try {
-		Camino nuevoCamino = new Camino();
-		Parada paradaInicio = new ParadaDAO().obtenerParada(rs.getInt("idOrigen"));
-		Parada paradaFinal = new ParadaDAO().obtenerParada(rs.getInt("idDestino"));
-		nuevoCamino.setInicio(paradaInicio);
-		nuevoCamino.setFin(paradaFinal);
-		nuevoCamino.setDistancia(rs.getDouble("distancia"));
-		nuevoCamino.setDuracion(rs.getInt("duracion"));
-		nuevoCamino.setActiva(rs.getBoolean("activa"));
-		return nuevoCamino;
-		}
-		catch (SQLException e ) {
-			e.printStackTrace();
-		}
-		return null;
-	}*/
-
 		//Dado un DTO de un camino, lo transforma a objeto camino y lo devuelve
 		public static Camino transformarACamino(DTOCamino unCamino) {
 		Camino nuevoCamino = new Camino();
