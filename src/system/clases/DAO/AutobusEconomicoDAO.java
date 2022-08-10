@@ -15,7 +15,7 @@ public class AutobusEconomicoDAO implements AutobusInterfaceDAO<AutobusEconomico
 	
 	private Connection conn;
 	
-	public final AutobusEconomico transformarA_Autobus(ResultSet rs) throws SQLException{
+	public static AutobusEconomico transformarA_Autobus(ResultSet rs) throws SQLException{
 		AutobusEconomico autobus = new AutobusEconomico();
 		try {
 			//MODELAR EXCEPTION PARA EL CASO EN QUE EL ID DEL COLECTIVO NO SEA SUPERIOR//
@@ -35,15 +35,14 @@ public class AutobusEconomicoDAO implements AutobusInterfaceDAO<AutobusEconomico
 	}
 	
 	
-	@Override
-	public AutobusEconomico obtenerAutobus(int idAutobus) {
+	public static AutobusEconomico obtenerAutobus(int idAutobus) {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try {
 			PreparedStatement st = con.prepareStatement("SELECT * FROM aplicacion_bus.linea WHERE id="+idAutobus);
 			ResultSet rs = st.executeQuery();
 			if (rs.next()) {
-				return this.transformarA_Autobus(rs);
+				return transformarA_Autobus(rs);
 			}
 			rs.close();
 			con.close();

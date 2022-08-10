@@ -15,7 +15,7 @@ import system.interfaces.AutobusInterfaceDAO;
 public class AutobusSuperiorDAO implements AutobusInterfaceDAO <AutobusSuperior> {
 
 	
-	public final AutobusSuperior transformarA_Autobus(ResultSet rs) throws SQLException{
+	public final static AutobusSuperior transformarA_Autobus(ResultSet rs) throws SQLException{
 		AutobusSuperior autobus = new AutobusSuperior();
 		try {
 			//MODELAR EXCEPTION PARA EL CASO EN QUE EL ID DEL COLECTIVO NO SEA SUPERIOR//
@@ -36,15 +36,14 @@ public class AutobusSuperiorDAO implements AutobusInterfaceDAO <AutobusSuperior>
 	}
 	
 	
-	@Override
-	public AutobusSuperior obtenerAutobus(int idAutobus) {
+	public static AutobusSuperior obtenerAutobus(int idAutobus) {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try {
 			PreparedStatement st = con.prepareStatement("SELECT * FROM aplicacion_bus.linea WHERE id="+idAutobus );
 			ResultSet rs = st.executeQuery();
 			if (rs.next()) {
-				return this.transformarA_Autobus(rs);
+				return transformarA_Autobus(rs);
 			}
 			rs.close();
 			con.close();
