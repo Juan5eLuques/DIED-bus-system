@@ -2,6 +2,7 @@ package GUI.Componentes;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JTextField;
@@ -13,6 +14,7 @@ public class TextFieldNumbers extends JTextField {
 		this.setFont(new Font("Ebrima", Font.BOLD, 25));
 		this.setForeground(Color.white);
 		this.setBorder(null);
+		this.setCaretColor(Color.white);
 		
 		this.addKeyListener(new KeyAdapter() {
 			@Override

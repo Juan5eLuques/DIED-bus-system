@@ -95,7 +95,7 @@ public class GUIBusquedaParada extends JFrame {
 		JButton btnBuscar = new JButton("Buscar");
 
 		ActionListener actionBuscar = e ->{
-			System.out.println("Buscar parada nro: "+TFNroParada.getText()); //BORRAR
+			
 			Parada paradaBuscada = ParadaDAO.obtenerParada(Integer.parseInt(TFNroParada.getText()));
 			if (paradaBuscada.getNroParada() == -1) {
 				System.out.println("No se encontro la parada");

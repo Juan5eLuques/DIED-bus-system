@@ -43,8 +43,16 @@ public class GestorParada {
 		}
 	}
 	
+	public static void actualizarParada(int nroParada, String calle, int nroCalle, boolean estado) {
+		ParadaDAO.actualizarParada(nroParada, calle, nroCalle, estado);
+	}
+	
 	public static Parada obtenerParada(int idParada) {
 		return ParadaDAO.obtenerParada(idParada);
+	}
+	
+	public static ArrayList <DTOParada> obtenerTodos(){
+		return ParadaDAO.obtenerParadas();
 	}
 
 }

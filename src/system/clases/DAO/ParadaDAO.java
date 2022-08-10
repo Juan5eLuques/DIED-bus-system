@@ -61,9 +61,9 @@ public class ParadaDAO {
 	
 	
 	//Obtiene todas las paradas de la BD
-	public ArrayList<Parada> obtenerParadas(){
+	public static ArrayList<DTOParada> obtenerParadas(){
 		
-		ArrayList<Parada> lista = new ArrayList<Parada>();
+		ArrayList<DTOParada> lista = new ArrayList<DTOParada>();
 		
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
@@ -71,7 +71,12 @@ public class ParadaDAO {
 			PreparedStatement st = con.prepareStatement("SELECT * FROM APLICACION_BUS.PARADA");
 			ResultSet rs = st.executeQuery();
 			while(rs.next()) {
-				Parada parada = new Parada(rs.getInt("id"),rs.getInt("numero"),rs.getString("calle"),rs.getBoolean("activa"));
+				DTOParada parada = new DTOParada();
+				parada.setNroParada(rs.getInt("id"));
+				parada.setCalle(rs.getString("calle"));
+				parada.setActiva(rs.getBoolean("activa"));
+				parada.setNroCalle(rs.getInt("numero"));
+	
 				lista.add(parada);
 			}
 			rs.close();
@@ -188,6 +193,25 @@ public class ParadaDAO {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public static void actualizarParada(int nroParada, String calle, int nroCalle, boolean valida ) {
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		
+		try {
+			PreparedStatement st = con.prepareStatement("UPDATE aplicacion_bus.parada SET calle = ?, activa=?, numero = ? WHERE id = ?");
+			st.setString(1, calle);
+			st.setBoolean(2, valida);
+			st.setInt(3,nroCalle);
+			st.setInt(4,nroParada);
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public static void main(String[] argc) { 

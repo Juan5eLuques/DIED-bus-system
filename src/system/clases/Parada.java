@@ -47,7 +47,7 @@ public class Parada {
 	}
 
 
-	public boolean isIncidenciaEstado() {
+	public boolean getActiva() {
 		return incidenciaEstado;
 	}
 
@@ -67,7 +67,7 @@ public class Parada {
 	@Override
 	public String toString() {
 		return "Parada [nroParada=" + this.getNroParada() + ", nroCalle=" + this.getNroCalle() + ", calle=" + this.getCalle() + ", incidencia="
-				+ this.isIncidenciaEstado() + "]";
+				+ this.getActiva() + "]";
 	}
 	
 	public Parada() {
