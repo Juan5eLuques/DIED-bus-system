@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import DTO.DTOAutobus;
+import DTO.DTOCamino;
 import system.clases.Autobus;
 import system.clases.AutobusEconomico;
 import system.clases.AutobusSuperior;
@@ -35,10 +36,6 @@ public class AutobusDAO {
 		return idColectivos;
 	}
 	
-	public static void agregarAutobus(DTOAutobus autobus) {
-		
-	}
-	
 	public ArrayList<Integer> obtenerCantidadDeLineas(){
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
@@ -56,6 +53,46 @@ public class AutobusDAO {
 			e.printStackTrace();
 		}
 		return idColectivos;
+	}
+	
+	public static int IDUltimaLinea() {
+		
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		int id= -2;
+		try {
+			PreparedStatement st = con.prepareStatement("SELECT id FROM aplicacion_bus.LINEA");
+			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				id = rs.getInt("id");
+			}
+			con.close();
+			rs.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
+	public static int siguienteIDTrayecto() {
+		
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		int id= -2;
+		try {
+			PreparedStatement st = con.prepareStatement("SELECT id FROM aplicacion_bus.TRAYECTO");
+			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				id = rs.getInt("id");
+			}
+			con.close();
+			rs.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
 	}
 	
 	public static ArrayList<DTOAutobus> obtenerAutobuses(){
@@ -158,21 +195,23 @@ public class AutobusDAO {
 	}
 	
 
-	private int crearTrayecto(int idAutobus){
+	private static int crearTrayecto(int idAutobus){
 		int id= 0; 
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try{
 			PreparedStatement st = con.prepareStatement("INSERT INTO APLICACION_BUS.TRAYECTO (idLinea) values (?);");
 			st.setInt(1,idAutobus);
-			//id = st.executeUpdate(Statement.RETURN_GENERATED_KEYS);	
+			st.execute();	
+			id = siguienteIDTrayecto();
+			
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}	
 		return id;
 	}
-	private void guardarTrayecto(int idAutobus, ArrayList<Camino> listaCaminos){
+	public static void guardarTrayecto(int idAutobus, ArrayList<DTOCamino> listaCaminos){
 		int idTrayecto = crearTrayecto (idAutobus);
 		CaminoDAO.guardarTrayecto(listaCaminos, idTrayecto);
 	}

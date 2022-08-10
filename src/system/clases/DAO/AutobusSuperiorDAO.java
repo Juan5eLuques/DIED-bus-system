@@ -78,9 +78,27 @@ public class AutobusSuperiorDAO implements AutobusInterfaceDAO <AutobusSuperior>
 		
 	}
 
-	@Override
 	public void agregarAutobus(AutobusSuperior nuevoAutobus) {
-		// TODO Auto-generated method stub
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		try {
+			PreparedStatement st = con.prepareStatement("INSERT INTO aplicacion_bus.linea (nombre, color, tipo, asientos, parados, wifi, aire) VALUES (?, ?, ?, ?, ?, ?, ?)");
+			st.setString(1, nuevoAutobus.getNombre());
+			st.setString(2, nuevoAutobus.getColor());
+			st.setString(3, "Superior");
+			st.setInt(4,nuevoAutobus.getPasajeros());
+			st.setInt (5,0);
+			st.setBoolean(6, nuevoAutobus.isWifi());
+			st.setBoolean(7, nuevoAutobus.isAireAcondicionado());
+			st.executeUpdate();
+			nuevoAutobus.setId(AutobusDAO.IDUltimaLinea());
+			AutobusDAO.guardarTrayecto(nuevoAutobus.getId(),(ArrayList)nuevoAutobus.getRecorridoLinea());
+			st.close();
+			con.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

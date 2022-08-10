@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 import DTO.DTOAutobus;
 import DTO.DTOCamino;
+import system.clases.AutobusEconomico;
+import system.clases.AutobusSuperior;
 import system.clases.DAO.AutobusDAO;
+import system.clases.DAO.AutobusEconomicoDAO;
+import system.clases.DAO.AutobusSuperiorDAO;
 
 public class GestorAutobus {
 	
@@ -27,7 +31,30 @@ public class GestorAutobus {
 	}
 	
 	public static void crearAutobus(DTOAutobus datosAutobus, ArrayList<DTOCamino> trayecto) {
-		AutobusDAO.agregarAutobus(datosAutobus);
+		if (datosAutobus.getTipo().equals("Economico")) {
+			AutobusEconomico nuevoAutobus = new AutobusEconomico();
+			nuevoAutobus.setCapacidadMaxima(datosAutobus.getAsientos());
+			nuevoAutobus.setColor(datosAutobus.getColor());
+			nuevoAutobus.setNombre(datosAutobus.getNombre());
+			nuevoAutobus.setPasajeros(0);
+			nuevoAutobus.setPasajerosParados(datosAutobus.getPasajerosextra());
+			nuevoAutobus.setRecorridoLinea(trayecto);
+			AutobusEconomicoDAO autobusEconomicoDAO = new AutobusEconomicoDAO();
+			autobusEconomicoDAO.agregarAutobus(nuevoAutobus);
+		}
+		if (datosAutobus.getTipo().equals("Superior")) {
+			
+			AutobusSuperior nuevoAutobus = new AutobusSuperior();
+			nuevoAutobus.setCapacidadMaxima(datosAutobus.getAsientos());
+			nuevoAutobus.setColor(datosAutobus.getColor());
+			nuevoAutobus.setNombre(datosAutobus.getNombre());
+			nuevoAutobus.setPasajeros(0);
+			nuevoAutobus.setAireAcondicionado(datosAutobus.isAire());
+			nuevoAutobus.setWifi(datosAutobus.isWifi());
+			nuevoAutobus.setRecorridoLinea(trayecto);
+			AutobusSuperiorDAO autobusSuperiorDAO = new AutobusSuperiorDAO();
+			autobusSuperiorDAO.agregarAutobus(nuevoAutobus);
+		}
 	}
 	
 	public static void eliminarAutobus(int idLinea) {
