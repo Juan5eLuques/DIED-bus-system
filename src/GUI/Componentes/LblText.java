@@ -14,4 +14,11 @@ public class LblText extends JLabel {
 		this.setText(titulo);
 		this.setBorder(null);
 	}
+	
+	public LblText (String titulo, Font unaFuente) {
+		this.setForeground(Color.white);
+		this.setFont(unaFuente);
+		this.setText(titulo);
+		this.setBorder(null);
+	}
 }
