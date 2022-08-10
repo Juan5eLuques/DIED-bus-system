@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonMenu;
 import GUI.JPanels.Linea.JPEliminarLinea;
+import GUI.JPanels.Incidencia.JPRegistrarIncidencia;
 import GUI.JPanels.Incidencia.JPVerIncidencias;
 
 public class JPMenuIncidencias extends JPanel {
@@ -42,11 +43,21 @@ public class JPMenuIncidencias extends JPanel {
 		
 		btnVerIncidencias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JPVerIncidencias panelEliminarLinea = new JPVerIncidencias(getPanel(), lblTitulo);
-				panelContent.add(panelEliminarLinea);
+				JPVerIncidencias panelVerIncidencias = new JPVerIncidencias(getPanel(), lblTitulo);
+				panelContent.add(panelVerIncidencias);
 				desabilitarMenu();
-				lblTitulo.setText("Incidencias");
-				panelEliminarLinea.setVisible(true);
+				lblTitulo.setText("Listado incidencias");
+				panelVerIncidencias.setVisible(true);
+			}
+		}); 
+		
+		btnRegistrarIncidencias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JPRegistrarIncidencia panelRegistrarIncidencia = new JPRegistrarIncidencia(getPanel(), lblTitulo);
+				panelContent.add(panelRegistrarIncidencia);
+				desabilitarMenu();
+				lblTitulo.setText("Registrar incidencia");
+				panelRegistrarIncidencia.setVisible(true);     
 			}
 		});
 		

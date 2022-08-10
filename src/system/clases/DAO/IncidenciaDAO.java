@@ -1,6 +1,7 @@
 package system.clases.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,4 +39,25 @@ public class IncidenciaDAO {
 			}
 		return incidencias;
 	}
+	
+	public static void registrarIncidencia(DTOIncidencia nueva) {
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		try {
+			PreparedStatement st = con.prepareStatement("INSERT INTO aplicacion_bus.INCIDENCIAS VALUES (?,?,?,?,?,?)");
+			st.setInt(1, nueva.getIdIncidencia());
+			st.setInt(2, nueva.getIdParada());
+			//st.setDate(3, (nueva.getFechaFin())); 
+			//st.setDate(4, nueva.getFechaFin());
+			st.setInt(5, nueva.getIdIncidencia());
+			st.setInt(6, nueva.getIdIncidencia());
+			st.executeUpdate();
+			st.close();
+			con.close();
+			}
+		catch (SQLException e ) {
+			e.printStackTrace();
+		}
+	}
+	
 }
