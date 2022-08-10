@@ -42,8 +42,7 @@ FOREIGN KEY(idLinea) REFERENCES APLICACION_BUS.LINEA(id)
 CREATE TABLE APLICACION_BUS.INCIDENCIAS
 (
     id INT PRIMARY KEY,
-    idOrigen INT NOT NULL,
-    idDestino INT NOT NULL,
+    idParada INT NOT NULL,
     inicio DATE NOT NULL,
     fin DATE,
     descripcion VARCHAR (500), 
