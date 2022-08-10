@@ -38,6 +38,7 @@ public class GUIMenu extends JFrame {
 			public void run() {
 				try {
 					GUIMenu frame = new GUIMenu();
+					frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

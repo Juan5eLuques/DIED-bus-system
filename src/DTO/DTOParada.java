@@ -28,8 +28,9 @@ public class DTOParada {
 	public boolean isActiva() {
 		return activa;
 	}
-	public void setIncidencia(boolean activa) {
-		this.activa = activa;
+	
+	public void setActiva(boolean valor) {
+		activa = valor;
 	}
 	
 }
