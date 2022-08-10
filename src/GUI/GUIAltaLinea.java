@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 
 import DTO.DTOAutobus;
 import DTO.DTOCamino;
+import system.clases.DAO.AutobusDAO;
 import system.gestores.GestorAutobus;
 import system.gestores.GestorGUI;
 
@@ -40,6 +41,7 @@ public class GUIAltaLinea extends JFrame {
 	private JTextField TFNombreLinea;
 	private JTextField TFColor;
 	private JTextField TFCapacidad;
+	private int siguienteID;
 	JRadioButton rdbtnAire;
 	JRadioButton rdbtnWifi;
 	private JTextField TFPasajerosExtra;
@@ -98,7 +100,7 @@ public class GUIAltaLinea extends JFrame {
 		lblTitulo.setBounds(10, 14, 86, 14);
 		panelDeControl.add(lblTitulo, gbc_lblTitulo);
 		
-		////PANEL CUERPO////
+		////PANEL CUERPO////		
 		JPanel panelGrafo = new JPanel();
 		panelGrafo.setBackground(new Color(70, 130, 180));
 		contentPane.add(panelGrafo, BorderLayout.CENTER);
@@ -177,7 +179,7 @@ public class GUIAltaLinea extends JFrame {
 		btnCrearLinea.setBounds(719, 546, 89, 23);
 		btnCrearLinea.setEnabled(false);
 		panelGrafo.add(btnCrearLinea);
-		
+	
 		TFPasajerosExtra = new JTextField();
 		TFPasajerosExtra.setBounds(30, 179, 124, 20);
 		TFPasajerosExtra.setVisible(false);
@@ -201,6 +203,7 @@ public class GUIAltaLinea extends JFrame {
 	
 	private DTOAutobus generarDatosLinea () {
 		DTOAutobus datos = new DTOAutobus();
+		datos.setId(siguienteID);
 		if (TFCapacidad.getText().equals("")) {
 			datos.setAsientos(0);
 		}
@@ -208,7 +211,6 @@ public class GUIAltaLinea extends JFrame {
 			datos.setAsientos(Integer.parseInt(TFCapacidad.getText()));
 		}
 		datos.setColor(TFColor.getText());
-		datos.setId(123);
 		datos.setNombre(TFNombreLinea.getText());
 		
 		if (comboTipo.getSelectedIndex() == 1) {
@@ -217,7 +219,7 @@ public class GUIAltaLinea extends JFrame {
 			datos.setWifi(rdbtnWifi.isSelected());
 		}
 		else if (comboTipo.getSelectedIndex() == 2){ 
-			datos.setTipo("Economica");
+			datos.setTipo("Economico");
 			datos.setPasajerosextra(Integer.parseInt(TFPasajerosExtra.getText()));
 		}
 		else {
@@ -233,7 +235,7 @@ public class GUIAltaLinea extends JFrame {
 			TFCapacidad.setText(Integer.toString(datos.getAsientos()));
 			TFColor.setText(datos.getColor());
 			TFNombreLinea.setText(datos.getNombre());
-			if (datos.getTipo().equals("Economica")) {
+			if (datos.getTipo().equals("Economico")) {
 				comboTipo.setSelectedIndex(2);
 				TFPasajerosExtra.setText(Integer.toString(datos.getPasajerosextra()));
 			}

@@ -199,33 +199,28 @@ public class CaminoDAO {
 		}
 
 		//Dada una lista de caminos ya existentes, los asocia a un trayecto con id idTrayecto, en orden ascendente
-		public static void guardarTrayecto(ArrayList<Camino> listaCaminos, int idTrayecto){
+		public static void guardarTrayecto(ArrayList<DTOCamino> listaCaminos, int idTrayecto){
 			int orden = 1;
 			GestorDB gdb = GestorDB.getInstance();
 			Connection con = gdb.conec;
-			for (Camino unCamino:listaCaminos){
-				PreparedStatement st;
-				try {
+			try {
+				for (DTOCamino unCamino:listaCaminos){
+					PreparedStatement st;
+
+
 					st = con.prepareStatement("INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (?,?,?,?)");
-					st.setInt(1, unCamino.getInicio().getNroParada());
-					st.setInt(2, unCamino.getFin().getNroParada());
+					st.setInt(1, unCamino.getIdOrigen());
+					st.setInt(2, unCamino.getIdDestino());
 					st.setInt(3, idTrayecto);
 					st.setInt(4, orden);
 					st.executeUpdate();
 					orden ++;
 				} 
+			}
 				catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-					try {
-						con.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-
 			}
 
 			public static void eliminarCamino(DTOCamino unCamino) {
