@@ -21,7 +21,18 @@ public class GestorAutobus {
 		return GAutobus;
 	}
 	
+	public static ArrayList<DTOAutobus> obtenerAutobuses() {
+		return AutobusDAO.obtenerAutobuses();
+		
+	}
+	
 	public static void crearAutobus(DTOAutobus datosAutobus, ArrayList<DTOCamino> trayecto) {
 		AutobusDAO.agregarAutobus(datosAutobus);
 	}
+	
+	public static void eliminarAutobus(int idLinea) {
+		AutobusDAO.eliminarTrayecto(idLinea); 
+		AutobusDAO.eliminarAutobus(idLinea);
+	}
+	
 }

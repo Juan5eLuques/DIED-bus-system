@@ -1,4 +1,4 @@
-package GUI.JPanels;
+package GUI.JPanels.Menu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,6 +10,10 @@ import javax.swing.JPanel;
 
 import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonMenu;
+import GUI.JPanels.Parada.JPAgregarParada;
+import GUI.JPanels.Parada.JPBuscarParada;
+import GUI.JPanels.Parada.JPEliminarParada;
+import GUI.JPanels.Parada.JPVerParadas;
 
 public class JPMenuParada extends JPanel {
 	

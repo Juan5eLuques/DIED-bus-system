@@ -1,4 +1,4 @@
-package GUI.JPanels;
+package GUI.JPanels.Parada;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;

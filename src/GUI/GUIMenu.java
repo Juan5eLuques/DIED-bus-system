@@ -16,10 +16,10 @@ import javax.swing.border.EmptyBorder;
 
 import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonMenu;
-import GUI.JPanels.JPMenuIncidencias;
-import GUI.JPanels.JPMenuLineas;
-import GUI.JPanels.JPMenuParada;
-import GUI.JPanels.JPMenuTrayecto;
+import GUI.JPanels.Menu.JPMenuIncidencias;
+import GUI.JPanels.Menu.JPMenuLineas;
+import GUI.JPanels.Menu.JPMenuParada;
+import GUI.JPanels.Menu.JPMenuTrayecto;
 
 
 public class GUIMenu extends JFrame {
@@ -106,7 +106,7 @@ public class GUIMenu extends JFrame {
 		btnLineas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-			JPMenuLineas menuParada = new JPMenuLineas(panelCentral);
+			JPMenuLineas menuParada = new JPMenuLineas(panelCentral, panelLayout,lblTitulo);
 			panelLayout.add(menuParada, BorderLayout.CENTER);
 			menuParada.setVisible(true);
 			}
