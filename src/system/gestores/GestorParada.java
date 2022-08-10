@@ -54,5 +54,13 @@ public class GestorParada {
 	public static ArrayList <DTOParada> obtenerTodos(){
 		return ParadaDAO.obtenerParadas();
 	}
+	public static ArrayList <Parada> obtenerTodasLasParadas(){
+		ArrayList<DTOParada> listaDTO = ParadaDAO.obtenerParadas();
+		ArrayList<Parada> listaParadas = new ArrayList<Parada>();
+		for (DTOParada paradaDTO : listaDTO) {
+			listaParadas.add(ParadaDAO.transformarDTOParadaAParada(paradaDTO));
+		}
+		return listaParadas;
+	}
 
 }

@@ -96,7 +96,7 @@ public class GUIMenu extends JFrame {
 		btnTrayectos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
-			JPMenuTrayecto menuParada = new JPMenuTrayecto(panelCentral);
+			JPMenuTrayecto menuParada = new JPMenuTrayecto(panelCentral, panelLayout,lblTitulo);
 			panelCentral.setVisible(false);
 			panelLayout.add(menuParada, BorderLayout.CENTER);
 			menuParada.setVisible(true);

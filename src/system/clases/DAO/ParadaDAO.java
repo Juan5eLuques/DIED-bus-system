@@ -19,6 +19,15 @@ public class ParadaDAO {
 	
 	private Connection conn;
 	
+	public static Parada transformarDTOParadaAParada(DTOParada unaParada) {
+		Parada nuevaParada = new Parada();
+		nuevaParada.setNroParada(unaParada.getNroParada());
+		nuevaParada.setCalle(unaParada.getCalle());
+		nuevaParada.setNroCalle(unaParada.getNroCalle());
+		nuevaParada.setIncidenciaEstado(unaParada.isActiva());
+		return nuevaParada;
+	}
+	
 	//agrega una nueva parada
 	public static void agregarParada(DTOParada nuevaParada) {
 		
