@@ -63,4 +63,9 @@ public class GestorAutobus {
 		AutobusDAO.eliminarAutobus(idLinea);
 	}
 	
+	public static ArrayList<Integer> lineasQueContienenParada(int idParada){
+		return null;
+	}
+	
+	
 }

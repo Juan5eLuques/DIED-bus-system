@@ -90,7 +90,7 @@ public class CaminoDAO {
 			if(rs.next()) {
 			idTrayecto = rs.getInt("id");
 			}
-			st=con.prepareStatement ("SELECT * FROM APLICACION_BUS.CAMINOTRAYECTO where idTrayecto=? ORDER BY orden DESC");
+			st=con.prepareStatement ("SELECT * FROM APLICACION_BUS.CAMINOTRAYECTO where idTrayecto=? ORDER BY orden ASC");
 			st.setInt(1,idTrayecto);
 			rs2 = st.executeQuery();
 			while (rs2.next()){

@@ -13,6 +13,7 @@ import system.clases.Autobus;
 import system.clases.AutobusEconomico;
 import system.clases.AutobusSuperior;
 import system.clases.Camino;
+import system.clases.Parada;
 import system.gestores.GestorDB;
 
 public class AutobusDAO {
@@ -262,9 +263,30 @@ public class AutobusDAO {
 		}	
 	}
 	
+	public static void lineasQueContienenParada(int idParada, ArrayList <Integer> lineas, ArrayList<String> tipo) {
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		try{
+			PreparedStatement st = con.prepareStatement("Select linea.id, linea.tipo from aplicacion_bus.linea inner join aplicacion_bus.trayecto on linea.id =  trayecto.idlinea inner join aplicacion_bus.caminotrayecto on trayecto.id = caminotrayecto.idTrayecto where caminotrayecto.idOrigen = ?");
+			st.setInt(1,idParada);
+			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				lineas.add(rs.getInt("id"));
+				tipo.add(rs.getString("tipo"));
+			}
+			con.close();
+			rs.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	
+	
 	public static void main (String argc[]) {
 		AutobusDAO prueba = new AutobusDAO();
-		System.out.println(prueba.obtenerCantidadDeLineas()); 
+		//System.out.println(prueba.lineasQueContienenParada(187)); 
 	}
 	
 }

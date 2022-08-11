@@ -1,5 +1,6 @@
 package system.clases;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import DTO.DTOCamino;
@@ -13,7 +14,7 @@ public abstract class Autobus {
 	protected int capacidadMaxima;
 	protected int asientos;
 	protected double precioBoleto;
-	protected List<DTOCamino> recorridoLinea;	
+	protected ArrayList<DTOCamino> recorridoLinea;	
 	
 	public String getNombre() {
 		return nombre;
@@ -39,14 +40,14 @@ public abstract class Autobus {
 	public void setPasajeros(int pasajeros) {
 		this.asientos = pasajeros;
 	}
-	public List<DTOCamino> getRecorridoLinea() {
+	public ArrayList<DTOCamino> getRecorridoLinea() {
 		return recorridoLinea;
 	}
-	public void setRecorridoLinea(List<DTOCamino> recorridoLinea) {
+	public void setRecorridoLinea(ArrayList<DTOCamino> recorridoLinea) {
 		this.recorridoLinea = recorridoLinea;
 	}
 	
-	public void trayectoColectivo(List<DTOCamino> unCamino) {
+	public void trayectoColectivo(ArrayList<DTOCamino> unCamino) {
 		recorridoLinea = unCamino;
 	};
 
@@ -79,6 +80,18 @@ public abstract class Autobus {
 	public String toString() {
 		return "Autobus [id=" + id + ", nombre=" + nombre + ", color=" + color + ", capacidadMaxima=" + capacidadMaxima
 				+ ", pasajeros=" + asientos + ", recorridoLinea=" + recorridoLinea + "]";
+	}
+	public static double getMontoPorKM() {
+		return montoPorKM;
+	}
+	public static void setMontoPorKM(double montoPorKM) {
+		Autobus.montoPorKM = montoPorKM;
+	}
+	public static double getPorcentajePorServicio() {
+		return porcentajePorServicio;
+	}
+	public static void setPorcentajePorServicio(double porcentajePorServicio) {
+		Autobus.porcentajePorServicio = porcentajePorServicio;
 	}
 	
 }
