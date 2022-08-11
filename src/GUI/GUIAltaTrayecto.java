@@ -79,9 +79,9 @@ public class GUIAltaTrayecto extends JFrame {
 	 */
 	public GUIAltaTrayecto(DTOAutobus DatosLinea) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 700);
+		setBounds(200, 0, 900, 700);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(70, 130, 180));
+		contentPane.setBackground(new Color(32, 83, 117));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
@@ -95,6 +95,7 @@ public class GUIAltaTrayecto extends JFrame {
 		gbl_panelDeControl.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panelDeControl.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		JPanel panelDeControl = new JPanel();
+		panelDeControl.setBackground(new Color(32, 83, 117));
 		panelDeControl.setLayout(gbl_panelDeControl);
 		panelDeControl.setBackground(SystemColor.activeCaption);
 		contentPane.add(panelDeControl, BorderLayout.NORTH);
@@ -102,6 +103,8 @@ public class GUIAltaTrayecto extends JFrame {
 	
 		
 		JLabel lblTitulo = new JLabel("CREAR TRAYECTO");
+		lblTitulo.setForeground(Color.white);
+		lblTitulo.setFont(new Font("Ebrima", Font.BOLD, 30));
 		GridBagConstraints gbc_lblTitulo = new GridBagConstraints();
 		gbc_lblTitulo.gridwidth = 3;
 		gbc_lblTitulo.anchor = GridBagConstraints.NORTH;
@@ -110,18 +113,16 @@ public class GUIAltaTrayecto extends JFrame {
 		gbc_lblTitulo.gridx = 0;
 		gbc_lblTitulo.gridy = 0;
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 22));
-		lblTitulo.setBounds(10, 14, 86, 14);
+		lblTitulo.setBounds(10, 15, 50, 20);
 		panelDeControl.add(lblTitulo, gbc_lblTitulo);
 		
 		////PANEL CUERPO////
 		
 		JPanel panelGrafo = new JPanel();
-		panelGrafo.setBackground(new Color(70, 130, 180));
+		panelGrafo.setBackground(new Color(32, 83, 117));
 		contentPane.add(panelGrafo, BorderLayout.CENTER);
 		
 		//HASTA ACA HACE LA BASE
-
 		
 		TFNroParada = new JTextField();
 		GridBagConstraints gbc_TFNroParada = new GridBagConstraints();
@@ -129,6 +130,7 @@ public class GUIAltaTrayecto extends JFrame {
 		gbc_TFNroParada.insets = new Insets(0, 0, 0, 5);
 		gbc_TFNroParada.gridx = 3;
 		gbc_TFNroParada.gridy = 0;
+		
 		TFNroParada.setColumns(10);
 		panelDeControl.add(TFNroParada, gbc_TFNroParada);
 		
@@ -228,7 +230,7 @@ public class GUIAltaTrayecto extends JFrame {
 		}
 		
 		private static void dibujarParadasPosibles(Parada paradaActual, ArrayList<Parada> paradasPosibles, JPanel panel) {
-			panel.setBackground(new Color(70, 130, 180));
+			panel.setBackground(new Color(32, 83, 117));
 			ArrayList <Integer> posActual; 
 			ArrayList <Integer> posPosible;
 			Graphics g = panel.getGraphics();

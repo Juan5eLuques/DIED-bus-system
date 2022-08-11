@@ -217,6 +217,23 @@ public class AutobusDAO {
 		CaminoDAO.guardarTrayecto(listaCaminos, idTrayecto);
 	}
 	
+	
+	public static void eliminarIDTrayecto(int nroLinea) {
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		try{
+			PreparedStatement st = con.prepareStatement("DELETE FROM aplicacion_bus.trayecto WHERE idlinea=?");
+			st.setInt(1,nroLinea);
+			st.execute();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+
+	
+	
+	
 	public static void eliminarTrayecto(int nroLinea) {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;

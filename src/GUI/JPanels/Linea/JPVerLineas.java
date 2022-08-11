@@ -38,6 +38,7 @@ public class JPVerLineas extends JPanel {
 		this.add(scroll);
 		
 		DefaultTableModel model = new DefaultTableModel();
+		
 		JTable tabla = new JTable();
 		tabla.setModel(model);
 		model.addColumn("IDLinea");
@@ -60,11 +61,10 @@ public class JPVerLineas extends JPanel {
 			matrizInfo[5] = unaLinea.getPasajerosextra();
 			matrizInfo[6] = unaLinea.isWifi();
 			matrizInfo[7] = unaLinea.isAire();
-		
 			
 			model.addRow(matrizInfo);
 		}
-
+		
 		tabla.setRowHeight(80);
 		tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
 		tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
@@ -86,6 +86,8 @@ public class JPVerLineas extends JPanel {
 		scroll.setBackground(new Color(17, 43, 60));
 		tabla.getTableHeader().setReorderingAllowed(false);
 		
+		tabla.setAutoCreateRowSorter(true);
+		
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelManipular.setVisible(true);
@@ -94,7 +96,6 @@ public class JPVerLineas extends JPanel {
 			}
 		});
 	}
-
 	
 	public void deshabilitar() {
 		this.setVisible(false);

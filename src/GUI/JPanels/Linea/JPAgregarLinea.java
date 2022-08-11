@@ -163,8 +163,6 @@ public class JPAgregarLinea extends JPanel {
 					}
 					
 					
-					
-					
 				}
 			}
 		});

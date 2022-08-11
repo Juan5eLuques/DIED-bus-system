@@ -24,4 +24,8 @@ public class GestorIncidencia {
 			return IncidenciaDAO.obtenerTodas();
 		}
 		
+		public static void registrarIncidencia(DTOIncidencia nueva) {
+			IncidenciaDAO.registrarIncidencia(nueva);
+		}
+		
 	}
