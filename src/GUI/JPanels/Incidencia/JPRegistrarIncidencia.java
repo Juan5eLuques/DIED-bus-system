@@ -39,7 +39,8 @@ public class JPRegistrarIncidencia extends JPanel {
 		JDateChooser JDFechaFin = new JDateChooser();
 		TextFieldText TFDescripcion = new TextFieldText();
 		
-		JDfechaInicio.setDateFormatString("yyyy/mm/dd");
+		JDfechaInicio.setDateFormatString("dd-MM-yyyy");
+		JDFechaFin.setDateFormatString("dd-MM-yyyy");
 		//TextFieldText TFResuleta = new TextFieldText();
 		
 		TFIDIncidencia.setBounds(410, 132, 300, 30);
@@ -109,6 +110,7 @@ public class JPRegistrarIncidencia extends JPanel {
 					//nuevaIncidencia.setFechaFin(JDFechaFin.getDate());
 					nuevaIncidencia.setDescripcion(TFDescripcion.getText());
 					nuevaIncidencia.setEstadoActual(true);
+					System.out.println(JDfechaInicio.getDate());
 					
 					
 					GestorIncidencia.registrarIncidencia(nuevaIncidencia);

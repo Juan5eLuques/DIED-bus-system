@@ -22,6 +22,7 @@ import system.gestores.GestorBoleto;
 import system.gestores.GestorParada;
 
 import java.awt.Font;
+import java.awt.Graphics;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -34,13 +35,17 @@ public class JPBoleto extends JPanel {
 	ArrayList<AutobusSuperior> as = new ArrayList<AutobusSuperior>();
 	ArrayList<ArrayList<DTOCamino>> listaCaminos = new ArrayList<ArrayList<DTOCamino>> ();
 	ArrayList<Integer> paradasPosibles = new ArrayList<Integer>();
-	JButton btnBuscar = new JButton("Buscar");
+	BotonIcono btnBuscar = new BotonIcono("iconSearch.png");
 	panelCentral.setVisible(false);
 	lblTitulo.setText("Compra de boleto");
 		
 	String[] opciones = new String[] {};
 	
 	BotonAtras boton = new BotonAtras(true);
+	JButton botonVerCaminos = new JButton();
+	botonVerCaminos.setText("Ver Caminos");
+	botonVerCaminos.setBounds(409, 95, 180, 30);
+	botonVerCaminos.setVisible(false);
 	
 	this.add(boton);
 	this.setLayout(null);
@@ -49,6 +54,8 @@ public class JPBoleto extends JPanel {
 	JComboBox JCidParadaDestino = new JComboBox(opciones);
 	BotonIcono botonComprar = new BotonIcono("iconComprar.png");
 	botonComprar.setEnabled(false);
+	btnBuscar.setBounds(409, 95, 40, 30);
+	
 	LblText lblCosto = new LblText("");
 	lblCosto.setVisible(false);
 	
@@ -74,6 +81,7 @@ public class JPBoleto extends JPanel {
 	this.add(lblParadaDestino);
 	this.add(lblParadaOrigen);
 	this.add(botonComprar);
+	this.add(botonVerCaminos);
 	
 	ActionListener actionBuscar = e ->{
 		Parada unaParada;
@@ -88,12 +96,11 @@ public class JPBoleto extends JPanel {
 			JCidParadaDestino.setModel(new DefaultComboBoxModel(paradasPosibles.toArray()));
 			JCidParadaDestino.setVisible(true);
 			lblParadaDestino.setVisible(true);
-			btnBuscar.setBounds(409, 95, 180, 30);
-			btnBuscar.setText("Ver caminos");
+			botonVerCaminos.setVisible(true);
+			btnBuscar.setVisible(false);
+			
 		}
 	};
-	
-	btnBuscar.setBounds(409, 95, 89, 30);
 	btnBuscar.addActionListener(actionBuscar);
 	add(btnBuscar);
 	
@@ -107,18 +114,8 @@ public class JPBoleto extends JPanel {
 		}
 	});
 	
-	boton.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			panelManipular.setVisible(true);
-			deshabilitar();
-			lblTitulo.setText("SISTEMA AUTOBUS");
-			panelCentral.setVisible(true);
-		}
-	});
-	
 	}
-	
-		
+
 	public static void setearParadasPosibles(ArrayList<Parada> posibles, ArrayList<ArrayList<DTOCamino>> listaCaminos) {
 		for (ArrayList<DTOCamino> unTrayecto:listaCaminos) {
 			for (DTOCamino unCamino:unTrayecto) {

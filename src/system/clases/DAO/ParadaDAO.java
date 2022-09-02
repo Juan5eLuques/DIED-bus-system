@@ -119,6 +119,32 @@ public class ParadaDAO {
 		}
 	}
 	
+	
+	public static DTOParada obtenerDTOParada(int nroParada) {
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		DTOParada paradaResult = new DTOParada();
+		paradaResult.setNroParada(-1);
+		try {
+			PreparedStatement st = con.prepareStatement("SELECT id, activa, calle, numero FROM aplicacion_bus.parada WHERE id=" + nroParada);
+			ResultSet rs = st.executeQuery();
+				if (rs.next()) {
+					paradaResult.setNroParada(rs.getInt("id"));
+					paradaResult.setCalle(rs.getString("calle"));
+					paradaResult.setNroCalle(rs.getInt("numero"));
+					paradaResult.setActiva(rs.getBoolean("activa"));
+				}
+
+			rs.close();
+			con.close();
+		}
+		catch (Exception e ) {
+			e.printStackTrace();
+		}
+		return paradaResult;
+	}
+	
+	
 	//Devuelve la parada con id nroParada. Si no encuentra parada con ese numero, devuelve una con nroParada = -1
 	public static Parada obtenerParada(int nroParada) {
 		GestorDB gdb = GestorDB.getInstance();

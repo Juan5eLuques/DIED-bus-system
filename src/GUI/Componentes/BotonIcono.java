@@ -16,5 +16,6 @@ public class BotonIcono extends JButton{
 		this.setBorderPainted(false);
 		this.setFocusPainted(false);
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		this.setContentAreaFilled(false);
 	}
 }
