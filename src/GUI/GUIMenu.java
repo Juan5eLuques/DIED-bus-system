@@ -22,6 +22,7 @@ import GUI.JPanels.Menu.JPMenuIncidencias;
 import GUI.JPanels.Menu.JPMenuLineas;
 import GUI.JPanels.Menu.JPMenuParada;
 import GUI.JPanels.Menu.JPMenuTrayecto;
+import GUI.JPanels.Menu.JPMostrarCiudad;
 
 
 public class GUIMenu extends JFrame {
@@ -89,6 +90,8 @@ public class GUIMenu extends JFrame {
 		
 		BotonMenu btnIncidencias = new BotonMenu("Incidencias");
 		
+		BotonMenu btnCiudad = new BotonMenu("Mostrar Ciudad");
+		
 		BotonIcono botonBoleto = new BotonIcono("iconBoleto.png");
 		botonBoleto.setBounds(700,455,100,100);
 		panelCentral.add(botonBoleto);
@@ -97,7 +100,7 @@ public class GUIMenu extends JFrame {
 		agregarBoton(190, panelCentral,btnLineas);
 		agregarBoton(250, panelCentral,btnParadas);
 		agregarBoton(310, panelCentral,btnIncidencias);
-		
+		agregarBoton(370, panelCentral,btnCiudad);
 		
 		
 		btnTrayectos.addActionListener(new ActionListener() {
@@ -142,6 +145,16 @@ public class GUIMenu extends JFrame {
 			panelLayout.add(comprarBoleto, BorderLayout.CENTER);
 			comprarBoleto.setVisible(true);
 			botonBoleto.setVisible(false);
+			}
+		});
+		
+		btnCiudad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+			JPMostrarCiudad menuCiudad = new JPMostrarCiudad(panelCentral, panelLayout,lblTitulo);
+			panelCentral.setVisible(false);
+			panelLayout.add(menuCiudad, BorderLayout.CENTER);
+			menuCiudad.setVisible(true);
 			}
 		});
 		

@@ -21,6 +21,17 @@ public class BotonMenu extends JButton {
 	this.setFocusPainted(false);
 	this.setForeground(new Color(17, 43, 60));
 	this.setCursor(new Cursor(Cursor.HAND_CURSOR));
-	
 	}
+	
+
+	public BotonMenu(String titulo, Font unaFuente) {
+	this.setFont(new Font("Century Gothic", Font.BOLD, 25));
+	this.setText(titulo);
+	this.setBorderPainted(false);
+	this.setFocusPainted(false);
+	this.setForeground(new Color(17, 43, 60));
+	this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	this.setFont(unaFuente);
+	}
+	
 }

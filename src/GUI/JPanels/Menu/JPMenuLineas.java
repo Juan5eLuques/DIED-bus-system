@@ -48,7 +48,7 @@ public class JPMenuLineas extends JPanel {
 				JPVerLineas panelVerLineas = new JPVerLineas(getPanel(), lblTitulo);
 				panelContent.add(panelVerLineas);
 				desabilitarMenu();
-				lblTitulo.setText("AGREGAR PARADA");
+				lblTitulo.setText("VER LINEAS");
 				panelVerLineas.setVisible(true);
 			}
 		});
@@ -68,7 +68,7 @@ public class JPMenuLineas extends JPanel {
 				JPEliminarLinea panelEliminarLinea = new JPEliminarLinea(getPanel(), lblTitulo);
 				panelContent.add(panelEliminarLinea);
 				desabilitarMenu();
-				lblTitulo.setText("AGREGAR LINEA");
+				lblTitulo.setText("ELIMINAR LINEA");
 				panelEliminarLinea.setVisible(true);
 			}
 		});
