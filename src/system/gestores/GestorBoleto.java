@@ -28,6 +28,7 @@ public class GestorBoleto {
 		return GBoleto;
 	}
 	
+	//Devuelve en "ae" y "as" la lista de los autobuces que pasan por la parada "parada"
 	public static boolean cargarLineasQueContienenParada(int parada, ArrayList<AutobusEconomico> ae, ArrayList<AutobusSuperior> as) {
 		boolean ret = false;
 		ArrayList <Integer> IDParadas = new ArrayList<Integer>();
@@ -46,6 +47,7 @@ public class GestorBoleto {
 			if (tipo.get(i).equals("Superior")) {
 				as.add(AutobusSuperiorDAO.obtenerAutobus(id));
 			}
+			i++;
 		}
 		
 		return ret;
@@ -139,6 +141,7 @@ public class GestorBoleto {
 		return ret; 
 	}
 	
+	//Devuelve el valor del pasaje
 	public static double calcularCostoPasaje(DTOAutobus unAutobus, double distancia) {
 		double valor=distancia * Autobus.getMontoPorKM();
 		double modificador = Autobus.getPorcentajePorServicio();
@@ -151,6 +154,7 @@ public class GestorBoleto {
 		return valor*(1+modificador/100);
 	}
 	
+	//Devuelve la distancia total recorrida en un trayecto
 	public static double calcularDistanciaRecorrida(ArrayList<DTOCamino> unTrayecto) {
 		double distancia=0;
 		for (DTOCamino unCamino:unTrayecto) {
@@ -159,6 +163,7 @@ public class GestorBoleto {
 		return distancia;
 	}
 	
+	//Devuelve la duracion total de un trayecto
 	public static double calcularDuracion(ArrayList<DTOCamino> unTrayecto) {
 		double duracion=0;
 		for (DTOCamino unCamino:unTrayecto) {
@@ -167,6 +172,7 @@ public class GestorBoleto {
 		return duracion;
 	}
 	
+	//devuelve una lista de paradas que pasan por un camino
 	public static void agregarParadasPosible (ArrayList<Parada> posibles, ArrayList<DTOCamino> unTrayecto) {
 		for (DTOCamino unCamino:unTrayecto) {
 			posibles.add(GestorParada.obtenerParada(unCamino.getIdDestino()));
