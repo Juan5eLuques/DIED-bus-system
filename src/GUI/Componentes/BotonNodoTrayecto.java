@@ -5,27 +5,23 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
+import DTO.DTOCamino;
 import DTO.DTOParada;
-import GUI.GUIInfoNodo;
-import GUI.GUIInfoNodo;
-import system.clases.DAO.ParadaDAO;
+import GUI.JPanels.Trayecto.JPGuardarTrayecto;
 
-public class BotonNodo extends JLabel {
-	
+public class BotonNodoTrayecto extends JLabel {
+
 	private DTOParada parada;
 	private int posY;
 	private int posX;
 	
-	public BotonNodo(DTOParada parada) {
+	public BotonNodoTrayecto(DTOParada parada, ArrayList<DTOParada> trayecto, JPGuardarTrayecto panelDibujo, ArrayList<DTOCamino> posibles) {
 		
 		this.setHorizontalAlignment(SwingConstants.CENTER);
 		this.parada=parada;
@@ -50,14 +46,31 @@ public class BotonNodo extends JLabel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIInfoNodo info = new GUIInfoNodo(infoParada());
-				info.setResizable(false);
-				info.setVisible(true);
+		
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
+				ArrayList<DTOCamino> posibles = panelDibujo.getListaPosibles();
+				boolean encontrado = false;
+				for (DTOCamino unCamino: posibles) {
+					if (unCamino.getIdDestino() == parada.getNroParada()) {
+						encontrado=true;
+					}
+				}
+				if (encontrado == true) {
+					
+				DTOCamino nuevoCamino = new DTOCamino();
+				nuevoCamino.setIdOrigen(trayecto.get(trayecto.size()-1).getNroParada());
+				nuevoCamino.setIdDestino(parada.getNroParada());
+				trayecto.add(parada);
+				panelDibujo.setearCaminos(nuevoCamino);
+				panelDibujo.revalidate();
+				panelDibujo.repaint();
+				}
+				else {
+					
+				}
 				
 			}
 
@@ -83,8 +96,16 @@ public class BotonNodo extends JLabel {
 		
 	}
 	
+	public void buscarParada (DTOCamino camino, Boolean encontrado) {
+			if(camino.getIdDestino() == parada.getNroParada()) encontrado = true;
+	}
+	
 	public DTOParada infoParada() {
 		return this.parada;
 	}
-	
+
+	public void addActionListener() {
+		// TODO Auto-generated method stub
+		
+	}
 }

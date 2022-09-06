@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import DTO.DTOParada;
 import DTO.DTOCamino;
 import system.clases.Camino;
 import system.clases.Parada;
@@ -105,6 +104,43 @@ public class CaminoDAO {
 		}
 		return null;
 	}
+		
+		public final static ArrayList<DTOCamino> obtenerCaminosDeUnaLinea(String nombreLinea){
+			ArrayList<DTOCamino> listaCaminos = new ArrayList <DTOCamino>();
+			GestorDB gdb = GestorDB.getInstance();
+			Connection con = gdb.conec;
+			try {
+				int idColectivo=-1;
+				int idTrayecto=-1;
+				PreparedStatement st1 = con.prepareStatement("SELECT id FROM APLICACION_BUS.LINEA where nombre=?");
+				st1.setString(1, nombreLinea);
+				ResultSet rs1 = st1.executeQuery();
+				if (rs1.next()) {
+					idColectivo = rs1.getInt("id");
+				}
+				PreparedStatement st = con.prepareStatement("SELECT * FROM APLICACION_BUS.TRAYECTO where idLinea=?");
+				st.setInt(1, idColectivo);
+				ResultSet rs = st.executeQuery();
+				ResultSet rs2;
+				if(rs.next()) {
+				idTrayecto = rs.getInt("id");
+				}
+				st=con.prepareStatement ("SELECT * FROM APLICACION_BUS.CAMINOTRAYECTO where idTrayecto=? ORDER BY orden ASC");
+				st.setInt(1,idTrayecto);
+				rs2 = st.executeQuery();
+				while (rs2.next()){
+					listaCaminos.add((obtenerUnCamino(rs2.getInt("idOrigen"),rs2.getInt("idDestino"))));
+				}
+				rs.close();
+				con.close();
+				return listaCaminos;
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
 	
 	//Si existe, devuelve en camino que tiene como origen y destino las paradas pasadas. Si no existe, retorna null
 	public static DTOCamino obtenerUnCamino(int idOrigen, int idDestino ) {
@@ -185,18 +221,17 @@ public class CaminoDAO {
 			GestorDB gdb = GestorDB.getInstance();
 			Connection con = gdb.conec;
 			try {
+				PreparedStatement st;
+				st = con.prepareStatement("INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (?,?,?,?)");
 				for (DTOCamino unCamino:listaCaminos){
-					PreparedStatement st;
-
-
-					st = con.prepareStatement("INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (?,?,?,?)");
 					st.setInt(1, unCamino.getIdOrigen());
 					st.setInt(2, unCamino.getIdDestino());
 					st.setInt(3, idTrayecto);
 					st.setInt(4, orden);
 					st.executeUpdate();
 					orden ++;
-				} 
+				}
+				st.close();
 			}
 				catch (SQLException e) {
 					// TODO Auto-generated catch block

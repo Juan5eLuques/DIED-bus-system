@@ -3,13 +3,16 @@ package GUI.JPanels.Menu;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import DTO.DTOCamino;
 import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonMenu;
 import GUI.JPanels.Trayecto.JPMostrarTrayecto;
+import system.clases.DAO.CaminoDAO;
 
 public class JPMenuTrayecto extends JPanel {
 	
@@ -47,6 +50,11 @@ public class JPMenuTrayecto extends JPanel {
 				desabilitarMenu();
 				lblTitulo.setText("VER TRAYECTOS");
 				panelVerTrayectos.setVisible(true);
+//				JPUnTrayecto JP = new JPUnTrayecto(panelManipular, lblTitulo,trayecto, panelContent);
+//				panelContent.add(JP);
+//				desabilitarMenu();
+//				lblTitulo.setText("VER TRAYECTOS");
+//				JP.setVisible(true);
 			}
 		});
 		

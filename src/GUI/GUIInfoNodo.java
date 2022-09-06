@@ -2,57 +2,73 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import DTO.DTOParada;
 import GUI.Componentes.BotonMenu;
 import GUI.Componentes.LblText;
+import javax.swing.JLabel;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
 public class GUIInfoNodo extends JFrame {
 	
 	private JPanel panelLayout;
-	
-	public GUIInfoNodo(DTOParada paradaInfo){
-		
-		panelLayout = new JPanel();
-		panelLayout.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(panelLayout);
-		panelLayout.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panelSuperior = new JPanel();
-		panelLayout.add(panelSuperior, BorderLayout.NORTH);
-		panelSuperior.setBackground(new Color(17, 43, 60));
+	private JPanel contentPane;
+
+	/**
+	 * Create the frame.
+	 */
+	public GUIInfoNodo(DTOParada paradaInfo) {
 		
 		this.setBounds(100,30,300,350);
-		this.setVisible(true);
-		JPanel content = new JPanel();
-		this.add(content);
-		content.setLayout(null);
-		content.setBackground(new Color(32, 83, 117));
-		LblText titulo = new LblText("Parada "+paradaInfo.getNroParada());
-		titulo.setBounds(30, 30, 50, 30);
-		titulo.setBackground(null);
-		panelSuperior.add(titulo);
-		LblText calle = new LblText("Calle: "+ paradaInfo.getCalle());
-		LblText estado;
+		
+		String dir = System.getProperty("user.dir");
+		
+		JPanel panelSuperior = new JPanel();
+		getContentPane().add(panelSuperior, BorderLayout.NORTH);
+		panelSuperior.setBackground(new Color(17, 43, 60));
+		
+		LblText lblTitulo = new LblText("Parada "+paradaInfo.getNroParada());
+		panelSuperior.add(lblTitulo);
+		lblTitulo.setForeground(Color.white);
+		
+		JPanel panelContent = new JPanel();
+		getContentPane().add(panelContent, BorderLayout.CENTER);
+		panelContent.setLayout(null);
+		
+		LblText lvlCalle = new LblText("Calle: "+ paradaInfo.getCalle());
+		lvlCalle.setHorizontalAlignment(SwingConstants.CENTER);
+		lvlCalle.setBounds(0, 40, 284, 30);
+		panelContent.add(lvlCalle);
+		
+		LblText lblEstado = new LblText("");
 		if (paradaInfo.isActiva()) {
-			estado = new LblText("Estado: ACTIVA");
+			lblEstado = new LblText("Estado: ACTIVA");
+			lblEstado.setIcon(new ImageIcon(dir +"\\iconos\\iconVerified.png"));
 		}
 		else {
-			estado = new LblText("Estado:  NO ACTIVA");
+			lblEstado = new LblText("Estado:  NO ACTIVA");
+			lblEstado.setIcon(new ImageIcon(dir +"\\iconos\\iconDenied.png"));
 		}
+		lblEstado.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEstado.setBounds(0, 120, 284, 64);
+		panelContent.add(lblEstado);
+		
 		BotonMenu verIncidencias = new BotonMenu("VER INCIDENCIAS", new Font("Ebrima", Font.BOLD, 20));
 		
-		calle.setBounds(40,20,300,70);
-		estado.setBounds(40,80,300,70);
-		verIncidencias.setBounds(30,200,210,40);
-		
-		content.add(calle);
-		content.add(estado);
-		content.add(verIncidencias);
-	}
+		panelContent.add(verIncidencias);
+		verIncidencias.setBounds(10,200,264,40);
+		panelContent.setBackground(new Color(32, 83, 117));
 }
+	}

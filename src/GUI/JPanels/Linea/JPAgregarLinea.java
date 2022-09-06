@@ -4,42 +4,50 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import DTO.DTOAutobus;
-import DTO.DTOParada;
+import DTO.DTOCamino;
 import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonIcono;
 import GUI.Componentes.LblText;
 import GUI.Componentes.TextFieldNumbers;
 import GUI.Componentes.TextFieldText;
 import system.clases.DAO.AutobusDAO;
-import system.clases.DAO.ParadaDAO;
-import system.gestores.GestorParada;
+import system.gestores.GestorAutobus;
+import GUI.GUIGuardarTrayecto;
 
-public class JPAgregarLinea extends JPanel {
+public class JPAgregarLinea extends JPanel implements KeyListener {
+	
+	TextFieldNumbers TFNroLinea = new TextFieldNumbers();
+	TextFieldText TFNombre= new TextFieldText();
+	TextFieldText TFColor = new TextFieldText();
+	TextFieldNumbers TFPasajeros = new TextFieldNumbers();
+	TextFieldNumbers TFParados = new TextFieldNumbers();
+	JComboBox JCBTipo = new JComboBox(new String[] {"Economico", "Superior"});
+	BotonIcono botonGuardar = new BotonIcono("iconGuardar.png");
+	BotonIcono botonCamino = new BotonIcono("iconCamino.png");
+	JCheckBox JCheckAire = new JCheckBox("Aire");
+	JCheckBox JCheckWifi = new JCheckBox("Wifi");
+	
+	private ArrayList<DTOCamino> trayecto;
 	
 	private Font fuente = new Font("Ebrima", Font.BOLD, 20);
 	
 	public JPAgregarLinea(JPanel panelManipular, JLabel lblTitulo){
 		
+		trayecto = new ArrayList<DTOCamino>();
+		
 		BotonAtras boton = new BotonAtras(true);
 		this.add(boton);
 		this.setLayout(null);
 		this.setBackground(new Color(32, 83, 117));
-		TextFieldNumbers TFNroLinea = new TextFieldNumbers();
-		TextFieldText TFNombre= new TextFieldText();
-		TextFieldText TFColor = new TextFieldText();
-		TextFieldNumbers TFPasajeros = new TextFieldNumbers();
-		TextFieldNumbers TFParados = new TextFieldNumbers();
-		JComboBox JCBTipo = new JComboBox(new String[] {"Economico", "Superior"});
-		JCheckBox JCheckAire = new JCheckBox("Aire");
-		JCheckBox JCheckWifi = new JCheckBox("Wifi");
 		
 		JCheckAire.setBackground(null);
 		JCheckWifi.setBackground(null);
@@ -56,36 +64,34 @@ public class JPAgregarLinea extends JPanel {
 		
 		
 		LblText lblNroLinea = new LblText("Numero de linea: ", fuente);
-		lblNroLinea.setBounds(200, 120, 300, 30);
+		lblNroLinea.setBounds(160, 120, 300, 30);
 		
 		LblText lblNombre = new LblText("Nombre: ",fuente);
 		lblNombre.setBounds(200, 160, 300, 30);
 	
 		LblText lblColor = new LblText("Color: ",fuente);
-		lblColor.setBounds(200, 200, 300, 30);
+		lblColor.setBounds(212, 200, 300, 30);
 		
 		LblText lblTipo = new LblText("Tipo: ",fuente);
-		lblTipo.setBounds(200, 240, 300, 30);
+		lblTipo.setBounds(215, 240, 300, 30);
 		
 		LblText lblPasajeros = new LblText("Asientos: ",fuente);
-		lblPasajeros.setBounds(200, 280, 300, 30);
+		lblPasajeros.setBounds(195, 280, 300, 30);
 		
 		LblText lblParados = new LblText("Parados: ",fuente);
-		lblParados.setBounds(200, 320, 300, 30);
+		lblParados.setBounds(197, 320, 300, 30);
 		
 		LblText lblServicios = new LblText("Servicios: ",fuente);
-		lblServicios.setBounds(200, 360, 300, 30);
+		lblServicios.setBounds(191, 360, 300, 30);
 		lblServicios.setVisible(false);
 		
 		JCheckWifi.setBounds(400,363,80,30);
 		JCheckAire.setBounds(500,363,80,30);
 		JCheckWifi.setVisible(false);
 		JCheckAire.setVisible(false);
-		TFParados.setEnabled(false);
-		
-		BotonIcono botonGuardar = new BotonIcono("iconGuardar.png");
 		botonGuardar.setBounds(680,470, 100, 100);
-		BotonIcono botonCamino = new BotonIcono("iconCamino.png");
+		botonGuardar.setEnabled(false);
+		botonCamino.setEnabled(false);
 		botonCamino.setBounds(530,470,100,100);
 		
 		this.add(botonCamino);
@@ -107,10 +113,15 @@ public class JPAgregarLinea extends JPanel {
 		this.add(lblParados);
 		this.add(lblServicios);
 		
-		TFParados.setEnabled(false);
-		JCBTipo.setSelectedIndex(-1);
+		JCBTipo.setSelectedIndex(0);
 		
 		panelManipular.setVisible(false);
+		
+		TFNroLinea.addKeyListener(this);
+		TFNombre.addKeyListener(this);
+		TFColor.addKeyListener(this);
+		TFParados.addKeyListener(this);
+		TFPasajeros.addKeyListener(this);
 		
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -126,13 +137,13 @@ public class JPAgregarLinea extends JPanel {
 					JCheckWifi.setVisible(true);
 					JCheckAire.setVisible(true);  
 					lblServicios.setVisible(true);
+					TFParados.setEnabled(false);
 				}
 				if(JCBTipo.getSelectedItem().toString() == "Economico") {
 					JCheckWifi.setVisible(false);
 					JCheckAire.setVisible(false);
 					TFParados.setEnabled(true);
 					lblServicios.setVisible(false);
-					 
 				}
 			}
 		});
@@ -145,16 +156,13 @@ public class JPAgregarLinea extends JPanel {
 				else {
 					DTOAutobus autobus = new DTOAutobus();
 					autobus.setId(Integer.parseInt(TFNroLinea.getText()));
-					autobus.setNombre(TFNroLinea.getText());
+					autobus.setNombre(TFNombre.getText());
 					autobus.setColor(TFColor.getText());
 					autobus.setTipo(JCBTipo.getSelectedItem().toString());
 					autobus.setAsientos(Integer.parseInt(TFPasajeros.getText()));
 					if (JCBTipo.getSelectedItem().toString() == "Superior") {
 						autobus.setAire(JCheckAire.isSelected());
 						autobus.setWifi(JCheckWifi.isSelected());
-						
-						System.out.println(JCheckAire.isSelected());
-						System.out.println(JCheckWifi.isSelected());
 					}
 					else {
 						autobus.setAire(false);
@@ -162,13 +170,69 @@ public class JPAgregarLinea extends JPanel {
 						autobus.setPasajerosextra(Integer.parseInt(TFParados.getText()));
 					}
 					
+					GestorAutobus.crearAutobus(autobus, trayecto);
 					
 				}
 			}
 		});
+		
+		
+		botonCamino.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GUIGuardarTrayecto nuevoTrayecto = new GUIGuardarTrayecto(getPanel(),botonGuardar);
+				nuevoTrayecto.setVisible(true);
+			}
+		});
+	}
+	
+	public void habilitarBotonCamino() {
+		if (JCBTipo.getSelectedItem().toString() == "Economico") {
+		if (!TFNroLinea.getText().isEmpty() && !TFNombre.getText().isEmpty() && !TFColor.getText().isEmpty() && !TFParados.getText().isEmpty()  && !TFPasajeros.getText().isEmpty()) {
+			botonCamino.setEnabled(true);
+			}
+		else {
+			botonCamino.setEnabled(false);
+			}
+		}
+		
+		if (JCBTipo.getSelectedItem().toString() == "Superior") {
+			if (!TFNroLinea.getText().isEmpty() && !TFNombre.getText().isEmpty() && !TFColor.getText().isEmpty() && !TFPasajeros.getText().isEmpty()) {
+				botonCamino.setEnabled(true);
+				}
+			else {
+				botonCamino.setEnabled(false);
+				}
+		}
+		
+	}	
+	
+	public void setearTrayecto (ArrayList<DTOCamino> unTrayecto) {
+		this.trayecto = unTrayecto;
 	}
 	
 	public void deshabilitar() {
 		this.setVisible(false);
 		}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		habilitarBotonCamino();
+		
+	}
+	
+	public JPAgregarLinea getPanel() {
+		return this;
+	}
 }
