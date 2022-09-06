@@ -23,6 +23,7 @@ public class BotonAtras extends JButton {
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		this.setVisible(true);
 		this.setEnabled(visible);
+		this.setContentAreaFilled(false);
 		
 	}
 	

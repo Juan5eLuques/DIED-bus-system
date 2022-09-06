@@ -1,306 +1,244 @@
-CREATE SCHEMA APLICACION_BUS;
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(1,'TRUE','CALLE 00',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(2,'TRUE','CALLE 00',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(3,'TRUE','CALLE 00',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(4,'TRUE','CALLE 00',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(5,'TRUE','CALLE 00',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(6,'TRUE','CALLE 00',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(7,'TRUE','CALLE 00',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(8,'TRUE','CALLE 00',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(9,'TRUE','CALLE 00',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(10,'TRUE','CALLE 00',1000);
 
-CREATE TABLE APLICACION_BUS.LINEA
-(
-    id SERIAL PRIMARY KEY,
-    nombre VARCHAR(20) NOT NULL,
-    color VARCHAR(15) NOT NULL,
-    tipo VARCHAR(15 )NOT NULL,
-    asientos INT NOT NULL,
-    parados INT,
-    wifi BOOLEAN,
-    aire BOOLEAN
-);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(11,'TRUE','CALLE 01',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(12,'TRUE','CALLE 01',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(13,'TRUE','CALLE 01',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(14,'TRUE','CALLE 01',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(15,'TRUE','CALLE 01',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(16,'TRUE','CALLE 01',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(17,'TRUE','CALLE 01',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(18,'TRUE','CALLE 01',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(19,'TRUE','CALLE 01',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(20,'TRUE','CALLE 01',1000);
 
-CREATE TABLE APLICACION_BUS.PARADA
-(
-    id INT PRIMARY KEY, 
-    activa BOOLEAN NOT NULL,
-    calle VARCHAR(15) NOT NULL,
-    numero INT NOT NULL
-);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(21,'TRUE','CALLE 02',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(22,'TRUE','CALLE 02',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(23,'TRUE','CALLE 02',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(24,'TRUE','CALLE 02',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(25,'TRUE','CALLE 02',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(26,'TRUE','CALLE 02',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(27,'TRUE','CALLE 02',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(28,'TRUE','CALLE 02',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(29,'TRUE','CALLE 02',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(30,'TRUE','CALLE 02',1000);
 
-CREATE TABLE APLICACION_BUS.CAMINO
-(
-    idOrigen INT NOT NULL,
-    idDestino INT NOT NULL,
-    distancia DECIMAL (5,1) NOT NULL,
-    duracion INT NOT NULL,
-    activa BOOLEAN NOT NULL,
-    PRIMARY KEY (idOrigen, idDestino),
-    FOREIGN KEY(idOrigen) REFERENCES APLICACION_BUS.PARADA(id),
-    FOREIGN KEY(idDestino) REFERENCES APLICACION_BUS.PARADA(id)
-);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(31,'TRUE','CALLE 03',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(32,'TRUE','CALLE 03',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(33,'TRUE','CALLE 03',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(34,'TRUE','CALLE 03',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(35,'TRUE','CALLE 03',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(36,'TRUE','CALLE 03',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(37,'TRUE','CALLE 03',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(38,'TRUE','CALLE 03',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(39,'TRUE','CALLE 03',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(40,'TRUE','CALLE 03',1000);
 
-CREATE TABLE APLICACION_BUS.TRAYECTO
-(
-id SERIAL PRIMARY KEY,
-idLinea INT NOT NULL,
-FOREIGN KEY(idLinea) REFERENCES APLICACION_BUS.LINEA(id)
-);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(41,'TRUE','CALLE 04',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(42,'TRUE','CALLE 04',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(43,'TRUE','CALLE 04',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(44,'TRUE','CALLE 04',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(45,'TRUE','CALLE 04',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(46,'TRUE','CALLE 04',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(47,'TRUE','CALLE 04',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(48,'TRUE','CALLE 04',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(49,'TRUE','CALLE 04',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(50,'TRUE','CALLE 04',1000);
 
-CREATE TABLE APLICACION_BUS.INCIDENCIAS
-(
-    id INT PRIMARY KEY,
-    idParada INT NOT NULL,
-    inicio DATE NOT NULL,
-    fin DATE,
-    descripcion VARCHAR (500), 
-    resuelta BOOLEAN,
-    FOREIGN KEY(idParada) REFERENCES APLICACION_BUS.PARADA(id)
-);
-CREATE TABLE APLICACION_BUS.CAMINOTRAYECTO
-(
-    idOrigen INT NOT NULL,
-	idDestino INT NOT NULL,
-    idTrayecto INT NOT NULL,
-    orden INT NOT NULL,
-    PRIMARY KEY(idTrayecto,orden),
-    FOREIGN KEY(idOrigen,idDestino) REFERENCES APLICACION_BUS.CAMINO(idOrigen,idDestino),
-    FOREIGN KEY(idTrayecto) REFERENCES APLICACION_BUS.TRAYECTO(id)
-);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(51,'TRUE','CALLE 05',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(52,'TRUE','CALLE 05',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(53,'TRUE','CALLE 05',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(54,'TRUE','CALLE 05',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(55,'TRUE','CALLE 05',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(56,'TRUE','CALLE 05',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(57,'TRUE','CALLE 05',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(58,'TRUE','CALLE 05',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(59,'TRUE','CALLE 05',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(60,'TRUE','CALLE 05',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(1,'TRUE','CALLE 00',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(2,'TRUE','CALLE 00',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(3,'TRUE','CALLE 00',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(4,'TRUE','CALLE 00',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(5,'TRUE','CALLE 00',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(6,'TRUE','CALLE 00',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(7,'TRUE','CALLE 00',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(8,'TRUE','CALLE 00',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(9,'TRUE','CALLE 00',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(10,'TRUE','CALLE 00',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(61,'TRUE','CALLE 06',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(62,'TRUE','CALLE 06',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(63,'TRUE','CALLE 06',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(64,'TRUE','CALLE 06',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(65,'TRUE','CALLE 06',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(66,'TRUE','CALLE 06',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(67,'TRUE','CALLE 06',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(68,'TRUE','CALLE 06',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(69,'TRUE','CALLE 06',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(70,'TRUE','CALLE 06',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(11,'TRUE','CALLE 01',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(12,'TRUE','CALLE 01',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(13,'TRUE','CALLE 01',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(14,'TRUE','CALLE 01',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(15,'TRUE','CALLE 01',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(16,'TRUE','CALLE 01',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(17,'TRUE','CALLE 01',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(18,'TRUE','CALLE 01',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(19,'TRUE','CALLE 01',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(20,'TRUE','CALLE 01',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(71,'TRUE','CALLE 07',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(72,'TRUE','CALLE 07',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(73,'TRUE','CALLE 07',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(74,'TRUE','CALLE 07',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(75,'TRUE','CALLE 07',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(76,'TRUE','CALLE 07',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(77,'TRUE','CALLE 07',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(78,'TRUE','CALLE 07',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(79,'TRUE','CALLE 07',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(80,'TRUE','CALLE 07',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(21,'TRUE','CALLE 02',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(22,'TRUE','CALLE 02',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(23,'TRUE','CALLE 02',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(24,'TRUE','CALLE 02',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(25,'TRUE','CALLE 02',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(26,'TRUE','CALLE 02',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(27,'TRUE','CALLE 02',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(28,'TRUE','CALLE 02',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(29,'TRUE','CALLE 02',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(30,'TRUE','CALLE 02',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(81,'TRUE','CALLE 08',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(82,'TRUE','CALLE 08',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(83,'TRUE','CALLE 08',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(84,'TRUE','CALLE 08',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(85,'TRUE','CALLE 08',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(86,'TRUE','CALLE 08',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(87,'TRUE','CALLE 08',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(88,'TRUE','CALLE 08',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(89,'TRUE','CALLE 08',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(90,'TRUE','CALLE 08',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(31,'TRUE','CALLE 03',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(32,'TRUE','CALLE 03',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(33,'TRUE','CALLE 03',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(34,'TRUE','CALLE 03',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(35,'TRUE','CALLE 03',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(36,'TRUE','CALLE 03',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(37,'TRUE','CALLE 03',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(38,'TRUE','CALLE 03',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(39,'TRUE','CALLE 03',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(40,'TRUE','CALLE 03',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(91,'TRUE','CALLE 09',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(92,'TRUE','CALLE 09',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(93,'TRUE','CALLE 09',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(94,'TRUE','CALLE 09',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(95,'TRUE','CALLE 09',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(96,'TRUE','CALLE 09',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(97,'TRUE','CALLE 09',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(98,'TRUE','CALLE 09',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(99,'TRUE','CALLE 09',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(100,'TRUE','CALLE 09',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(41,'TRUE','CALLE 04',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(42,'TRUE','CALLE 04',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(43,'TRUE','CALLE 04',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(44,'TRUE','CALLE 04',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(45,'TRUE','CALLE 04',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(46,'TRUE','CALLE 04',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(47,'TRUE','CALLE 04',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(48,'TRUE','CALLE 04',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(49,'TRUE','CALLE 04',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(50,'TRUE','CALLE 04',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(101,'TRUE','CALLE 10',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(102,'TRUE','CALLE 10',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(103,'TRUE','CALLE 10',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(104,'TRUE','CALLE 10',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(105,'TRUE','CALLE 10',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(106,'TRUE','CALLE 10',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(107,'TRUE','CALLE 10',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(108,'TRUE','CALLE 10',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(109,'TRUE','CALLE 10',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(110,'TRUE','CALLE 10',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(51,'TRUE','CALLE 05',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(52,'TRUE','CALLE 05',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(53,'TRUE','CALLE 05',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(54,'TRUE','CALLE 05',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(55,'TRUE','CALLE 05',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(56,'TRUE','CALLE 05',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(57,'TRUE','CALLE 05',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(58,'TRUE','CALLE 05',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(59,'TRUE','CALLE 05',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(60,'TRUE','CALLE 05',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(111,'TRUE','CALLE 11',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(112,'TRUE','CALLE 11',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(113,'TRUE','CALLE 11',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(114,'TRUE','CALLE 11',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(115,'TRUE','CALLE 11',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(116,'TRUE','CALLE 11',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(117,'TRUE','CALLE 11',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(118,'TRUE','CALLE 11',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(119,'TRUE','CALLE 11',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(120,'TRUE','CALLE 11',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(61,'TRUE','CALLE 06',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(62,'TRUE','CALLE 06',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(63,'TRUE','CALLE 06',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(64,'TRUE','CALLE 06',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(65,'TRUE','CALLE 06',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(66,'TRUE','CALLE 06',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(67,'TRUE','CALLE 06',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(68,'TRUE','CALLE 06',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(69,'TRUE','CALLE 06',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(70,'TRUE','CALLE 06',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(121,'TRUE','CALLE 12',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(122,'TRUE','CALLE 12',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(123,'TRUE','CALLE 12',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(124,'TRUE','CALLE 12',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(125,'TRUE','CALLE 12',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(126,'TRUE','CALLE 12',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(127,'TRUE','CALLE 12',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(128,'TRUE','CALLE 12',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(129,'TRUE','CALLE 12',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(130,'TRUE','CALLE 12',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(71,'TRUE','CALLE 07',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(72,'TRUE','CALLE 07',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(73,'TRUE','CALLE 07',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(74,'TRUE','CALLE 07',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(75,'TRUE','CALLE 07',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(76,'TRUE','CALLE 07',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(77,'TRUE','CALLE 07',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(78,'TRUE','CALLE 07',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(79,'TRUE','CALLE 07',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(80,'TRUE','CALLE 07',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(131,'TRUE','CALLE 13',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(132,'TRUE','CALLE 13',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(133,'TRUE','CALLE 13',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(134,'TRUE','CALLE 13',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(135,'TRUE','CALLE 13',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(136,'TRUE','CALLE 13',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(137,'TRUE','CALLE 13',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(138,'TRUE','CALLE 13',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(139,'TRUE','CALLE 13',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(140,'TRUE','CALLE 13',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(81,'TRUE','CALLE 08',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(82,'TRUE','CALLE 08',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(83,'TRUE','CALLE 08',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(84,'TRUE','CALLE 08',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(85,'TRUE','CALLE 08',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(86,'TRUE','CALLE 08',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(87,'TRUE','CALLE 08',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(88,'TRUE','CALLE 08',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(89,'TRUE','CALLE 08',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(90,'TRUE','CALLE 08',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(141,'TRUE','CALLE 14',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(142,'TRUE','CALLE 14',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(143,'TRUE','CALLE 14',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(144,'TRUE','CALLE 14',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(145,'TRUE','CALLE 14',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(146,'TRUE','CALLE 14',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(147,'TRUE','CALLE 14',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(148,'TRUE','CALLE 14',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(149,'TRUE','CALLE 14',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(150,'TRUE','CALLE 14',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(91,'TRUE','CALLE 09',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(92,'TRUE','CALLE 09',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(93,'TRUE','CALLE 09',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(94,'TRUE','CALLE 09',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(95,'TRUE','CALLE 09',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(96,'TRUE','CALLE 09',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(97,'TRUE','CALLE 09',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(98,'TRUE','CALLE 09',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(99,'TRUE','CALLE 09',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(100,'TRUE','CALLE 09',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(151,'TRUE','CALLE 15',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(152,'TRUE','CALLE 15',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(153,'TRUE','CALLE 15',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(154,'TRUE','CALLE 15',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(155,'TRUE','CALLE 15',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(156,'TRUE','CALLE 15',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(157,'TRUE','CALLE 15',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(158,'TRUE','CALLE 15',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(159,'TRUE','CALLE 15',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(160,'TRUE','CALLE 15',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(101,'TRUE','CALLE 10',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(102,'TRUE','CALLE 10',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(103,'TRUE','CALLE 10',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(104,'TRUE','CALLE 10',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(105,'TRUE','CALLE 10',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(106,'TRUE','CALLE 10',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(107,'TRUE','CALLE 10',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(108,'TRUE','CALLE 10',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(109,'TRUE','CALLE 10',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(110,'TRUE','CALLE 10',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(161,'TRUE','CALLE 16',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(162,'TRUE','CALLE 16',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(163,'TRUE','CALLE 16',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(164,'TRUE','CALLE 16',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(165,'TRUE','CALLE 16',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(166,'TRUE','CALLE 16',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(167,'TRUE','CALLE 16',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(168,'TRUE','CALLE 16',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(169,'TRUE','CALLE 16',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(170,'TRUE','CALLE 16',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(111,'TRUE','CALLE 11',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(112,'TRUE','CALLE 11',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(113,'TRUE','CALLE 11',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(114,'TRUE','CALLE 11',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(115,'TRUE','CALLE 11',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(116,'TRUE','CALLE 11',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(117,'TRUE','CALLE 11',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(118,'TRUE','CALLE 11',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(119,'TRUE','CALLE 11',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(120,'TRUE','CALLE 11',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(171,'TRUE','CALLE 17',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(172,'TRUE','CALLE 17',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(173,'TRUE','CALLE 17',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(174,'TRUE','CALLE 17',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(175,'TRUE','CALLE 17',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(176,'TRUE','CALLE 17',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(177,'TRUE','CALLE 17',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(178,'TRUE','CALLE 17',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(179,'TRUE','CALLE 17',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(180,'TRUE','CALLE 17',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(121,'TRUE','CALLE 12',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(122,'TRUE','CALLE 12',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(123,'TRUE','CALLE 12',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(124,'TRUE','CALLE 12',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(125,'TRUE','CALLE 12',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(126,'TRUE','CALLE 12',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(127,'TRUE','CALLE 12',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(128,'TRUE','CALLE 12',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(129,'TRUE','CALLE 12',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(130,'TRUE','CALLE 12',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(181,'TRUE','CALLE 18',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(182,'TRUE','CALLE 18',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(183,'TRUE','CALLE 18',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(184,'TRUE','CALLE 18',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(185,'TRUE','CALLE 18',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(186,'TRUE','CALLE 18',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(187,'TRUE','CALLE 18',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(188,'TRUE','CALLE 18',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(189,'TRUE','CALLE 18',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(190,'TRUE','CALLE 18',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(131,'TRUE','CALLE 13',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(132,'TRUE','CALLE 13',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(133,'TRUE','CALLE 13',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(134,'TRUE','CALLE 13',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(135,'TRUE','CALLE 13',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(136,'TRUE','CALLE 13',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(137,'TRUE','CALLE 13',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(138,'TRUE','CALLE 13',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(139,'TRUE','CALLE 13',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(140,'TRUE','CALLE 13',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(191,'TRUE','CALLE 19',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(192,'TRUE','CALLE 19',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(193,'TRUE','CALLE 19',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(194,'TRUE','CALLE 19',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(195,'TRUE','CALLE 19',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(196,'TRUE','CALLE 19',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(197,'TRUE','CALLE 19',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(198,'TRUE','CALLE 19',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(199,'TRUE','CALLE 19',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(200,'TRUE','CALLE 19',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(141,'TRUE','CALLE 14',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(142,'TRUE','CALLE 14',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(143,'TRUE','CALLE 14',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(144,'TRUE','CALLE 14',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(145,'TRUE','CALLE 14',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(146,'TRUE','CALLE 14',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(147,'TRUE','CALLE 14',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(148,'TRUE','CALLE 14',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(149,'TRUE','CALLE 14',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(150,'TRUE','CALLE 14',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(201,'TRUE','CALLE 20',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(202,'TRUE','CALLE 20',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(203,'TRUE','CALLE 20',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(204,'TRUE','CALLE 20',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(205,'TRUE','CALLE 20',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(206,'TRUE','CALLE 20',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(207,'TRUE','CALLE 20',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(208,'TRUE','CALLE 20',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(209,'TRUE','CALLE 20',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(210,'TRUE','CALLE 20',1000);
 
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(151,'TRUE','CALLE 15',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(152,'TRUE','CALLE 15',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(153,'TRUE','CALLE 15',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(154,'TRUE','CALLE 15',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(155,'TRUE','CALLE 15',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(156,'TRUE','CALLE 15',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(157,'TRUE','CALLE 15',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(158,'TRUE','CALLE 15',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(159,'TRUE','CALLE 15',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(160,'TRUE','CALLE 15',1850);
-
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(161,'TRUE','CALLE 16',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(162,'TRUE','CALLE 16',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(163,'TRUE','CALLE 16',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(164,'TRUE','CALLE 16',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(165,'TRUE','CALLE 16',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(166,'TRUE','CALLE 16',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(167,'TRUE','CALLE 16',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(168,'TRUE','CALLE 16',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(169,'TRUE','CALLE 16',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(170,'TRUE','CALLE 16',1850);
-
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(171,'TRUE','CALLE 17',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(172,'TRUE','CALLE 17',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(173,'TRUE','CALLE 17',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(174,'TRUE','CALLE 17',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(175,'TRUE','CALLE 17',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(176,'TRUE','CALLE 17',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(177,'TRUE','CALLE 17',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(178,'TRUE','CALLE 17',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(179,'TRUE','CALLE 17',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(180,'TRUE','CALLE 17',1850);
-
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(181,'TRUE','CALLE 18',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(182,'TRUE','CALLE 18',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(183,'TRUE','CALLE 18',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(184,'TRUE','CALLE 18',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(185,'TRUE','CALLE 18',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(186,'TRUE','CALLE 18',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(187,'TRUE','CALLE 18',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(188,'TRUE','CALLE 18',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(189,'TRUE','CALLE 18',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(190,'TRUE','CALLE 18',1850);
-
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(191,'TRUE','CALLE 19',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(192,'TRUE','CALLE 19',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(193,'TRUE','CALLE 19',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(194,'TRUE','CALLE 19',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(195,'TRUE','CALLE 19',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(196,'TRUE','CALLE 19',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(197,'TRUE','CALLE 19',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(198,'TRUE','CALLE 19',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(199,'TRUE','CALLE 19',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(200,'TRUE','CALLE 19',1850);
-
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(201,'TRUE','CALLE 20',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(202,'TRUE','CALLE 20',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(203,'TRUE','CALLE 20',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(204,'TRUE','CALLE 20',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(205,'TRUE','CALLE 20',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(206,'TRUE','CALLE 20',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(207,'TRUE','CALLE 20',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(208,'TRUE','CALLE 20',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(209,'TRUE','CALLE 20',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(210,'TRUE','CALLE 20',1850);
-
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(211,'TRUE','CALLE 21',50);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(212,'TRUE','CALLE 21',250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(213,'TRUE','CALLE 21',450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(214,'TRUE','CALLE 21',650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(215,'TRUE','CALLE 21',850);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(216,'TRUE','CALLE 21',1050);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(217,'TRUE','CALLE 21',1250);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(218,'TRUE','CALLE 21',1450);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(219,'TRUE','CALLE 21',1650);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(220,'TRUE','CALLE 21',1850);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(211,'TRUE','CALLE 21',100);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(212,'TRUE','CALLE 21',200);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(213,'TRUE','CALLE 21',300);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(214,'TRUE','CALLE 21',400);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(215,'TRUE','CALLE 21',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(216,'TRUE','CALLE 21',600);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(217,'TRUE','CALLE 21',700);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(218,'TRUE','CALLE 21',800);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(219,'TRUE','CALLE 21',900);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(220,'TRUE','CALLE 21',1000);
 
 --Calle0 -> (Completa)
 INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (1,2,200,2,'true');
@@ -667,7 +605,6 @@ INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, act
 INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (186,119,200,2,'true');
 INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (185,100,200,2,'true');
 INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (184,79,200,2,'true');
-INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (183,99,200,2,'true');
 INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (182,39,200,2,'true');
 INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (181,20,200,2,'true');
 
@@ -767,9 +704,9 @@ INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) 
 INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (156,155,2,26);
 INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (155,154,2,27);
 INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (153,152,2,28);
-INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (152,151,2,29);
-INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (151,8,2,30);
-INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (8,171,2,31);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (152,151,2,30);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (151,8,2,31);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (8,171,2,32);
 
 --LINEA S1
 INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (205,120,3,1);
@@ -792,3 +729,20 @@ INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) 
 INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (98,99,3,18);
 INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (99,100,3,19);
 INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (100,205,3,20);
+
+--Linea S2
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (205,120,4,1);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (120,119,4,2);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (119,118,4,3);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (118,117,4,4);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (117,116,4,5);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (116,115,4,6);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (115,114,4,7);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (114,113,4,8);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (113,112,4,9);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (112,25,4,10);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (25,92,4,11);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (92,93,4,12);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (93,94,4,13);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (94,95,4,14);
+

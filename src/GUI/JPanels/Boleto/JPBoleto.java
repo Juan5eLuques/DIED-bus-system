@@ -22,6 +22,7 @@ import system.gestores.GestorBoleto;
 import system.gestores.GestorParada;
 
 import java.awt.Font;
+import java.awt.Graphics;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;

@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class LblText extends JLabel {
 	public LblText (String titulo) {
@@ -20,5 +21,6 @@ public class LblText extends JLabel {
 		this.setFont(unaFuente);
 		this.setText(titulo);
 		this.setBorder(null);
+		this.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 }

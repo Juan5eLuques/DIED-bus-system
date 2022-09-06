@@ -38,4 +38,6 @@ public class DTOCamino {
 	public void setActiva(boolean activa) {
 		this.activa = activa;
 	}
+	
+	
 }

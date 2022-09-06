@@ -18,6 +18,27 @@ import system.gestores.GestorDB;
 
 public class AutobusDAO {
 	
+	
+	public static Boolean existeNroAutobus(DTOAutobus autobus) {
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		try {
+			PreparedStatement st = con.prepareStatement("SELECT id FROM aplicacion_bus.LINEA where id=?");
+			st.setInt(1, autobus.getId());
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+			con.close();
+			rs.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
 	public static ArrayList<String> obtenerNombresDeLineas(){
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
@@ -195,28 +216,67 @@ public class AutobusDAO {
 				return null;
 	}
 	
+	public static void setearDatosAutobus(DTOAutobus datos) {
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		try {
+			PreparedStatement st = con.prepareStatement("INSERT INTO aplicacion_bus.LINEA (id,nombre,color,tipo,asientos,parados,wifi,aire) VALUES (?,?,?,?,?,?,?,?)");
+			st.setInt(1, datos.getId());
+			st.setString(2,datos.getNombre());
+			st.setString(3,datos.getColor());
+			st.setString(4,datos.getTipo());
+			st.setInt(5, datos.getAsientos());
+			st.setInt(6, datos.getPasajerosextra());
+			st.setBoolean(7, datos.isWifi());
+			st.setBoolean(8, datos.isAire());
+			st.executeUpdate();
+			
+			st.close();
+			con.close();
+		}
+			catch (SQLException e) {
+			e.printStackTrace();
+			}
+	}
+	
 
-	private static int crearTrayecto(int idAutobus){
-		int id= 0; 
+	private static int obtenerIDTrayecto(int idAutobus){
+		int id= 0;
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try{
-			PreparedStatement st = con.prepareStatement("INSERT INTO APLICACION_BUS.TRAYECTO (idLinea) values (?);");
+			PreparedStatement st = con.prepareStatement("SELECT id FROM APLICACION_BUS.TRAYECTO where idLinea = ?");
 			st.setInt(1,idAutobus);
-			st.execute();	
-			id = siguienteIDTrayecto();
-			
+			ResultSet rs =st.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("id");
+			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}	
 		return id;
 	}
+	
 	public static void guardarTrayecto(int idAutobus, ArrayList<DTOCamino> listaCaminos){
-		int idTrayecto = crearTrayecto (idAutobus);
+		int idTrayecto = obtenerIDTrayecto(idAutobus);
+		System.out.println(idTrayecto);
 		CaminoDAO.guardarTrayecto(listaCaminos, idTrayecto);
 	}
 	
+	
+	public static void crearIDTrayecto(int idAutobus) {
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		try{
+			PreparedStatement st = con.prepareStatement("INSERT INTO APLICACION_BUS.TRAYECTO (idLinea) values (?)");
+			st.setInt(1,idAutobus);
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public static void eliminarIDTrayecto(int nroLinea) {
 		GestorDB gdb = GestorDB.getInstance();
@@ -230,8 +290,6 @@ public class AutobusDAO {
 			e.printStackTrace();
 		}	
 	}
-
-	
 	
 	
 	public static void eliminarTrayecto(int nroLinea) {
