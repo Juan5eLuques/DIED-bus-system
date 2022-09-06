@@ -1,14 +1,10 @@
 package system.gestores;
 
 import java.util.ArrayList;
-
+import javax.swing.JOptionPane;
 import DTO.DTOAutobus;
 import DTO.DTOCamino;
-import system.clases.AutobusEconomico;
-import system.clases.AutobusSuperior;
 import system.clases.DAO.AutobusDAO;
-import system.clases.DAO.AutobusEconomicoDAO;
-import system.clases.DAO.AutobusSuperiorDAO;
 
 public class GestorAutobus {
 	
@@ -31,29 +27,15 @@ public class GestorAutobus {
 	}
 	
 	public static void crearAutobus(DTOAutobus datosAutobus, ArrayList<DTOCamino> trayecto) {
-		if (datosAutobus.getTipo().equals("Economico")) {
-			AutobusEconomico nuevoAutobus = new AutobusEconomico();
-			nuevoAutobus.setCapacidadMaxima(datosAutobus.getAsientos());
-			nuevoAutobus.setColor(datosAutobus.getColor());
-			nuevoAutobus.setNombre(datosAutobus.getNombre());
-			nuevoAutobus.setPasajeros(0);
-			nuevoAutobus.setPasajerosParados(datosAutobus.getPasajerosextra());
-			nuevoAutobus.setRecorridoLinea(trayecto);
-			AutobusEconomicoDAO autobusEconomicoDAO = new AutobusEconomicoDAO();
-			autobusEconomicoDAO.agregarAutobus(nuevoAutobus);
+		if (AutobusDAO.existeNroAutobus(datosAutobus)) {
+			JOptionPane.showMessageDialog(null, "El número de la linea ya existe en la base de datos", null, JOptionPane.INFORMATION_MESSAGE);
 		}
-		if (datosAutobus.getTipo().equals("Superior")) {
-			
-			AutobusSuperior nuevoAutobus = new AutobusSuperior();
-			nuevoAutobus.setCapacidadMaxima(datosAutobus.getAsientos());
-			nuevoAutobus.setColor(datosAutobus.getColor());
-			nuevoAutobus.setNombre(datosAutobus.getNombre());
-			nuevoAutobus.setPasajeros(0);
-			nuevoAutobus.setAireAcondicionado(datosAutobus.isAire());
-			nuevoAutobus.setWifi(datosAutobus.isWifi());
-			nuevoAutobus.setRecorridoLinea(trayecto);
-			AutobusSuperiorDAO autobusSuperiorDAO = new AutobusSuperiorDAO();
-			autobusSuperiorDAO.agregarAutobus(nuevoAutobus);
+		else {
+			AutobusDAO.setearDatosAutobus(datosAutobus);
+			AutobusDAO.crearIDTrayecto(datosAutobus.getId());
+			AutobusDAO.guardarTrayecto(datosAutobus.getId(), trayecto);
+			if (trayecto.isEmpty()) System.out.println("Trayecto vacio");
+			JOptionPane.showMessageDialog(null, "Linea registrada !", "Exito", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
@@ -61,6 +43,7 @@ public class GestorAutobus {
 		AutobusDAO.eliminarTrayecto(idLinea); 
 		AutobusDAO.eliminarIDTrayecto(idLinea);
 		AutobusDAO.eliminarAutobus(idLinea);
+		
 	}
 	
 	public static ArrayList<Integer> lineasQueContienenParada(int idParada){
