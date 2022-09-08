@@ -1,6 +1,8 @@
 package system.gestores;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import DTO.DTOAutobus;
 import DTO.DTOCamino;
@@ -8,6 +10,7 @@ import DTO.DTOParada;
 import system.clases.Autobus;
 import system.clases.AutobusEconomico;
 import system.clases.AutobusSuperior;
+import system.clases.InformacionCamino;
 import system.clases.Parada;
 import system.clases.DAO.AutobusDAO;
 import system.clases.DAO.AutobusEconomicoDAO;
@@ -28,6 +31,7 @@ public class GestorBoleto {
 		return GBoleto;
 	}
 	
+	//Devuelve en "ae" y "as" la lista de los autobuces que pasan por la parada "parada"
 	public static boolean cargarLineasQueContienenParada(int parada, ArrayList<AutobusEconomico> ae, ArrayList<AutobusSuperior> as) {
 		boolean ret = false;
 		ArrayList <Integer> IDParadas = new ArrayList<Integer>();
@@ -46,6 +50,7 @@ public class GestorBoleto {
 			if (tipo.get(i).equals("Superior")) {
 				as.add(AutobusSuperiorDAO.obtenerAutobus(id));
 			}
+			i++;
 		}
 		
 		return ret;
@@ -72,58 +77,63 @@ public class GestorBoleto {
 			flag = false;
 			int i=0;
 			while (!flag) {
+				System.out.println("GESTORBOLETO::Siguiente parada __->" +unTrayecto.get(i).getIdDestino()); //BORRAR
 				caminoCortado.add(unTrayecto.get(i));
 				if (unTrayecto.get(i).getIdDestino() == parada) {
 					flag = true;
 				}
+				i++;
 			}
-			if(true) {
+			if(!flag) {
 				caminoCortado.clear();
 			}
 			return caminoCortado;
 			}
 	
 	public static void calcularCaminosPosibles(int paradaInicio, int paradaFin, ArrayList<AutobusEconomico> ae, ArrayList<AutobusSuperior> as, 
-			ArrayList<ArrayList<DTOCamino>> listaCaminos, ArrayList<DTOAutobus> listaAutobuses, ArrayList<Double> listaDistancia, ArrayList<Double> listaCosto, ArrayList<Double> listaDuracion){
-		listaAutobuses.clear();
-		listaCaminos.clear();
-		listaDistancia.clear();
-		listaCosto.clear();
-		listaDuracion.clear();
+			ArrayList<InformacionCamino> caminosPosibles){
+		caminosPosibles.clear();
 		double unaDistancia;
-		double unCosto;
-		double unTiempo;
 		DTOAutobus unAuto;
 		
+		
+		System.out.println("GESTORBOLETO::Cantidad de autobuses economicos: "+ae.size()); //BORRAR
 		for (AutobusEconomico unAutobus:ae) {
 			ArrayList<DTOCamino> unTrayecto = new ArrayList<DTOCamino>();
 			unTrayecto = caminoRecortadoInicio(paradaInicio, unAutobus.getRecorridoLinea());
 			unTrayecto = caminoRecortadoFin (paradaFin, unTrayecto);
 			
 			if (!unTrayecto.isEmpty()) {
+				InformacionCamino unCamino = new InformacionCamino();
+				System.out.println("GESTORBOLETO::Hay un camino economico posible"); //BORRAR
 				unAuto = AutobusEconomicoDAO.transformarADTO(unAutobus);
-				listaAutobuses.add(unAuto);
-				listaCaminos.add(unTrayecto);
+				unCamino.setAutobus(unAuto);
+				System.out.println("GESTORBOLETO::ID LINEA ECONOMICA:" + unCamino.getAutobus().getId()); //BORRAR
+				unCamino.setRecorrido(unTrayecto);
 				unaDistancia = calcularDistanciaRecorrida(unTrayecto);
-				listaDistancia.add(unaDistancia);
-				listaCosto.add(calcularCostoPasaje(unAuto,unaDistancia));
-				listaDuracion.add(calcularDuracion(unTrayecto));
+				unCamino.setDistancia(unaDistancia);
+				unCamino.setCosto(calcularCostoPasaje(unAuto,unaDistancia));
+				unCamino.setDuracion(calcularDuracion(unTrayecto));
+				caminosPosibles.add(unCamino);
 			}
 		}
-		
+		System.out.println("GESTORBOLETO::Cantidad de autobuses superiores: "+as.size()); //BORRAR
 		for (AutobusSuperior unAutobus:as) {
 			ArrayList<DTOCamino> unTrayecto = new ArrayList<DTOCamino>();
 			unTrayecto = caminoRecortadoInicio(paradaInicio, unAutobus.getRecorridoLinea());
 			unTrayecto = caminoRecortadoFin (paradaFin, unTrayecto);
 			
 			if (!unTrayecto.isEmpty()) {
+				InformacionCamino unCamino = new InformacionCamino();
+				System.out.println("GESTORBOLETO::Hay un camino superior posible"); //BORRAR
 				unAuto = AutobusSuperiorDAO.transformarADTO(unAutobus);
-				listaAutobuses.add(unAuto);
-				listaCaminos.add(unTrayecto);
+				unCamino.setAutobus(unAuto);
+				unCamino.setRecorrido(unTrayecto);
 				unaDistancia = calcularDistanciaRecorrida(unTrayecto);
-				listaDistancia.add(unaDistancia);
-				listaCosto.add(calcularCostoPasaje(unAuto,unaDistancia));
-				listaDuracion.add(calcularDuracion(unTrayecto));
+				unCamino.setDistancia(unaDistancia);
+				unCamino.setCosto(calcularCostoPasaje(unAuto,unaDistancia));
+				unCamino.setDuracion(calcularDuracion(unTrayecto));
+				caminosPosibles.add(unCamino);
 			}
 		}
 		
@@ -139,9 +149,17 @@ public class GestorBoleto {
 		return ret; 
 	}
 	
+	//Devuelve el valor del pasaje
 	public static double calcularCostoPasaje(DTOAutobus unAutobus, double distancia) {
 		double valor=distancia * Autobus.getMontoPorKM();
-		double modificador = Autobus.getPorcentajePorServicio();
+		double modificador;
+		if (unAutobus.getTipo()=="Economico") {
+			modificador = AutobusEconomico.getPorcentajePorServicio();
+		}
+		else {
+			modificador = AutobusSuperior.getPorcentajePorServicio();
+		}
+		System.out.println("GESTORBOLETO:: PORCENTAJE POR SERVICIO: "+modificador); //BORRAR
 		if (unAutobus.isAire()) {
 			modificador += 5;
 		}
@@ -151,14 +169,16 @@ public class GestorBoleto {
 		return valor*(1+modificador/100);
 	}
 	
+	//Devuelve la distancia total EN KILOMETROS recorrida en un trayecto
 	public static double calcularDistanciaRecorrida(ArrayList<DTOCamino> unTrayecto) {
 		double distancia=0;
 		for (DTOCamino unCamino:unTrayecto) {
 			distancia+= unCamino.getDistancia();
 		}
-		return distancia;
+		return distancia/1000; //PARA PASAR A KM
 	}
 	
+	//Devuelve la duracion total de un trayecto
 	public static double calcularDuracion(ArrayList<DTOCamino> unTrayecto) {
 		double duracion=0;
 		for (DTOCamino unCamino:unTrayecto) {
@@ -171,5 +191,14 @@ public class GestorBoleto {
 		for (DTOCamino unCamino:unTrayecto) {
 			posibles.add(GestorParada.obtenerParada(unCamino.getIdDestino()));
 		}
+	}
+	
+	
+	//Ordena la lista de caminos posibles por duracion, costo o distancia del viaje
+	public static void ordenarPorCriterio(int criterio, ArrayList<InformacionCamino> caminosPosibles) {
+		if (caminosPosibles.size() > 1) {
+			caminosPosibles.sort(Comparator.comparingDouble(InformacionCamino::getCosto));
+		}	
+		
 	}
 }
