@@ -15,6 +15,7 @@ import system.clases.Parada;
 import system.clases.DAO.AutobusDAO;
 import system.clases.DAO.AutobusEconomicoDAO;
 import system.clases.DAO.AutobusSuperiorDAO;
+import system.clases.DAO.InformacionBoletoDAO;
 
 public class GestorBoleto {
 	
@@ -200,5 +201,9 @@ public class GestorBoleto {
 			caminosPosibles.sort(Comparator.comparingDouble(InformacionCamino::getCosto));
 		}	
 		
+	}
+	
+	public static void guardarBoleto(InformacionCamino unBoleto) {
+		InformacionBoletoDAO.guardarBoleto(unBoleto);
 	}
 }
