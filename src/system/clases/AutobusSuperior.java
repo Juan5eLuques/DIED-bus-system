@@ -5,7 +5,7 @@ public class AutobusSuperior extends Autobus{
 	
 	private boolean aireAcondicionado;
 	private boolean wifi;
-	
+	private static double porcentajePorServicio = 5;
 	
 	public boolean isAireAcondicionado() {
 		return aireAcondicionado;
@@ -14,12 +14,10 @@ public class AutobusSuperior extends Autobus{
 	public boolean isWifi() {
 		return wifi;
 	}
-		public double porcentajeExtra (){
-		double ret = porcentajePorServicio;
-		if (aireAcondicionado) ret +=5;
-		if (wifi) ret +=5;
-		return ret;
+	public static double getPorcentajePorServicio() {
+		return porcentajePorServicio;
 	}
+	
 	public void agregarPasajero() {
 		if (this.getCapacidadMaxima() < this.getPasajeros()) this.setPasajeros(asientos++);
 			else {
@@ -42,7 +40,15 @@ public class AutobusSuperior extends Autobus{
 				+ nombre + ", color=" + color + ", capacidadMaxima=" + capacidadMaxima + ", pasajeros=" + asientos
 				+ ", recorridoLinea=" + recorridoLinea + "]";
 	}
-	
+
+	@Override
+	public double porcentajeExtra() {
+		double ret = porcentajePorServicio;
+		if(wifi) ret +=5;
+		if(aireAcondicionado) ret += 5;
+		return ret;
+	}
+
 	
 	
 }

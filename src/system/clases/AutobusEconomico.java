@@ -8,6 +8,7 @@ import DTO.DTOCamino;
 public class AutobusEconomico extends Autobus {
 
 	private int pasajerosParados;
+	private static double porcentajePorServicio = 20;
 
 	public int getPasajerosParados() {
 		return pasajerosParados;
@@ -17,7 +18,8 @@ public class AutobusEconomico extends Autobus {
 		this.pasajerosParados = pasajerosParados;
 	}
 
-	public double porcentajeExtra (){
+	public static double getPorcentajePorServicio() {
+		// TODO Auto-generated method stub
 		return porcentajePorServicio;
 	}
 
@@ -47,6 +49,11 @@ public class AutobusEconomico extends Autobus {
 		return "AutobusEconomico [pasajerosParados=" + pasajerosParados + ", id=" + id + ", nombre=" + nombre
 				+ ", color=" + color + ", capacidadMaxima=" + capacidadMaxima + ", pasajeros=" + asientos
 				+ ", recorridoLinea=" + recorridoLinea + "]";
+	}
+
+	@Override
+	public double porcentajeExtra() {
+		return porcentajePorServicio;
 	}
 	
 	

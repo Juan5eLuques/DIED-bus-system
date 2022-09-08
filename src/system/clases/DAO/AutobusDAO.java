@@ -321,6 +321,7 @@ public class AutobusDAO {
 		}	
 	}
 	
+	//Devuelve en "lineas" el id de los autobuces que pasan por la parada "idParada" y el tipo de cada uno en "tipo"
 	public static void lineasQueContienenParada(int idParada, ArrayList <Integer> lineas, ArrayList<String> tipo) {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;

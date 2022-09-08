@@ -7,7 +7,6 @@ import DTO.DTOCamino;
 
 public abstract class Autobus {
 	protected static double montoPorKM = 1;
-	protected static double porcentajePorServicio = 2;
 	protected int id;
 	protected String nombre;
 	protected String color;
@@ -86,12 +85,6 @@ public abstract class Autobus {
 	}
 	public static void setMontoPorKM(double montoPorKM) {
 		Autobus.montoPorKM = montoPorKM;
-	}
-	public static double getPorcentajePorServicio() {
-		return porcentajePorServicio;
-	}
-	public static void setPorcentajePorServicio(double porcentajePorServicio) {
-		Autobus.porcentajePorServicio = porcentajePorServicio;
 	}
 	
 }
