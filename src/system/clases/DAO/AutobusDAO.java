@@ -296,9 +296,16 @@ public class AutobusDAO {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try{
-			PreparedStatement st = con.prepareStatement("DELETE FROM aplicacion_bus.caminotrayecto WHERE idtrayecto=?");
-			st.setInt(1,nroLinea);
-			st.execute();
+			int idTrayecto = -1;
+			PreparedStatement st = con.prepareStatement("SELECT * FROM aplicacion_bus.trayecto WHERE idLinea=?");
+			st.setInt(1, nroLinea);
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				idTrayecto = rs.getInt("id");
+			}
+			PreparedStatement st1 = con.prepareStatement("DELETE FROM aplicacion_bus.caminotrayecto WHERE idtrayecto=?");
+			st1.setInt(1,idTrayecto);
+			st1.execute();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

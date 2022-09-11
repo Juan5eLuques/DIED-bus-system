@@ -23,6 +23,7 @@ import GUI.JPanels.Menu.JPMenuLineas;
 import GUI.JPanels.Menu.JPMenuParada;
 import GUI.JPanels.Menu.JPMenuTrayecto;
 import GUI.JPanels.Menu.JPMostrarCiudad;
+import GUI.JPanels.Trayecto.JPBoletoCiudad;
 
 
 public class GUIMenu extends JFrame {
@@ -141,8 +142,14 @@ public class GUIMenu extends JFrame {
 		
 		botonBoleto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			JPBoleto comprarBoleto = new JPBoleto(panelCentral, panelLayout,lblTitulo, botonBoleto);
-			panelLayout.add(comprarBoleto, BorderLayout.CENTER);
+//			JPBoleto comprarBoleto = new JPBoleto(panelCentral, panelLayout,lblTitulo, botonBoleto);				
+//			panelLayout.add(comprarBoleto);
+//			comprarBoleto.setVisible(true);
+//			botonBoleto.setVisible(false);
+				
+				
+			JPBoletoCiudad comprarBoleto = new JPBoletoCiudad(panelCentral, panelLayout,lblTitulo, botonBoleto);
+			panelLayout.add(comprarBoleto);
 			comprarBoleto.setVisible(true);
 			botonBoleto.setVisible(false);
 			}

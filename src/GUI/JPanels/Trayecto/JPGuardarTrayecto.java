@@ -70,7 +70,6 @@ public class JPGuardarTrayecto extends JPanel {
 		this.add(lblDeshacer);
 		
 		
-		
 		botonGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				botonGuardarManipular.setEnabled(true);
