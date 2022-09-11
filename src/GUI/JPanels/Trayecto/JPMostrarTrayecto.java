@@ -5,19 +5,16 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import DTO.DTOAutobus;
 import DTO.DTOCamino;
 import DTO.DTOParada;
 import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonIcono;
-import GUI.Componentes.BotonMenu;
 import GUI.Componentes.BotonNodo;
 import GUI.Componentes.UbicacionParada;
+import enums.CriterioNodoCiudad;
 import system.clases.DAO.AutobusDAO;
 import system.clases.DAO.CaminoDAO;
 import system.clases.DAO.ParadaDAO;
@@ -62,8 +59,8 @@ public class JPMostrarTrayecto extends JPanel{
 		
 		listaParadas = ParadaDAO.obtenerParadas();
 		listaCaminos = CaminoDAO.obtenerCaminos();
-		for (DTOParada parada: listaParadas) {
-		BotonNodo nuevaParada = new BotonNodo(parada);
+		for (DTOParada parada: listaParadas){
+		BotonNodo nuevaParada = new BotonNodo(parada, CriterioNodoCiudad.INFO);
 		this.add(nuevaParada);
 		}
 		
@@ -117,7 +114,6 @@ public class JPMostrarTrayecto extends JPanel{
 		g.setColor(Color.green);
 		
 		for(DTOCamino camino : trayectoLinea) {
-			
 			
 			DTOParada IDOrigen = new DTOParada();
 			DTOParada IDDestino = new DTOParada();

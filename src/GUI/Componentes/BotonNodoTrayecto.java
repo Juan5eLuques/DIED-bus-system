@@ -68,9 +68,6 @@ public class BotonNodoTrayecto extends JLabel {
 				panelDibujo.revalidate();
 				panelDibujo.repaint();
 				}
-				else {
-					
-				}
 				
 			}
 

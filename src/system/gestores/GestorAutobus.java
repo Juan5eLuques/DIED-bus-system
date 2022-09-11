@@ -40,7 +40,7 @@ public class GestorAutobus {
 	}
 	
 	public static void eliminarAutobus(int idLinea) {
-		AutobusDAO.eliminarTrayecto(idLinea); 
+		AutobusDAO.eliminarTrayecto(idLinea);
 		AutobusDAO.eliminarIDTrayecto(idLinea);
 		AutobusDAO.eliminarAutobus(idLinea);
 		

@@ -42,7 +42,7 @@ public class JPBoleto extends JPanel {
 		ArrayList<InformacionCamino> caminosPosibles = new ArrayList<InformacionCamino>();
 		ArrayList<AutobusEconomico> ae = new ArrayList<AutobusEconomico>();
 		ArrayList<AutobusSuperior> as = new ArrayList<AutobusSuperior>();
-		ArrayList<ArrayList<DTOCamino>> listaCaminos = new ArrayList<ArrayList<DTOCamino>> ();
+		ArrayList<ArrayList<DTOCamino>> listaCaminos = new ArrayList<ArrayList<DTOCamino>>();
 		ArrayList<Integer> paradasPosibles = new ArrayList<Integer>();
 		JButton btnBuscar = new JButton("Buscar");
 		panelCentral.setVisible(false);
@@ -95,16 +95,20 @@ public class JPBoleto extends JPanel {
 			GestorBoleto.ordenarPorCriterio(1, caminosPosibles);
 			System.out.println("JPBOLETO::IMPRIMIR INFORMACION DE CAMINOS POSIBLES: "); //BORRAR
 			System.out.println("caminos posibles: "+caminosPosibles.size()); //BORRAR
-			for(InformacionCamino unCamino:caminosPosibles) {
-				System.out.println("Linea: "+ unCamino.getAutobus().getId());
-				System.out.println("Tipo: "+ unCamino.getAutobus().getTipo());
-				System.out.println("Distancia: "+ unCamino.getDistancia());
-				System.out.println("Duracion: "+ unCamino.getDuracion());
-				System.out.println("Costo: "+ unCamino.getCosto());
-				System.out.println("Recorrido: ");
-				unCamino.mostrarRecorrido();
+//			for(InformacionCamino unCamino:caminosPosibles) {
+//				System.out.println("Linea: "+ unCamino.getAutobus().getId());
+//				System.out.println("Tipo: "+ unCamino.getAutobus().getTipo());
+//				System.out.println("Distancia: "+ unCamino.getDistancia());
+//				System.out.println("Duracion: "+ unCamino.getDuracion());
+//				System.out.println("Costo: "+ unCamino.getCosto());
+//				System.out.println("Recorrido: ");
+//				unCamino.mostrarRecorrido();
+//				}
+			for (ArrayList<DTOCamino> unTrayecto:listaCaminos) {
+				for (DTOCamino unCamino:unTrayecto) {
+					System.out.println("UnCamino"+unCamino.getIdOrigen()+"->"+unCamino.getIdDestino());
 				}
-			
+			}
 		};
 
 		//Accion que se realiza al seleccionar la parada inicial:  
