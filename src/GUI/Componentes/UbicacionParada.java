@@ -11,11 +11,11 @@ public class UbicacionParada {
 		int calle = Integer.parseInt(parada.getCalle().substring(6));
 		if (calle%2==0) {
 			X = (calle*25)+185;
-			Y = (((parada.getNroCalle()/10)*5)+40);
+			Y = (((parada.getNroCalle()/10)*5)+30);
 		}
 		else {
 			X = (((parada.getNroCalle()/10)*5)+160);
-			Y =(calle*25)+40;
+			Y =(calle*25)+30;
 		}
 		
 	}

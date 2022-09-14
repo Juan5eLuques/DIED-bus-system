@@ -93,8 +93,8 @@ public class JPBoleto extends JPanel {
 			
 			GestorBoleto.calcularCaminosPosibles(idPrimerParada, idUltimaParada, ae, as, caminosPosibles);
 			GestorBoleto.ordenarPorCriterio(1, caminosPosibles);
-			System.out.println("JPBOLETO::IMPRIMIR INFORMACION DE CAMINOS POSIBLES: "); //BORRAR
-			System.out.println("caminos posibles: "+caminosPosibles.size()); //BORRAR
+//			System.out.println("JPBOLETO::IMPRIMIR INFORMACION DE CAMINOS POSIBLES: "); //BORRAR
+//			System.out.println("caminos posibles: "+caminosPosibles.size()); //BORRAR
 //			for(InformacionCamino unCamino:caminosPosibles) {
 //				System.out.println("Linea: "+ unCamino.getAutobus().getId());
 //				System.out.println("Tipo: "+ unCamino.getAutobus().getTipo());
@@ -106,9 +106,14 @@ public class JPBoleto extends JPanel {
 //				}
 			for (ArrayList<DTOCamino> unTrayecto:listaCaminos) {
 				for (DTOCamino unCamino:unTrayecto) {
-					System.out.println("UnCamino"+unCamino.getIdOrigen()+"->"+unCamino.getIdDestino());
+//					System.out.println("UnCamino"+unCamino.getIdOrigen()+"->"+unCamino.getIdDestino());
 				}
 			}
+			
+			for (InformacionCamino  info : caminosPosibles) {
+				info.mostrarRecorrido();
+			}
+			
 		};
 
 		//Accion que se realiza al seleccionar la parada inicial:  
@@ -141,17 +146,7 @@ public class JPBoleto extends JPanel {
 		btnBuscar.setBounds(409, 95, 89, 30);
 		btnBuscar.addActionListener(actionBuscarPrimerParada);
 		add(btnBuscar);
-
-		botonAtras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelManipular.setVisible(true);
-				deshabilitar();
-				lblTitulo.setText("SISTEMA AUTOBUS");
-				panelCentral.setVisible(true);
-				botonBoleto.setVisible(true);
-			}
-		});
-
+		
 		botonAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelManipular.setVisible(true);
@@ -167,7 +162,7 @@ public class JPBoleto extends JPanel {
 	public static void setearParadasPosibles(ArrayList<Parada> posibles, ArrayList<ArrayList<DTOCamino>> listaCaminos) {
 		for (ArrayList<DTOCamino> unTrayecto:listaCaminos) {
 			for (DTOCamino unCamino:unTrayecto) {
-				System.out.println("UnCamino"+unCamino.getIdOrigen()+"->"+unCamino.getIdDestino());
+//				System.out.println("UnCamino"+unCamino.getIdOrigen()+"->"+unCamino.getIdDestino());
 			}
 			GestorBoleto.agregarParadasPosible(posibles, unTrayecto);
 		}

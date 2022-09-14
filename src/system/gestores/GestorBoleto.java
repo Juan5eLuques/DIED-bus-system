@@ -77,8 +77,8 @@ public class GestorBoleto {
 		boolean flag;
 			flag = false;
 			int i=0;
-			while (!flag) {
-				System.out.println("GESTORBOLETO::Siguiente parada __->" +unTrayecto.get(i).getIdDestino()); //BORRAR
+			while (!flag && i<unTrayecto.size()) {
+				
 				caminoCortado.add(unTrayecto.get(i));
 				if (unTrayecto.get(i).getIdDestino() == parada) {
 					flag = true;
@@ -98,7 +98,7 @@ public class GestorBoleto {
 		DTOAutobus unAuto;
 		
 		
-		System.out.println("GESTORBOLETO::Cantidad de autobuses economicos: "+ae.size()); //BORRAR
+
 		for (AutobusEconomico unAutobus:ae) {
 			ArrayList<DTOCamino> unTrayecto = new ArrayList<DTOCamino>();
 			unTrayecto = caminoRecortadoInicio(paradaInicio, unAutobus.getRecorridoLinea());
@@ -106,10 +106,10 @@ public class GestorBoleto {
 			
 			if (!unTrayecto.isEmpty()) {
 				InformacionCamino unCamino = new InformacionCamino();
-				System.out.println("GESTORBOLETO::Hay un camino economico posible"); //BORRAR
+
 				unAuto = AutobusEconomicoDAO.transformarADTO(unAutobus);
 				unCamino.setAutobus(unAuto);
-				System.out.println("GESTORBOLETO::ID LINEA ECONOMICA:" + unCamino.getAutobus().getId()); //BORRAR
+
 				unCamino.setRecorrido(unTrayecto);
 				unaDistancia = calcularDistanciaRecorrida(unTrayecto);
 				unCamino.setDistancia(unaDistancia);
@@ -118,7 +118,7 @@ public class GestorBoleto {
 				caminosPosibles.add(unCamino);
 			}
 		}
-		System.out.println("GESTORBOLETO::Cantidad de autobuses superiores: "+as.size()); //BORRAR
+
 		for (AutobusSuperior unAutobus:as) {
 			ArrayList<DTOCamino> unTrayecto = new ArrayList<DTOCamino>();
 			unTrayecto = caminoRecortadoInicio(paradaInicio, unAutobus.getRecorridoLinea());
@@ -126,7 +126,6 @@ public class GestorBoleto {
 			
 			if (!unTrayecto.isEmpty()) {
 				InformacionCamino unCamino = new InformacionCamino();
-				System.out.println("GESTORBOLETO::Hay un camino superior posible"); //BORRAR
 				unAuto = AutobusSuperiorDAO.transformarADTO(unAutobus);
 				unCamino.setAutobus(unAuto);
 				unCamino.setRecorrido(unTrayecto);
@@ -160,7 +159,7 @@ public class GestorBoleto {
 		else {
 			modificador = AutobusSuperior.getPorcentajePorServicio();
 		}
-		System.out.println("GESTORBOLETO:: PORCENTAJE POR SERVICIO: "+modificador); //BORRAR
+		
 		if (unAutobus.isAire()) {
 			modificador += 5;
 		}
@@ -199,7 +198,8 @@ public class GestorBoleto {
 	public static void ordenarPorCriterio(int criterio, ArrayList<InformacionCamino> caminosPosibles) {
 		if (caminosPosibles.size() > 1) {
 			caminosPosibles.sort(Comparator.comparingDouble(InformacionCamino::getCosto));
-		}	
+		}
+		
 		
 	}
 	

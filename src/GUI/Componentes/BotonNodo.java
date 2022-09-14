@@ -12,13 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import DTO.DTOParada;
 import GUI.GUIInfoNodo;
+import GUI.JPanels.Trayecto.JPBoletoCiudad;
 import enums.CriterioNodoCiudad;
+import enums.EnumColor;
 
 public class BotonNodo extends JLabel {
 	
 	private DTOParada parada;
-	private int posY;
-	private int posX;
+	private EnumColor color;
 	
 	public BotonNodo(DTOParada parada, CriterioNodoCiudad criterio) {
 		this.setHorizontalAlignment(SwingConstants.CENTER);
@@ -36,10 +37,10 @@ public class BotonNodo extends JLabel {
 		
 		
 		if(calle%2==0) {
-			this.setBounds((calle*25)+175,(((parada.getNroCalle()/10)*5)+30),20,20);
+			this.setBounds((calle*25)+175,(((parada.getNroCalle()/10)*5)+20),20,20);
 		}
 		else {
-			this.setBounds((((parada.getNroCalle()/10)*5)+150),(calle*25)+30,20,20);
+			this.setBounds((((parada.getNroCalle()/10)*5)+150),(calle*25)+20,20,20);
 		}
 		
 		this.addMouseListener(new MouseListener() {
@@ -111,4 +112,29 @@ public class BotonNodo extends JLabel {
 		}
 	}
 	
+	public void setColor(EnumColor color) {
+		this.color=color;
+		setBorderColor();
+	}
+	
+	private void setBorderColor() {
+		if (color == EnumColor.BLACK) {
+			this.setBorder((BorderFactory.createLineBorder(Color.BLACK)));
+		}
+		if (color == EnumColor.GREEN) {
+			this.setBorder((BorderFactory.createLineBorder(Color.GREEN)));
+		}
+		if (color == EnumColor.RED) {
+			this.setBorder((BorderFactory.createLineBorder(Color.RED)));
+		}
+		
+	}
+	
+	public EnumColor getColor() {
+		return color;
+	}
+	
+	public void resetColor() {
+		setColor(EnumColor.BLACK);
+	}
 }
