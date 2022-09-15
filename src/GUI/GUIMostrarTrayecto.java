@@ -10,9 +10,9 @@ import javax.swing.border.EmptyBorder;
 
 import DTO.DTOCamino;
 import system.clases.Parada;
-import system.clases.DAO.AutobusDAO;
 import system.clases.DAO.CaminoDAO;
 import system.clases.DAO.ParadaDAO;
+import system.gestores.GestorAutobus;
 
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -41,8 +41,8 @@ public class GUIMostrarTrayecto extends JFrame {
 	
 	private final static int CX = 100; //Corrimiento en X
 	private final static int CY = 100; //Corrimiento en Y
-	private final static int TPA = 8; //Tamaño punto anterior
-	private final static int TPN = 12; //Tamaño punto nuevo
+	private final static int TPA = 8; //Tamaï¿½o punto anterior
+	private final static int TPN = 12; //Tamaï¿½o punto nuevo
 	
 	private JPanel contentPane;
 
@@ -107,8 +107,8 @@ public class GUIMostrarTrayecto extends JFrame {
 		gbc_ListaLineas.gridy = 0;
 		panel.add(btnListaLineas, gbc_ListaLineas);
 		
-		String listaIDLineas[] = new String[AutobusDAO.obtenerNombresDeLineas().size()];
-		AutobusDAO.obtenerNombresDeLineas().toArray(listaIDLineas);
+		String listaIDLineas[] = new String[GestorAutobus.obtenerNombresDeLineas().size()];
+		GestorAutobus.obtenerNombresDeLineas().toArray(listaIDLineas);
 		
 		
 		btnListaLineas.setBackground(Color.WHITE);

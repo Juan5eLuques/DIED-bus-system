@@ -196,11 +196,22 @@ public class GestorBoleto {
 	
 	//Ordena la lista de caminos posibles por duracion, costo o distancia del viaje
 	public static void ordenarPorCriterio(int criterio, ArrayList<InformacionCamino> caminosPosibles) {
-		if (caminosPosibles.size() > 1) {
+		switch (criterio){
+			case 1:
 			caminosPosibles.sort(Comparator.comparingDouble(InformacionCamino::getCosto));
+			break;
+
+			case 2:
+			caminosPosibles.sort(Comparator.comparingDouble(InformacionCamino::getDuracion));
+			break;
+
+			case 3:
+			caminosPosibles.sort(Comparator.comparingDouble(InformacionCamino::getDistancia));
+			break;
+			
+			default: 
 		}
-		
-		
+
 	}
 	
 	public static void guardarBoleto(InformacionCamino unBoleto) {

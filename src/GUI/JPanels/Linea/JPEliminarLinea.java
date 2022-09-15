@@ -14,8 +14,6 @@ import GUI.Componentes.BotonIcono;
 import GUI.Componentes.LblText;
 import GUI.Componentes.TextFieldNumbers;
 import GUI.Componentes.TextFieldText;
-
-import system.clases.DAO.AutobusDAO;
 import system.clases.DAO.CaminoDAO;
 import system.clases.DAO.ParadaDAO;
 import system.gestores.GestorAutobus;
@@ -80,7 +78,7 @@ public JPEliminarLinea(JPanel panelManipular, JLabel lblTitulo){
 					JOptionPane.showMessageDialog(null, "Debe completar el campo de busqueda", "Error", JOptionPane.WARNING_MESSAGE);
 				}
 				else {
-					DTOAutobus autobusBuscado = AutobusDAO.obtenerDatosAutobus(Integer.parseInt(TFNroLinea.getText()));
+					DTOAutobus autobusBuscado = GestorAutobus.obtenerDatosAutobus(Integer.parseInt(TFNroLinea.getText()));
 					if(autobusBuscado != null) {
 						TFNombre.setText(autobusBuscado.getNombre());
 						TFColor.setText(autobusBuscado.getColor());
