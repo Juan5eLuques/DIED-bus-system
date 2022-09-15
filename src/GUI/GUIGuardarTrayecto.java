@@ -11,7 +11,6 @@ import DTO.DTOParada;
 import GUI.Componentes.BotonIcono;
 import GUI.JPanels.Linea.JPAgregarLinea;
 import GUI.JPanels.Trayecto.JPGuardarTrayecto;
-import system.clases.DAO.ParadaDAO;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;

@@ -51,7 +51,7 @@ public class GestorParada {
 		return ParadaDAO.obtenerParada(idParada);
 	}
 	
-	public static ArrayList <DTOParada> obtenerTodos(){
+	public static ArrayList <DTOParada> obtenerTodas(){
 		return ParadaDAO.obtenerParadas();
 	}
 	public static ArrayList <Parada> obtenerTodasLasParadas(){
@@ -62,5 +62,20 @@ public class GestorParada {
 		}
 		return listaParadas;
 	}
+
+	public static boolean paradaExiste(int nroParada) {
+		boolean ret = true;
+		Parada unaParada = ParadaDAO.obtenerParada(nroParada);
+		if (unaParada.getNroParada() == -1){
+			ret = false;
+		}
+		return ret; 
+	}
+
+	public static DTOParada obtenerDTOParada(int idParada) {
+		return  ParadaDAO.obtenerDTOParada(idParada);
+	}
+
+
 
 }

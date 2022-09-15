@@ -17,7 +17,6 @@ import GUI.Componentes.BotonIcono;
 import GUI.Componentes.LblText;
 import GUI.Componentes.TextFieldNumbers;
 import GUI.Componentes.TextFieldText;
-import system.clases.DAO.ParadaDAO;
 import system.gestores.GestorParada;
 
 public class JPAgregarParada extends JPanel {
@@ -83,8 +82,8 @@ public class JPAgregarParada extends JPanel {
 				nuevaParada.setCalle(TFCalle.getText());
 				nuevaParada.setNroCalle(Integer.parseInt(TFNroCalle.getText()));
 				
-				if(ParadaDAO.paradaExiste(nuevaParada.getNroParada())==true) {
-				JOptionPane.showMessageDialog(null, "El número de parada ingresado ya existe", "Error", JOptionPane.WARNING_MESSAGE);
+				if(GestorParada.paradaExiste(nuevaParada.getNroParada())==true) {
+				JOptionPane.showMessageDialog(null, "El nï¿½mero de parada ingresado ya existe", "Error", JOptionPane.WARNING_MESSAGE);
 				}
 				else {
 					GestorParada.agregarParada(nuevaParada); 

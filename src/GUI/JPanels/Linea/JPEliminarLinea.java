@@ -15,7 +15,6 @@ import GUI.Componentes.LblText;
 import GUI.Componentes.TextFieldNumbers;
 import GUI.Componentes.TextFieldText;
 import system.clases.DAO.CaminoDAO;
-import system.clases.DAO.ParadaDAO;
 import system.gestores.GestorAutobus;
 
 public class JPEliminarLinea extends JPanel{

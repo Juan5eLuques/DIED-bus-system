@@ -17,7 +17,7 @@ import GUI.Componentes.BotonNodoTrayecto;
 import GUI.Componentes.UbicacionParada;
 import GUI.JPanels.Linea.JPAgregarLinea;
 import system.clases.DAO.CaminoDAO;
-import system.clases.DAO.ParadaDAO;
+import system.gestores.GestorParada;
 
 public class JPGuardarTrayecto extends JPanel {
 
@@ -34,7 +34,7 @@ public class JPGuardarTrayecto extends JPanel {
 		this.setBackground(new Color(32, 83, 117));
 		this.setLayout(null);
 		
-		listaParadas = ParadaDAO.obtenerParadas();
+		listaParadas = GestorParada.obtenerTodas();
 		listaCaminos = CaminoDAO.obtenerCaminos();
 		
 		for (DTOParada parada: listaParadas){
@@ -194,7 +194,7 @@ public class JPGuardarTrayecto extends JPanel {
 	
 	private void elegirPuntoInicial() {
 			int ans = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresar numero de parada de origen",JOptionPane.INFORMATION_MESSAGE));
-			listaParadasTrayecto.add(ParadaDAO.obtenerDTOParada(ans));
+			listaParadasTrayecto.add(GestorParada.obtenerDTOParada(ans));
 			repaint();
 	}
 	

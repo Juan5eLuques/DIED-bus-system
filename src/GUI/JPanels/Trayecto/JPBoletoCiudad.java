@@ -27,7 +27,6 @@ import system.clases.AutobusSuperior;
 import system.clases.InformacionCamino;
 import system.clases.Parada;
 import system.clases.DAO.CaminoDAO;
-import system.clases.DAO.ParadaDAO;
 import system.gestores.GestorBoleto;
 import system.gestores.GestorParada;
 
@@ -45,7 +44,7 @@ public class JPBoletoCiudad extends JPanel {
 	DTOParada nodoOrigen= new DTOParada();
 	ArrayList<AutobusEconomico> ae = new ArrayList<AutobusEconomico>();
 	ArrayList<AutobusSuperior> as = new ArrayList<AutobusSuperior>();
-	JComboBox criterio = new JComboBox(new String[] {"Ver todos","Más barato","Más corto","Más rápido"});
+	JComboBox criterio = new JComboBox(new String[] {"Ver todos","Mï¿½s barato","Mï¿½s corto","Mï¿½s rï¿½pido"});
 	
 	
 	public JPBoletoCiudad (JPanel panelCentral,JPanel panelManipular, JLabel lblTitulo, BotonIcono botonBoleto){
@@ -60,7 +59,7 @@ public class JPBoletoCiudad extends JPanel {
 		btnCheck.setBounds(85, 35, 70, 70);
 		btnCheck.setVisible(true);
 		btnCheck.setEnabled(false);
-		listaParadas = ParadaDAO.obtenerParadas();
+		listaParadas = GestorParada.obtenerTodas();
 		listaCaminos = CaminoDAO.obtenerCaminos();
 		criterio.setBounds(10,200,150,40);
 		criterio.setAlignmentX(CENTER_ALIGNMENT);
