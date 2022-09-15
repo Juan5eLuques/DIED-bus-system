@@ -13,7 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import DTO.DTOParada;
-import system.clases.DAO.ParadaDAO;
 import system.gestores.GestorParada;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -131,8 +130,8 @@ public class GUIAltaParada extends JFrame {
 			nuevaParada.setCalle(TFCalle.getText());
 			nuevaParada.setNroCalle(Integer.parseInt(TFNumero.getText()));
 			
-			if(ParadaDAO.paradaExiste(nuevaParada.getNroParada())==true) {
-			JOptionPane.showMessageDialog(null, "El número de parada ingresado ya existe", "Error", JOptionPane.WARNING_MESSAGE);
+			if(GestorParada.paradaExiste(nuevaParada.getNroParada())==true) {
+			JOptionPane.showMessageDialog(null, "El nï¿½mero de parada ingresado ya existe", "Error", JOptionPane.WARNING_MESSAGE);
 			}
 			else {
 				GestorParada.agregarParada(nuevaParada); 

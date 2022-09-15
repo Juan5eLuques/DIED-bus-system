@@ -19,7 +19,6 @@ import DTO.DTOCamino;
 import DTO.DTOParada;
 import system.clases.Parada;
 import system.clases.DAO.CaminoDAO;
-import system.clases.DAO.ParadaDAO;
 import system.gestores.GestorCamino;
 import system.gestores.GestorGUI;
 import system.gestores.GestorParada;
@@ -54,8 +53,8 @@ public class GUIAltaTrayecto extends JFrame {
 	private static ArrayList<Parada> paradasPosibles = new ArrayList<Parada>();
 	private final static int CX = 200; //Corrimiento en X
 	private final static int CY = 5; //Corrimiento en Y
-	private final static int TPA = 8; //Tamaño punto anterior
-	private final static int TPN = 12; //Tamaño punto nuevo
+	private final static int TPA = 8; //Tamaï¿½o punto anterior
+	private final static int TPN = 12; //Tamaï¿½o punto nuevo
 
 	/**
 	 * Launch the application.

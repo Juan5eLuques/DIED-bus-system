@@ -16,7 +16,6 @@ import GUI.Componentes.TextFieldNumbers;
 import GUI.Componentes.TextFieldText;
 import system.clases.Parada;
 import system.clases.DAO.CaminoDAO;
-import system.clases.DAO.ParadaDAO;
 import system.gestores.GestorParada;
 
 public class JPEliminarParada extends JPanel{
@@ -79,7 +78,7 @@ public JPEliminarParada(JPanel panelManipular, JLabel lblTitulo){
 					JOptionPane.showMessageDialog(null, "Debe completar el campo de busqueda", "Error", JOptionPane.WARNING_MESSAGE);
 				}
 				else {
-				Parada paradaBuscada = ParadaDAO.obtenerParada(Integer.parseInt(TFNroParada.getText()));
+				Parada paradaBuscada = GestorParada.obtenerParada(Integer.parseInt(TFNroParada.getText()));
 				if (paradaBuscada.getNroParada() == -1) {
 					JOptionPane.showMessageDialog(null, "Parada no encontrada", "Error", JOptionPane.WARNING_MESSAGE);
 				}
@@ -95,7 +94,7 @@ public JPEliminarParada(JPanel panelManipular, JLabel lblTitulo){
 		botonDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CaminoDAO.eliminarCaminosConParada(Integer.parseInt(TFNroParada.getText()));
-				ParadaDAO.eliminarParada(Integer.parseInt(TFNroParada.getText()));
+				GestorParada.eliminarParada(Integer.parseInt(TFNroParada.getText()));
 				JOptionPane.showMessageDialog(null, "Parada eliminada", "Succes", JOptionPane.INFORMATION_MESSAGE);
 				TFNroCalle.setText("");
 				TFCalle.setText("");

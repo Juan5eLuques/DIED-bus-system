@@ -11,8 +11,8 @@ import javax.swing.border.EmptyBorder;
 import DTO.DTOCamino;
 import system.clases.Parada;
 import system.clases.DAO.CaminoDAO;
-import system.clases.DAO.ParadaDAO;
 import system.gestores.GestorAutobus;
+import system.gestores.GestorParada;
 
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -131,7 +131,7 @@ public class GUIMostrarTrayecto extends JFrame {
 				int autobus = btnListaLineas.getSelectedIndex();
 				ArrayList<DTOCamino> camino = CaminoDAO.obtenerCaminosDeUnaLinea(autobus+1);
 				for(DTOCamino unCamino : camino ) {
-					listaParadas.add(ParadaDAO.obtenerParada(unCamino.getIdOrigen()));
+					listaParadas.add(GestorParada.obtenerParada(unCamino.getIdOrigen()));
 				}
 				dibujarParadas(listaParadas, Grafo);
 				

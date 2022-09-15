@@ -18,7 +18,7 @@ import GUI.Componentes.BotonNodo;
 import GUI.Componentes.UbicacionParada;
 import enums.CriterioNodoCiudad;
 import system.clases.DAO.CaminoDAO;
-import system.clases.DAO.ParadaDAO;
+import system.gestores.GestorParada;
 
 public class JPMostrarCiudad extends JPanel{
 	
@@ -44,7 +44,7 @@ public class JPMostrarCiudad extends JPanel{
 			}
 		});
 		
-		listaParadas = ParadaDAO.obtenerParadas();
+		listaParadas = GestorParada.obtenerTodas();
 		listaCaminos = CaminoDAO.obtenerCaminos();
 		for (DTOParada parada: listaParadas) {
 		BotonNodo nuevaParada = new BotonNodo(parada, CriterioNodoCiudad.INFO);

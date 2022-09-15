@@ -17,7 +17,6 @@ import javax.swing.border.EmptyBorder;
 import DTO.DTOParada;
 import system.clases.Parada;
 import system.clases.DAO.CaminoDAO;
-import system.clases.DAO.ParadaDAO;
 import system.gestores.GestorParada;
 import java.awt.event.ActionEvent;
 
@@ -73,7 +72,7 @@ public class GUIBusquedaParada extends JFrame {
 		JButton btnEliminar = new JButton("Eliminar");
 		ActionListener actionEliminar = e -> {
 			CaminoDAO.eliminarCaminosConParada(Integer.parseInt(TFNroParada.getText()));
-			ParadaDAO.eliminarParada(Integer.parseInt(TFNroParada.getText()));
+			GestorParada.eliminarParada(Integer.parseInt(TFNroParada.getText()));
 		};
 		btnEliminar.addActionListener(actionEliminar);
 		btnEliminar.setEnabled(false);
@@ -96,7 +95,7 @@ public class GUIBusquedaParada extends JFrame {
 
 		ActionListener actionBuscar = e ->{
 			
-			Parada paradaBuscada = ParadaDAO.obtenerParada(Integer.parseInt(TFNroParada.getText()));
+			Parada paradaBuscada = GestorParada.obtenerParada(Integer.parseInt(TFNroParada.getText()));
 			if (paradaBuscada.getNroParada() == -1) {
 				System.out.println("No se encontro la parada");
 			}
