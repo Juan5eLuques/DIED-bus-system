@@ -16,7 +16,7 @@ import GUI.Componentes.BotonMenu;
 import GUI.Componentes.BotonNodoTrayecto;
 import GUI.Componentes.UbicacionParada;
 import GUI.JPanels.Linea.JPAgregarLinea;
-import system.clases.DAO.CaminoDAO;
+import system.gestores.GestorCamino;
 import system.gestores.GestorParada;
 
 public class JPGuardarTrayecto extends JPanel {
@@ -35,7 +35,7 @@ public class JPGuardarTrayecto extends JPanel {
 		this.setLayout(null);
 		
 		listaParadas = GestorParada.obtenerTodas();
-		listaCaminos = CaminoDAO.obtenerCaminos();
+		listaCaminos = GestorCamino.obtenerCaminos();
 		
 		for (DTOParada parada: listaParadas){
 		BotonNodoTrayecto nuevaParada = new BotonNodoTrayecto(parada,listaParadasTrayecto,this,listaPosibles);
@@ -166,7 +166,7 @@ public class JPGuardarTrayecto extends JPanel {
 		
 			if (listaParadasTrayecto.size()!=0) {
 			int lastIndex = listaParadasTrayecto.size()-1;
-			listaPosibles = CaminoDAO.obtenerCaminosDesdeParada(listaParadasTrayecto.get(lastIndex).getNroParada());
+			listaPosibles = GestorCamino.caminosQueInicianEnParada(listaParadasTrayecto.get(lastIndex).getNroParada());
 
 			for(DTOCamino camino : listaPosibles) {
 			

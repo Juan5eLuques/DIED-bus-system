@@ -16,7 +16,7 @@ import GUI.Componentes.BotonNodo;
 import GUI.Componentes.UbicacionParada;
 import enums.CriterioNodoCiudad;
 import system.clases.DAO.AutobusDAO;
-import system.clases.DAO.CaminoDAO;
+import system.gestores.GestorCamino;
 import system.gestores.GestorParada;
 
 public class JPMostrarTrayecto extends JPanel{
@@ -43,7 +43,7 @@ public class JPMostrarTrayecto extends JPanel{
 		lineas.setForeground(Color.black);
 		lineas.setBounds(30,200,120,30);
 		
-		trayectoLinea = CaminoDAO.obtenerCaminosDeUnaLinea(lineas.getSelectedItem().toString());
+		trayectoLinea = GestorCamino.trayectoLinea(lineas.getSelectedItem().toString());
 		
 		this.add(boton);
 		this.setBackground(new Color(32, 83, 117));
@@ -58,7 +58,7 @@ public class JPMostrarTrayecto extends JPanel{
 		});
 		
 		listaParadas = GestorParada.obtenerTodas();
-		listaCaminos = CaminoDAO.obtenerCaminos();
+		listaCaminos = GestorCamino.obtenerCaminos();
 		for (DTOParada parada: listaParadas){
 		BotonNodo nuevaParada = new BotonNodo(parada, CriterioNodoCiudad.INFO);
 		this.add(nuevaParada);
@@ -69,7 +69,7 @@ public class JPMostrarTrayecto extends JPanel{
 		
 		botonVerTrayecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			trayectoLinea = CaminoDAO.obtenerCaminosDeUnaLinea(lineas.getSelectedItem().toString());
+			trayectoLinea = GestorCamino.trayectoLinea(lineas.getSelectedItem().toString());
 			revalidate();
 			repaint();
 			}

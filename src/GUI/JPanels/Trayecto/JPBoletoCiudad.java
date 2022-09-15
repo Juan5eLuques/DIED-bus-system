@@ -26,8 +26,8 @@ import system.clases.AutobusEconomico;
 import system.clases.AutobusSuperior;
 import system.clases.InformacionCamino;
 import system.clases.Parada;
-import system.clases.DAO.CaminoDAO;
 import system.gestores.GestorBoleto;
+import system.gestores.GestorCamino;
 import system.gestores.GestorParada;
 
 public class JPBoletoCiudad extends JPanel {
@@ -60,7 +60,7 @@ public class JPBoletoCiudad extends JPanel {
 		btnCheck.setVisible(true);
 		btnCheck.setEnabled(false);
 		listaParadas = GestorParada.obtenerTodas();
-		listaCaminos = CaminoDAO.obtenerCaminos();
+		listaCaminos = GestorCamino.obtenerCaminos();
 		criterio.setBounds(10,200,150,40);
 		criterio.setAlignmentX(CENTER_ALIGNMENT);
 		criterio.setVisible(false);

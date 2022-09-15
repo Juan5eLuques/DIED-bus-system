@@ -18,7 +18,6 @@ import DTO.DTOAutobus;
 import DTO.DTOCamino;
 import DTO.DTOParada;
 import system.clases.Parada;
-import system.clases.DAO.CaminoDAO;
 import system.gestores.GestorCamino;
 import system.gestores.GestorGUI;
 import system.gestores.GestorParada;

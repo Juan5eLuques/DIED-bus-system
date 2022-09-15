@@ -10,8 +10,8 @@ import javax.swing.border.EmptyBorder;
 
 import DTO.DTOCamino;
 import system.clases.Parada;
-import system.clases.DAO.CaminoDAO;
 import system.gestores.GestorAutobus;
+import system.gestores.GestorCamino;
 import system.gestores.GestorParada;
 
 import javax.swing.JSpinner;
@@ -129,7 +129,7 @@ public class GUIMostrarTrayecto extends JFrame {
 		
 				ArrayList<Parada> listaParadas = new ArrayList<Parada>();
 				int autobus = btnListaLineas.getSelectedIndex();
-				ArrayList<DTOCamino> camino = CaminoDAO.obtenerCaminosDeUnaLinea(autobus+1);
+				ArrayList<DTOCamino> camino = GestorCamino.trayectoLinea(autobus+1);
 				for(DTOCamino unCamino : camino ) {
 					listaParadas.add(GestorParada.obtenerParada(unCamino.getIdOrigen()));
 				}
