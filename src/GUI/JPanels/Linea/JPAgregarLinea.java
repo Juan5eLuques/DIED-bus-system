@@ -19,7 +19,6 @@ import GUI.Componentes.BotonIcono;
 import GUI.Componentes.LblText;
 import GUI.Componentes.TextFieldNumbers;
 import GUI.Componentes.TextFieldText;
-import system.clases.DAO.AutobusDAO;
 import system.gestores.GestorAutobus;
 import GUI.GUIGuardarTrayecto;
 
