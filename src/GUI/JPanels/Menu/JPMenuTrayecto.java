@@ -12,7 +12,6 @@ import DTO.DTOCamino;
 import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonMenu;
 import GUI.JPanels.Trayecto.JPMostrarTrayecto;
-import system.clases.DAO.CaminoDAO;
 
 public class JPMenuTrayecto extends JPanel {
 	

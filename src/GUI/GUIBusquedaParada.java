@@ -16,8 +16,8 @@ import javax.swing.border.EmptyBorder;
 
 import DTO.DTOParada;
 import system.clases.Parada;
-import system.clases.DAO.CaminoDAO;
 import system.gestores.GestorParada;
+import system.gestores.GestorCamino;
 import java.awt.event.ActionEvent;
 
 public class GUIBusquedaParada extends JFrame {
@@ -71,7 +71,7 @@ public class GUIBusquedaParada extends JFrame {
 		//BOTONES
 		JButton btnEliminar = new JButton("Eliminar");
 		ActionListener actionEliminar = e -> {
-			CaminoDAO.eliminarCaminosConParada(Integer.parseInt(TFNroParada.getText()));
+			GestorCamino.eliminarCaminosConParada(Integer.parseInt(TFNroParada.getText()));
 			GestorParada.eliminarParada(Integer.parseInt(TFNroParada.getText()));
 		};
 		btnEliminar.addActionListener(actionEliminar);

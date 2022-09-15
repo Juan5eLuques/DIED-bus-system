@@ -25,6 +25,10 @@ public class GestorCamino {
 		return GCamino;
 	}
 
+	public static void eliminarCaminosConParada (int idParada){
+		CaminoDAO.eliminarCaminosConParada(idParada);
+	}
+
 	public static void eliminarCaminos (ArrayList<DTOCamino> lista){
 
 	}
@@ -36,6 +40,15 @@ public class GestorCamino {
 	public static ArrayList<DTOCamino> trayectoLinea(int idLinea){
 		try {
 			return CaminoDAO.obtenerCaminosDeUnaLinea(idLinea);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static ArrayList<DTOCamino> trayectoLinea(String nombre){
+		try {
+			return CaminoDAO.obtenerCaminosDeUnaLinea(nombre);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
