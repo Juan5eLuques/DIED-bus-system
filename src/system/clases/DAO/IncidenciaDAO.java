@@ -44,13 +44,17 @@ public class IncidenciaDAO {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try {
+			
+			Date fechaInicio = new Date(nueva.getFechaInicio().getTime());
+			Date fechaFin = new Date(nueva.getFechaFin().getTime());
+			
 			PreparedStatement st = con.prepareStatement("INSERT INTO aplicacion_bus.INCIDENCIAS VALUES (?,?,?,?,?,?)");
 			st.setInt(1, nueva.getIdIncidencia());
 			st.setInt(2, nueva.getIdParada());
-			//st.setDate(3, (nueva.getFechaFin())); 
-			//st.setDate(4, nueva.getFechaFin());
-			st.setInt(5, nueva.getIdIncidencia());
-			st.setInt(6, nueva.getIdIncidencia());
+			st.setDate(3, fechaInicio);
+			st.setDate(4, fechaFin);
+			st.setString(5, nueva.getDescripcion());
+			st.setBoolean(6, nueva.isEstadoActual());
 			st.executeUpdate();
 			st.close();
 			con.close();

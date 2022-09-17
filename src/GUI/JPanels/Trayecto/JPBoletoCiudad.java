@@ -1,8 +1,12 @@
 package GUI.JPanels.Trayecto;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -11,12 +15,18 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import DTO.DTOCamino;
 import DTO.DTOParada;
+import GUI.GUIInfoNodo;
+import GUI.GUIInfoTrayecto;
 import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonIcono;
 import GUI.Componentes.BotonNodo;
@@ -34,9 +44,11 @@ public class JPBoletoCiudad extends JPanel {
 	
 	private int idPrimerParada;
 	private int idUltimaParada;
+	Font fontLbl = new Font("Century Gothic", Font.BOLD, 15);
 	BotonIcono btnCheck = new BotonIcono("iconCheck.png");
 	ArrayList<Integer> paradasPosibles = new ArrayList<Integer>();
 	ArrayList<InformacionCamino> caminosPosibles = new ArrayList<InformacionCamino>();
+	ArrayList<InformacionCamino> caminosPosiblesFiltrados = new ArrayList<InformacionCamino>();
 	ArrayList<DTOParada> listaParadas;
 	ArrayList<DTOCamino> listaCaminos;
 	Map <Integer, BotonNodo> nodosCiudad = new HashMap<Integer, BotonNodo>();
@@ -44,8 +56,14 @@ public class JPBoletoCiudad extends JPanel {
 	DTOParada nodoOrigen= new DTOParada();
 	ArrayList<AutobusEconomico> ae = new ArrayList<AutobusEconomico>();
 	ArrayList<AutobusSuperior> as = new ArrayList<AutobusSuperior>();
-	JComboBox criterio = new JComboBox(new String[] {"Ver todos","Mï¿½s barato","Mï¿½s corto","Mï¿½s rï¿½pido"});
-	
+	JComboBox criterio = new JComboBox(new String[] {"Sin filtro","Más barato","Más rápido","Más corto"});
+	JComboBox<String> trayectoDescripcion = new JComboBox<String>(new String[] {"Ver todos"});
+	BotonIcono botonComprar = new BotonIcono("iconComprar.png");
+	JLabel lblCriterio = new JLabel("Filtro de camino");
+	JLabel lblDescripcion = new JLabel("Selecc. camino");
+	JButton btnVerDescripcion = new JButton("Ver descripcion");
+	InformacionCamino informacionDescripcion = new InformacionCamino();
+	private int numTrayectoFiltrado;
 	
 	public JPBoletoCiudad (JPanel panelCentral,JPanel panelManipular, JLabel lblTitulo, BotonIcono botonBoleto){
 		
@@ -61,12 +79,111 @@ public class JPBoletoCiudad extends JPanel {
 		btnCheck.setEnabled(false);
 		listaParadas = GestorParada.obtenerTodas();
 		listaCaminos = GestorCamino.obtenerCaminos();
-		criterio.setBounds(10,200,150,40);
+		
+		botonComprar.setEnabled(false);
+		botonComprar.setVisible(true);
+		botonComprar.setBounds(30,470,100,100);
+		
+		this.add(botonComprar);
+		
+		criterio.setBounds(10,170,150,30);
 		criterio.setAlignmentX(CENTER_ALIGNMENT);
 		criterio.setVisible(false);
+		criterio.setSelectedIndex(0);
+		criterio.setFocusable(false);
 		
+		lblCriterio.setBounds(20,140,150,30);
+		lblCriterio.setForeground(Color.white);
+		lblCriterio.setFont(fontLbl);
+		lblDescripcion.setFont(fontLbl);
+		lblCriterio.setVisible(false);
+		lblDescripcion.setBounds(20,240,150,30);
+		trayectoDescripcion.setBounds(10,270,150,30);
+		trayectoDescripcion.setSelectedIndex(0);
+		trayectoDescripcion.setFocusable(false);
+		lblDescripcion.setForeground(Color.white);
+		lblDescripcion.setVisible(false);
+		trayectoDescripcion.setVisible(false);
+		btnVerDescripcion.setBounds(10,370,150,50);
+		btnVerDescripcion.setVisible(false);
+		btnVerDescripcion.setEnabled(false);
+		btnVerDescripcion.setBackground(new Color(107, 227, 162));
+		btnVerDescripcion.setFocusable(false);
+		btnVerDescripcion.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		
+		this.add(lblDescripcion);
+		this.add(lblCriterio);
 		this.add(criterio);
+		this.add(btnVerDescripcion);
+		this.add(trayectoDescripcion);
 		
+		
+		((JLabel)criterio.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+		((JLabel)trayectoDescripcion.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+		
+		btnVerDescripcion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (criterio.getSelectedIndex()==0) {
+				GUIInfoTrayecto info = new GUIInfoTrayecto(informacionDescripcion, trayectoDescripcion.getSelectedIndex()+"");
+				info.setResizable(false);
+				info.setVisible(true);
+				}
+				else {
+					GUIInfoTrayecto info = new GUIInfoTrayecto(informacionDescripcion, criterio.getSelectedItem().toString().substring(4));
+					info.setResizable(false);
+					info.setVisible(true);
+				}
+			}
+		});
+		
+		
+		botonComprar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(btnVerDescripcion.isEnabled()) {
+					int result = JOptionPane.showConfirmDialog(getPanel(), "Desea comprar un boleto para la linea : " +informacionDescripcion.getAutobus().getNombre() + " ?");
+					if (result == JOptionPane.YES_OPTION) {
+						GestorBoleto.guardarBoleto(informacionDescripcion);
+						JOptionPane.showMessageDialog(null,"Compra realizada con exito ! ");
+					}
+				}
+			}
+		});
+		
+		criterio.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (criterio.getSelectedIndex()!=0) {
+				GestorBoleto.ordenarPorCriterio(criterio.getSelectedIndex(), caminosPosiblesFiltrados);
+				trayectoDescripcion.setEnabled(false);
+				btnVerDescripcion.setEnabled(true);
+				informacionDescripcion = caminosPosiblesFiltrados.get(0);
+				}
+				else {
+					if (trayectoDescripcion.getSelectedIndex()==0) btnVerDescripcion.setEnabled(false);
+					trayectoDescripcion.setEnabled(true);
+				}
+				repaint();
+				revalidate();
+			}
+				});
+		
+		
+		trayectoDescripcion.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (trayectoDescripcion.getSelectedIndex()!=0) {
+				numTrayectoFiltrado = trayectoDescripcion.getSelectedIndex()-1;
+				btnVerDescripcion.setEnabled(true);
+				}
+				else {
+					trayectoDescripcion.setEnabled(true);
+					btnVerDescripcion.setEnabled(false);
+				}
+				repaint();
+				revalidate();
+			}
+				});
 		
 		for (DTOParada parada: listaParadas){
 			
@@ -149,11 +266,14 @@ public class JPBoletoCiudad extends JPanel {
 		
 		g.setColor(Color.green);
 		
+		if (criterio.getSelectedIndex()==0 && trayectoDescripcion.getSelectedIndex()==0) {
+			
 		for(InformacionCamino unaInfo : caminosPosibles) {
 			
-			if(caminosPosibles.indexOf(unaInfo)==0) g.setColor(Color.GREEN);
+			if(caminosPosibles.indexOf(unaInfo)==0) g.setColor(Color.green);
 			if(caminosPosibles.indexOf(unaInfo)==1) g.setColor(Color.MAGENTA);
-			if(caminosPosibles.indexOf(unaInfo)==2) g.setColor(Color.yellow);
+			if(caminosPosibles.indexOf(unaInfo)==2)  g.setColor(Color.YELLOW);
+		
 			
 			for (DTOCamino unCamino: unaInfo.getRecorrido()) {
 				
@@ -174,7 +294,72 @@ public class JPBoletoCiudad extends JPanel {
 				UbicacionParada U_Destino = new UbicacionParada(destino);
 				
 				g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+			
+				}
 			}
+			
+		}
+		
+		else {
+		
+			if (criterio.getSelectedIndex()!=0) {
+
+				for (DTOCamino unCamino: caminosPosiblesFiltrados.get(0).getRecorrido()) {
+			
+				DTOParada IDOrigen = new DTOParada();
+				DTOParada IDDestino = new DTOParada();
+				DTOParada origen,destino;
+		
+				IDOrigen.setNroParada(unCamino.getIdOrigen());
+				IDDestino.setNroParada(unCamino.getIdDestino());
+		
+				int posO = listaParadas.indexOf(IDOrigen);
+				int posD = listaParadas.indexOf(IDDestino);
+			
+				origen = listaParadas.get(posO);
+				destino = listaParadas.get(posD);
+			
+				UbicacionParada U_Origen = new UbicacionParada(origen);
+				UbicacionParada U_Destino = new UbicacionParada(destino);
+			
+				g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+				}
+			}
+			
+			if (criterio.getSelectedIndex()==0 && trayectoDescripcion.getSelectedIndex()!=0) {
+				
+				for(InformacionCamino unaInfo : caminosPosibles) {
+					
+					if (caminosPosibles.indexOf(unaInfo)==numTrayectoFiltrado) {
+					
+					informacionDescripcion = unaInfo;
+					
+					for (DTOCamino unCamino: unaInfo.getRecorrido()) {
+						
+							DTOParada IDOrigen = new DTOParada();
+							DTOParada IDDestino = new DTOParada();
+							DTOParada origen,destino;
+					
+							IDOrigen.setNroParada(unCamino.getIdOrigen());
+							IDDestino.setNroParada(unCamino.getIdDestino());
+					
+							int posO = listaParadas.indexOf(IDOrigen);
+							int posD = listaParadas.indexOf(IDDestino);
+						
+							origen = listaParadas.get(posO);
+							destino = listaParadas.get(posD);
+						
+							UbicacionParada U_Origen = new UbicacionParada(origen);
+							UbicacionParada U_Destino = new UbicacionParada(destino);
+						
+							g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+					
+						
+							}
+						}
+					}
+			}
+	
 		}
 		
 	}
@@ -197,9 +382,6 @@ public class JPBoletoCiudad extends JPanel {
 	
 	public static void setearParadasPosibles(ArrayList<Parada> posibles, ArrayList<ArrayList<DTOCamino>> listaCaminos) {
 		for (ArrayList<DTOCamino> unTrayecto:listaCaminos) {
-			for (DTOCamino unCamino:unTrayecto) {
-//				System.out.println("UnCamino"+unCamino.getIdOrigen()+"->"+unCamino.getIdDestino());
-			}
 			GestorBoleto.agregarParadasPosible(posibles, unTrayecto);
 		}
 
@@ -210,7 +392,6 @@ public class JPBoletoCiudad extends JPanel {
 		ArrayList<ArrayList<DTOCamino>> caminosPosibles = new ArrayList<ArrayList<DTOCamino>>();
 		ArrayList<Parada> paradasPosibles = new ArrayList<Parada> ();
 		setearCaminosPosibles(idInicial,caminosPosibles,ae,as);
-		System.out.println("Cantidad de caminos posibles: "+ caminosPosibles.size());
 		setearParadasPosibles(paradasPosibles,caminosPosibles);
 		for (Parada unaParada:paradasPosibles) {
 			idParadas.add(unaParada.getNroParada());
@@ -242,14 +423,25 @@ public class JPBoletoCiudad extends JPanel {
 					GestorBoleto.calcularCaminosPosibles(nodoOrigen.getNroParada(), idUltimaParada, ae, as, caminosPosibles);
 					GestorBoleto.ordenarPorCriterio(1, caminosPosibles);
 					criterio.setVisible(true);
+					lblCriterio.setVisible(true);
+					lblDescripcion.setVisible(true);
+					caminosPosiblesFiltrados= caminosPosibles;
+					botonComprar.setEnabled(true);
+					btnVerDescripcion.setVisible(true);
+					trayectoDescripcion.setVisible(true);
+					
+					if (criterio.getSelectedIndex()==0) {
+						trayectoDescripcion.removeAllItems();
+						trayectoDescripcion.addItem("Ver todos");
+						for (InformacionCamino camino : caminosPosibles) {
+							int index = caminosPosibles.indexOf(camino)+1;
+							trayectoDescripcion.addItem("Recorrido -> " + index);
+						}
+						revalidate();
+						repaint();
+					}
 					revalidate();
 					repaint();
-					for (InformacionCamino caminos: caminosPosibles ) {
-						System.out.println("Ruta: " + caminosPosibles.indexOf(caminos));
-						System.out.println("Duracion: "+ caminos.getDuracion());
-						System.out.println("Distancia: " + caminos.getDistancia());
-						System.out.println("Costo: "+ caminos.getCosto());
-						}
 				};
 			}
 			
@@ -308,9 +500,6 @@ public class JPBoletoCiudad extends JPanel {
 					revalidate();
 					repaint();
 				}
-				else {
-					//MOSTRAR MENSAJE DE INGRESAR NUEVA PARADA
-				}
 				}
 
 			@Override
@@ -342,24 +531,8 @@ public class JPBoletoCiudad extends JPanel {
 		parada.addMouseListener(setearActionDestino);
 	}
 	
-	public void resetearActions() {
-		for (DTOParada parada : listaParadas) {
-			nodosCiudad.get(parada).limpiarActions();
-			listenerOrigen(nodosCiudad.get(parada));
-		}
-	}
-
-	
 	public JPBoletoCiudad getPanel() {
 		return this;
-	}
-	
-	public void setColor(int n) {
-		Graphics g = this.getGraphics();
-		if(n==0) g.setColor(Color.GREEN);
-		if(n==1) g.setColor(Color.MAGENTA);
-		if(n==2) g.setColor(Color.yellow);
-		if(n==4) g.setColor(Color.yellow);
 	}
 	
 }

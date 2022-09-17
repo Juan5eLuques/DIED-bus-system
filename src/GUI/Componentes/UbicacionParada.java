@@ -10,11 +10,11 @@ public class UbicacionParada {
 	public UbicacionParada(DTOParada parada){
 		int calle = Integer.parseInt(parada.getCalle().substring(6));
 		if (calle%2==0) {
-			X = (calle*25)+185;
+			X = (calle*25)+200;
 			Y = (((parada.getNroCalle()/10)*5)+30);
 		}
 		else {
-			X = (((parada.getNroCalle()/10)*5)+160);
+			X = (((parada.getNroCalle()/10)*5)+175);
 			Y =(calle*25)+30;
 		}
 		

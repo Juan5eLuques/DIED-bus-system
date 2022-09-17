@@ -109,9 +109,10 @@ public class GestorBoleto {
 
 				unAuto = AutobusEconomicoDAO.transformarADTO(unAutobus);
 				unCamino.setAutobus(unAuto);
-
 				unCamino.setRecorrido(unTrayecto);
 				unaDistancia = calcularDistanciaRecorrida(unTrayecto);
+				unCamino.setParadaInicial(paradaInicio);
+				unCamino.setParadaFinal(paradaFin);
 				unCamino.setDistancia(unaDistancia);
 				unCamino.setCosto(calcularCostoPasaje(unAuto,unaDistancia));
 				unCamino.setDuracion(calcularDuracion(unTrayecto));
@@ -129,6 +130,8 @@ public class GestorBoleto {
 				unAuto = AutobusSuperiorDAO.transformarADTO(unAutobus);
 				unCamino.setAutobus(unAuto);
 				unCamino.setRecorrido(unTrayecto);
+				unCamino.setParadaInicial(paradaInicio);
+				unCamino.setParadaFinal(paradaFin);
 				unaDistancia = calcularDistanciaRecorrida(unTrayecto);
 				unCamino.setDistancia(unaDistancia);
 				unCamino.setCosto(calcularCostoPasaje(unAuto,unaDistancia));

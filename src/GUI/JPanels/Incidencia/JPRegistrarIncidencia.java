@@ -41,14 +41,12 @@ public class JPRegistrarIncidencia extends JPanel {
 		
 		JDfechaInicio.setDateFormatString("dd-MM-yyyy");
 		JDFechaFin.setDateFormatString("dd-MM-yyyy");
-		//TextFieldText TFResuleta = new TextFieldText();
 		
 		TFIDIncidencia.setBounds(410, 132, 300, 30);
 		TFIdParada.setBounds(410, 182, 300, 30);
 		JDfechaInicio.setBounds(410, 232, 300, 30);
 		JDFechaFin.setBounds(410,282,300,30);
 		TFDescripcion.setBounds(410,332,300,30);
-		//TFResuleta.setBounds(400,322,300,30);
 		
 		LblText lblNroLinea = new LblText("IDIncidencia : ", fuente);
 		lblNroLinea.setBounds(200, 130, 300, 30);
@@ -65,10 +63,6 @@ public class JPRegistrarIncidencia extends JPanel {
 		LblText lblPasajeros = new LblText("Descripcion : ",fuente);
 		lblPasajeros.setBounds(200, 330, 300, 30);
 		
-		//LblText lblParados = new LblText("Resuelta: ",fuente);
-		//lblParados.setBounds(200, 320, 300, 30);
-		
-	
 		
 		BotonIcono botonGuardar = new BotonIcono("iconGuardar.png");
 		botonGuardar.setBounds(680,470, 100, 100);
@@ -79,14 +73,12 @@ public class JPRegistrarIncidencia extends JPanel {
 		this.add(JDfechaInicio);
 		this.add(JDFechaFin);
 		this.add(TFDescripcion);
-		//this.add(TFResuleta);
 
 		this.add(lblNroLinea);
 		this.add(lblNombre);
 		this.add(lblColor);
 		this.add(lblTipo);
 		this.add(lblPasajeros);
-		//this.add(lblParados);
 		 
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -102,19 +94,23 @@ public class JPRegistrarIncidencia extends JPanel {
 					JOptionPane.showMessageDialog(null, "Debe completar todos los campos", "Error", JOptionPane.WARNING_MESSAGE);
 				}
 				else {
+					
+					if (JDfechaInicio.getDate().before(JDFechaFin.getDate())) {
+					
 					DTOIncidencia nuevaIncidencia = new DTOIncidencia();
 					
 					nuevaIncidencia.setIdIncidencia(Integer.parseInt(TFIDIncidencia.getText()));
 					nuevaIncidencia.setIdParada(Integer.parseInt(TFIdParada.getText()));
-					//nuevaIncidencia.setFechaInicio(JDfechaInicio.getDate());
-					//nuevaIncidencia.setFechaFin(JDFechaFin.getDate());
+					nuevaIncidencia.setFechaInicio(JDfechaInicio.getDate());
+					nuevaIncidencia.setFechaFin(JDFechaFin.getDate());
 					nuevaIncidencia.setDescripcion(TFDescripcion.getText());
-					nuevaIncidencia.setEstadoActual(true);
-					System.out.println(JDfechaInicio.getDate());
-					
+					nuevaIncidencia.setEstadoActual(true);			
 					
 					GestorIncidencia.registrarIncidencia(nuevaIncidencia);
-					
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "La fecha incio debe ser anterior a la fecha fin", "Error", JOptionPane.WARNING_MESSAGE);
+					}
 				}
 			}
 		});

@@ -37,10 +37,10 @@ public class BotonNodo extends JLabel {
 		
 		
 		if(calle%2==0) {
-			this.setBounds((calle*25)+175,(((parada.getNroCalle()/10)*5)+20),20,20);
+			this.setBounds((calle*25)+190,(((parada.getNroCalle()/10)*5)+20),20,20);
 		}
 		else {
-			this.setBounds((((parada.getNroCalle()/10)*5)+150),(calle*25)+20,20,20);
+			this.setBounds((((parada.getNroCalle()/10)*5)+165),(calle*25)+20,20,20);
 		}
 		
 		this.addMouseListener(new MouseListener() {

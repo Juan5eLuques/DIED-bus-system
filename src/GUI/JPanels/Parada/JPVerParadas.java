@@ -27,7 +27,7 @@ public class JPVerParadas extends JPanel {
 	
 	private int cantColumnas = 4;
 	
-	private ArrayList<DTOParada> paradas = GestorParada.obtenerTodos();
+	private ArrayList<DTOParada> paradas = GestorParada.obtenerTodas();
 	
 	public JPVerParadas(JPanel panelManipular, JLabel lblTitulo) {
 	
