@@ -17,7 +17,7 @@ public class InformacionBoletoDAO {
 		Connection con = gdb.conec;
 		try {
 			PreparedStatement st = con.prepareStatement("INSERT INTO APLICACION_BUS.BOLETO "
-					+ "(idLinea, paradaInicial, paradaFinal, duracion, distancia, costo) VALES (?,?,?,?,?,?) ");
+					+ "(idLinea, paradaInicial, paradaFinal, duracion, distancia, costo) VALUES (?,?,?,?,?,?) ");
 
 			st.setInt(1, unBoleto.getAutobus().getId());
 			st.setInt(2, unBoleto.getParadaInicial());

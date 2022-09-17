@@ -6,6 +6,7 @@ import DTO.DTOAutobus;
 import DTO.DTOCamino;
 
 public class InformacionCamino {
+	
 	private DTOAutobus autobus;
 	private int paradaInicial;
 	private int paradaFinal;
@@ -68,4 +69,5 @@ public class InformacionCamino {
 			i++;
 		}
 	}
+	
 }
