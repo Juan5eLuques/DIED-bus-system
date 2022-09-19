@@ -196,7 +196,6 @@ public class GestorBoleto {
 		}
 	}
 	
-	
 	//Ordena la lista de caminos posibles por duracion, costo o distancia del viaje
 	public static void ordenarPorCriterio(int criterio, ArrayList<InformacionCamino> caminosPosibles) {
 		switch (criterio){

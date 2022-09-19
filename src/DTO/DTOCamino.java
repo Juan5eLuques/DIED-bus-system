@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.Objects;
+
 public class DTOCamino {    
     private int idOrigen;
 	private int idDestino;
@@ -37,6 +39,21 @@ public class DTOCamino {
 	}
 	public void setActiva(boolean activa) {
 		this.activa = activa;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(idDestino, idOrigen);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DTOCamino other = (DTOCamino) obj;
+		return idDestino == other.idDestino && idOrigen == other.idOrigen;
 	}
 	
 	

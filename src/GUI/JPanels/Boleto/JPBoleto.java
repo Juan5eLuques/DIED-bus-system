@@ -48,7 +48,7 @@ public class JPBoleto extends JPanel {
 		panelCentral.setVisible(false);
 		lblTitulo.setText("Compra de boleto");
 		String[] opciones = new String[] {};
-
+		//
 		BotonAtras botonAtras = new BotonAtras(true);
 
 		this.add(botonAtras);
