@@ -301,5 +301,29 @@ public class CaminoDAO {
 		
 	
 	}
+
+	public static void actualizarActivo(int nroParada, boolean activa ) {
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		
+		ArrayList<DTOCamino>listaCaminos = obtenerCaminosQueIncluyenParada(nroParada);
+		for (DTOCamino unCamino:listaCaminos){
+			boolean estadoOrigen = ParadaDAO.obtenerEstadoParada(unCamino.getIdOrigen());
+			boolean estadoDestino = ParadaDAO.obtenerEstadoParada(unCamino.getIdDestino());
+			boolean estadoCaminoActual = estadoDestino && estadoOrigen;
+			if (estadoCaminoActual != unCamino.isActiva()){
+				try {
+					PreparedStatement st = con.prepareStatement("UPDATE aplicacion_bus.camino SET activa=?, WHERE idorigen = ? and iddestino = ?");
+					st.setBoolean(1, activa);
+					st.setInt(2, unCamino.getIdOrigen());
+					st.setInt(3, unCamino.getIdDestino());
+					st.executeUpdate();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 	
 }
