@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import DTO.DTOIncidencia;
 import system.clases.DAO.IncidenciaDAO;
+import system.clases.DAO.ParadaDAO;
 
 public class GestorIncidencia {
 
@@ -26,6 +27,10 @@ public class GestorIncidencia {
 		
 		public static void registrarIncidencia(DTOIncidencia nueva) {
 			IncidenciaDAO.registrarIncidencia(nueva);
+
+			if (nueva.isEstadoActual()){
+				ParadaDAO.actualizarActiva(nueva.getIdParada(),false);
+			}
 		}
 		
 	}

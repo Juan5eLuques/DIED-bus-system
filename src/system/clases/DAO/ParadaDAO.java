@@ -248,6 +248,43 @@ public class ParadaDAO {
 		}
 		
 	}
+
+	public static void actualizarActiva(int nroParada, boolean activa ) {
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		
+		try {
+			PreparedStatement st = con.prepareStatement("UPDATE aplicacion_bus.parada SET activa=? WHERE id = ?");
+			st.setBoolean(1, activa);
+			st.setInt(2, nroParada);
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		CaminoDAO.actualizarActivo(nroParada, activa);
+	}
+
+		//Devuelve el estado de la parada
+		public static boolean obtenerEstadoParada(int nroParada) {
+			GestorDB gdb = GestorDB.getInstance();
+			Connection con = gdb.conec;
+			boolean ret = true;
+			try {
+				PreparedStatement st = con.prepareStatement("SELECT actia FROM aplicacion_bus.parada WHERE id=" + nroParada);
+				ResultSet rs = st.executeQuery();
+					if (rs.next()) {
+						ret = (rs.getBoolean("activa"));
+					}
+	
+				rs.close();
+				con.close();
+			}
+			catch (Exception e ) {
+				e.printStackTrace();
+			}
+			return ret;
+		}
 	
 	public static void main(String[] argc) { 
 		
