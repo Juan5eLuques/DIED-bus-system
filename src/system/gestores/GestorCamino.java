@@ -111,6 +111,48 @@ public class GestorCamino {
 			}
 		}
 	}
+	//Devuelve un camino que esquiva la incidencia, uniendo la primer parte habilitada, el desvio calculado y la segunda parte habilitada
+	public static ArrayList<DTOCamino> caminoHabilitado (ArrayList<DTOCamino> trayectoRoto, int idParadaRota){
+		ArrayList<DTOCamino> primerParte = new ArrayList<>(); //Guarda la primer parte habilitada
+		ArrayList<DTOCamino> segundaParte = new ArrayList<>(); //Guarda la segunda parte habilitada
+		ArrayList<DTOCamino> caminosInactivos = new ArrayList<>(); //Guarda los caminos que hay que reemplazar
+		ArrayList<DTOCamino> ret = new ArrayList<>(); //Variable de retorno
+		//Separa el camino en las dos partes habilitadas e identifica las paradas inactivas por la incidencia
+		caminoSplit(trayectoRoto, primerParte, segundaParte, idParadaRota, caminosInactivos);
+
+		ArrayList<DTOCamino> desvio = recalcularCamino(caminosInactivos.get(0), caminosInactivos.get(1));
+
+		ret.addAll(primerParte);
+		ret.addAll(desvio);
+		ret.addAll(segundaParte);
+
+
+		return ret;
+	}
+
+	//Dado el trayecto y la parada inactiva, devuelve las dos partes del camino activas e identifica los caminos inactivos
+	public static void caminoSplit (ArrayList<DTOCamino> caminoCompleto, 
+	ArrayList<DTOCamino> primerParte, ArrayList<DTOCamino> segundaParte, int idParadaRota,
+	ArrayList<DTOCamino> caminosInactivos){
+		primerParte.clear();
+		segundaParte.clear();
+		caminosInactivos.clear();
+		boolean splitFlag = false;
+		for (DTOCamino unCamino: caminoCompleto){
+			if(unCamino.getIdOrigen() != idParadaRota || unCamino.getIdDestino() != idParadaRota){
+				if(splitFlag){
+					segundaParte.add(unCamino);
+				}
+				else{
+					primerParte.add(unCamino);
+				}
+			}
+			else{
+				caminosInactivos.add(unCamino);
+				splitFlag = true;
+			}
+		}
+	}
 
 	private static ArrayList<DTOCamino> filtrarDeshabilitados (ArrayList<DTOCamino> listaCaminos){
 		return (ArrayList<DTOCamino>)listaCaminos.stream().
