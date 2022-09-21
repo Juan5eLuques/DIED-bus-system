@@ -39,6 +39,11 @@ public class IncidenciaDAO {
 			}
 		return incidencias;
 	}
+
+	public static ArrayList<DTOIncidencia> obtenerActivas(){
+		ArrayList<DTOIncidencia> ret = obtenerTodas();
+		return (ArrayList<DTOIncidencia>)ret.stream().filter(unaIncidencia -> unaIncidencia.isEstadoActual());
+	}
 	
 	public static void registrarIncidencia(DTOIncidencia nueva) {
 		GestorDB gdb = GestorDB.getInstance();

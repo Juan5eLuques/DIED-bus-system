@@ -32,5 +32,9 @@ public class GestorIncidencia {
 				ParadaDAO.actualizarActiva(nueva.getIdParada(),false);
 			}
 		}
+
+		public static ArrayList<DTOIncidencia> obtenerActivas(){
+			return IncidenciaDAO.obtenerActivas();
+		}
 		
 	}

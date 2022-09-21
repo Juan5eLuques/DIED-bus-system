@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import DTO.DTOCamino;
+import DTO.DTOIncidencia;
 import DTO.DTOParada;
 import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonIcono;
@@ -17,6 +18,7 @@ import GUI.Componentes.UbicacionParada;
 import enums.CriterioNodoCiudad;
 import system.clases.DAO.AutobusDAO;
 import system.gestores.GestorCamino;
+import system.gestores.GestorIncidencia;
 import system.gestores.GestorParada;
 
 public class JPMostrarTrayecto extends JPanel{
@@ -70,6 +72,15 @@ public class JPMostrarTrayecto extends JPanel{
 		botonVerTrayecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			trayectoLinea = GestorCamino.trayectoLinea(lineas.getSelectedItem().toString());
+			//Carga una lista de todas las incidencias activas
+			ArrayList<DTOIncidencia> incidenciasActivas= GestorIncidencia.obtenerActivas();
+			//Para cada incidencia, busca si forma parte del trayecto seleccionado
+			//Si forma parte del trayecto, calcula un camino habilitado
+			for (DTOIncidencia unaIncidencia : incidenciasActivas){
+				if (GestorCamino.paradaPresente(trayectoLinea, unaIncidencia.getIdParada())){
+					trayectoLinea = GestorCamino.caminoHabilitado(trayectoLinea, unaIncidencia.getIdParada());
+				}
+			}
 			revalidate();
 			repaint();
 			}
