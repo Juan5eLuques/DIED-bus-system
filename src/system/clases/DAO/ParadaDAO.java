@@ -258,6 +258,8 @@ public class ParadaDAO {
 			st.setBoolean(1, activa);
 			st.setInt(2, nroParada);
 			st.executeUpdate();
+			st.close();
+			con.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -271,7 +273,7 @@ public class ParadaDAO {
 			Connection con = gdb.conec;
 			boolean ret = true;
 			try {
-				PreparedStatement st = con.prepareStatement("SELECT actia FROM aplicacion_bus.parada WHERE id=" + nroParada);
+				PreparedStatement st = con.prepareStatement("SELECT activa FROM aplicacion_bus.parada WHERE id=" + nroParada);
 				ResultSet rs = st.executeQuery();
 					if (rs.next()) {
 						ret = (rs.getBoolean("activa"));
@@ -294,8 +296,6 @@ public class ParadaDAO {
 		ArrayList<Parada> list;
 		/*list = prueba.obtenerParadas();
 		System.out.println(list);*/
-		
-		
 		//Eliminar una parada por ID
 		
 		//prueba.eliminarParada(210);

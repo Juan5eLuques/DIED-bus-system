@@ -36,11 +36,11 @@ public class GestorCamino {
 	public static void eliminarCaminos (ArrayList<DTOCamino> lista){
 
 	}
-	
+
 	public static ArrayList<DTOCamino> caminosQueInicianEnParada (int idParada){
 		return CaminoDAO.obtenerCaminosDesdeParada(idParada);
 	}
-	
+
 	public static ArrayList<DTOCamino> trayectoLinea(int idLinea){
 		try {
 			return CaminoDAO.obtenerCaminosDeUnaLinea(idLinea);
@@ -58,90 +58,91 @@ public class GestorCamino {
 		}
 		return null;
 	}
-	
+
 	public static ArrayList<DTOCamino> obtenerCaminos() {
 		return CaminoDAO.obtenerCaminos();
 	}
-	
+
 	//Devuelve el trayecto que surge de recalcular el camino entre 2 puntos
 	public static ArrayList<DTOCamino> recalcularCamino (DTOCamino caminoOrigen, DTOCamino caminoDestino){
 		ArrayList<DTOCamino> ret = new ArrayList<DTOCamino>();
 		Double menorDuracion = -1.0;
 		ArrayList<ArrayList<DTOCamino>> caminosPosibles = caminosPosibles(caminoOrigen, caminoDestino);
 		for (ArrayList<DTOCamino> unTrayecto : caminosPosibles){
-			double duracionTrayecto = 0;
-			for (DTOCamino unCamino :unTrayecto){
-				duracionTrayecto += unCamino.getDuracion();
-			}
+			double duracionTrayecto = GestorBoleto.calcularDuracion(unTrayecto);
 			if (menorDuracion == -1 || duracionTrayecto < menorDuracion){
 				ret = unTrayecto;
 				menorDuracion = duracionTrayecto;
 			}
 		}
 		return ret; 
-		}
-	
+	}
+
 	//Calcula de forma recursiva todos los caminos desde un camino hasta otro
 	private static ArrayList<ArrayList<DTOCamino>> caminosPosibles(DTOCamino caminoOrigen, DTOCamino caminoDestino){
-		System.out.println("GestorCamino::Calculando posibles caminos desde "+caminoOrigen.getIdOrigen()+"->"+caminoOrigen.getIdDestino()+ " hasta "+ caminoDestino.getIdOrigen()+"->" +caminoDestino.getIdDestino());
 		ArrayList<ArrayList<DTOCamino>> ret = new ArrayList<>();
 		ArrayList<DTOCamino> unCamino = new ArrayList<>();
-		int cantRecorrida = 1;
-		//unCamino.add(caminoOrigen);
-		
-		ArrayList<DTOCamino> conectados = CaminoDAO.obtenerCaminosDesdeParada(caminoOrigen.getIdDestino());
-		filtrarDeshabilitados(conectados);
+
+		ArrayList<DTOCamino> conectados = CaminoDAO.obtenerCaminosDesdeParada(caminoOrigen.getIdOrigen());
+		conectados = filtrarDeshabilitados(conectados);
 		for (DTOCamino camino:conectados) {
-			System.out.println("GestorCamino:: posible siguiente:" + camino.getIdOrigen()+"->"+camino.getIdDestino()); //BORRAR
 			ArrayList<DTOCamino> caminoAux = (ArrayList)unCamino.clone();
 			caminoAux.add(camino);
-			caminosPosibles(camino,caminoDestino,caminoAux, ret, cantRecorrida);
+			caminosPosibles(camino,caminoDestino,caminoAux, ret);
 		}	
 		return ret;
 	}
-	
-	private static void caminosPosibles(DTOCamino caminoOrigen, DTOCamino caminoDestino, ArrayList<DTOCamino> caminoPosible, ArrayList<ArrayList<DTOCamino>> ret, int cantRecorrida) {
-		System.out.println("Distancia recorrida: " + cantRecorrida);//BORRAR
-		System.out.println("GestorCamino:: Analizo camino " +caminoOrigen.getIdOrigen()+"->"+caminoOrigen.getIdDestino());//BORRAR
-		System.out.println("GestorCamino:: El camino destino es: " +caminoDestino.getIdOrigen()+"->"+caminoDestino.getIdDestino());//BORRAR
+
+	private static void caminosPosibles(DTOCamino caminoOrigen, DTOCamino caminoDestino, ArrayList<DTOCamino> caminoPosible, ArrayList<ArrayList<DTOCamino>> ret) {
 
 		if(caminoOrigen.getIdDestino() == caminoDestino.getIdDestino()) {
 			ret.add(caminoPosible);
-			System.out.println("GestorCamino:: Camino posbile!");//BORRAR
-			System.out.println(caminoPosible.get(0).getIdOrigen());//BORRAR
-			for (DTOCamino unCamino:caminoPosible) { //BORRAR
-				System.out.println("->"+unCamino.getIdDestino()); //BORRAR
-			}
 		}
-		else if(cantRecorrida >= 3){
-			
+		else if(caminoPosible.size() > 6){
+
 		}
 		else {
 			ArrayList<DTOCamino> conectados = CaminoDAO.obtenerCaminosDesdeParada(caminoOrigen.getIdDestino());
-			filtrarDeshabilitados(conectados);
+			conectados = filtrarDeshabilitados(conectados);
 			for (DTOCamino camino:conectados) {
-				if (!caminoPosible.contains(camino)) {
-					ArrayList<DTOCamino> caminoAux = (ArrayList)caminoPosible.clone();
-					caminoAux.add(camino);
-					caminosPosibles(camino,caminoDestino,caminoAux, ret, cantRecorrida ++);
-				}	
+				ArrayList<DTOCamino> caminoAux = (ArrayList)caminoPosible.clone();
+				caminoAux.add(camino);
+				caminosPosibles(camino,caminoDestino,caminoAux, ret);	
 			}
 		}
 	}
 
-	private static void filtrarDeshabilitados (ArrayList<DTOCamino> listaCaminos){
-		arrayList = listaCaminos= (ArrayList)listaCaminos.stream().
-									filter(camino -> camino.isActiva() == true).
-									collect(Collectors.toList());
-		
+	private static ArrayList<DTOCamino> filtrarDeshabilitados (ArrayList<DTOCamino> listaCaminos){
+		return (ArrayList<DTOCamino>)listaCaminos.stream().
+				filter(camino -> camino.isActiva()).
+				collect(Collectors.toList());
 	}
-	
+
+	public static boolean paradaPresente(ArrayList<DTOCamino> listaCaminos, int idParada) {
+		boolean ret = false; 
+		if (listaCaminos.get(0).getIdOrigen() == idParada) {
+			ret = true;
+		}
+		else {
+			for (DTOCamino unCamino:listaCaminos) {
+				if (unCamino.getIdDestino() == idParada) {
+					ret = true;
+				}
+			}
+		}
+		return ret; 
+	}
+
 	public static void main(String[] argc) {
 		ArrayList<DTOCamino> trayecto= trayectoLinea(1);
-		ArrayList<ArrayList<DTOCamino>> posibles = caminosPosibles(trayecto.get(5), trayecto.get(6));
-		
-		System.out.println(posibles);
+		ArrayList<DTOCamino> recalculado = recalcularCamino(trayecto.get(5), trayecto.get(6));
+		//		ArrayList<DTOCamino> aux = CaminoDAO.obtenerCaminosDesdeParada(81);
+		//	    aux = filtrarDeshabilitados(aux);
+		//		for (DTOCamino unCamino : aux) {
+		//			System.out.println(unCamino.getIdOrigen()+"-> "+unCamino.getIdDestino());
+		//		}
+		//		System.out.println(aux.size());
 	}	
-	
+
 
 }

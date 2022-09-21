@@ -275,14 +275,40 @@ public class CaminoDAO {
 		}
 		eliminarListaCaminos(listaCaminos);
 	}
-	
-	
+
+	public static void actualizarActivo(int nroParada, boolean activa ) {
+		ArrayList<DTOCamino>listaCaminos = obtenerCaminosQueIncluyenParada(nroParada);
+		
+		try {
+			for (DTOCamino unCamino:listaCaminos){
+				boolean estadoOrigen = ParadaDAO.obtenerEstadoParada(unCamino.getIdOrigen());
+				boolean estadoDestino = ParadaDAO.obtenerEstadoParada(unCamino.getIdDestino());
+				boolean estadoCaminoActual = estadoDestino && estadoOrigen;
+				if (estadoCaminoActual != unCamino.isActiva()){
+					GestorDB gdb = GestorDB.getInstance();
+					Connection con = gdb.conec;
+					PreparedStatement st = con.prepareStatement("UPDATE aplicacion_bus.camino SET activa=? WHERE idorigen = ? and iddestino = ?");
+					st.setBoolean(1, activa);
+					st.setInt(2, unCamino.getIdOrigen());
+					st.setInt(3, unCamino.getIdDestino());
+					st.executeUpdate();
+					st.close();
+					con.close();
+				}
+				
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public static void main(String[] argc) {
 		
 		//Devuelve todos los caminos
 		
 		CaminoDAO prueba = new CaminoDAO();
+		CaminoDAO.actualizarActivo(82, true);
 		/*ArrayList <Camino> lista = new ArrayList<Camino>();
 		lista = prueba.obtenerCaminos();
 		System.out.println(lista);*/
@@ -291,39 +317,15 @@ public class CaminoDAO {
 		for (DTOCamino camino : prueba.obtenerCaminosDeUnaLinea(1)) {
 			System.out.println("IDOrigen: " + camino.getIdOrigen()+"\n" + "IDDestino: " + camino.getIdDestino()+"\n");
 		}*/
-		
-		ArrayList<DTOCamino> caminosDesde = obtenerCaminosDesdeParada(95);
-		
-		for(DTOCamino camino : caminosDesde) {
-			System.out.println("Camino " + caminosDesde.indexOf(camino) + ": " + camino.getIdOrigen() + camino.getIdDestino() );
-		}
+//		
+//		ArrayList<DTOCamino> caminosDesde = obtenerCaminosDesdeParada(95);
+//		
+//		for(DTOCamino camino : caminosDesde) {
+//			System.out.println("Camino " + caminosDesde.indexOf(camino) + ": " + camino.getIdOrigen() + camino.getIdDestino() );
+//		}
 		
 		
 	
 	}
 
-	public static void actualizarActivo(int nroParada, boolean activa ) {
-		GestorDB gdb = GestorDB.getInstance();
-		Connection con = gdb.conec;
-		
-		ArrayList<DTOCamino>listaCaminos = obtenerCaminosQueIncluyenParada(nroParada);
-		for (DTOCamino unCamino:listaCaminos){
-			boolean estadoOrigen = ParadaDAO.obtenerEstadoParada(unCamino.getIdOrigen());
-			boolean estadoDestino = ParadaDAO.obtenerEstadoParada(unCamino.getIdDestino());
-			boolean estadoCaminoActual = estadoDestino && estadoOrigen;
-			if (estadoCaminoActual != unCamino.isActiva()){
-				try {
-					PreparedStatement st = con.prepareStatement("UPDATE aplicacion_bus.camino SET activa=?, WHERE idorigen = ? and iddestino = ?");
-					st.setBoolean(1, activa);
-					st.setInt(2, unCamino.getIdOrigen());
-					st.setInt(3, unCamino.getIdDestino());
-					st.executeUpdate();
-				}
-				catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-	
 }
