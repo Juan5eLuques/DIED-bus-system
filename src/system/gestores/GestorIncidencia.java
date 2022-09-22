@@ -36,5 +36,9 @@ public class GestorIncidencia {
 		public static ArrayList<DTOIncidencia> obtenerActivas(){
 			return IncidenciaDAO.obtenerActivas();
 		}
+
+		public static boolean incidenciaExiste(int idIncidencia){
+			return (IncidenciaDAO.obtenerIncidencia(idIncidencia).getIdParada() != -1);
+		}
 		
 	}

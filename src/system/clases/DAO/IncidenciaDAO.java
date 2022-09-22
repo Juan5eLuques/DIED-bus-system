@@ -44,6 +44,7 @@ public class IncidenciaDAO {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		DTOIncidencia incidencia = new DTOIncidencia();
+		incidencia.setIdIncidencia(-1);
 		try {
 			PreparedStatement st = con.prepareStatement("SELECT * FROM aplicacion_bus.INCIDENCIAS WHERE ID = ?");
 			st.setInt(1, idIncidencia);
