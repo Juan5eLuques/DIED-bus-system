@@ -33,6 +33,10 @@ public class GestorCamino {
 		CaminoDAO.eliminarCaminosConParada(idParada);
 	}
 
+	public static void guardarCamino(DTOCamino camino) {
+		CaminoDAO.guardarCamino(camino);
+	}
+	
 	public static void eliminarCaminos (ArrayList<DTOCamino> lista){
 
 	}

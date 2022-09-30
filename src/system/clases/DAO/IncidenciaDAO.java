@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import DTO.DTOAutobus;
 import DTO.DTOIncidencia;
@@ -69,8 +70,8 @@ public class IncidenciaDAO {
 	}
 
 	public static ArrayList<DTOIncidencia> obtenerActivas(){
-		ArrayList<DTOIncidencia> ret = obtenerTodas();
-		return (ArrayList<DTOIncidencia>)ret.stream().filter(unaIncidencia -> unaIncidencia.isEstadoActual());
+		List<DTOIncidencia> listaActivas = obtenerTodas().stream().filter(incidencia->incidencia.isEstadoActual()==true).toList();
+		return new ArrayList<DTOIncidencia> (listaActivas);
 	}
 	
 	public static void registrarIncidencia(DTOIncidencia nueva) {

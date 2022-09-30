@@ -38,7 +38,12 @@ public class JPVerIncidencias extends JPanel {
 	this.add(scroll);
 	
 	DefaultTableModel model = new DefaultTableModel();
+	
 	JTable tabla = new JTable();
+	
+	
+	tabla.setOpaque(false);
+	scroll.getViewport().setBackground(new Color(17, 43, 60));
 	tabla.setModel(model);
 	model.addColumn("IDIncidencia");
 	model.addColumn("ParadaAfectada");

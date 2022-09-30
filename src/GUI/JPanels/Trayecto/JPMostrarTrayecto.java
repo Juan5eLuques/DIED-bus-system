@@ -77,6 +77,7 @@ public class JPMostrarTrayecto extends JPanel{
 			//Para cada incidencia, busca si forma parte del trayecto seleccionado
 			//Si forma parte del trayecto, calcula un camino habilitado
 			for (DTOIncidencia unaIncidencia : incidenciasActivas){
+				System.out.println(unaIncidencia.getIdIncidencia());
 				if (GestorCamino.paradaPresente(trayectoLinea, unaIncidencia.getIdParada())){
 					trayectoLinea = GestorCamino.caminoHabilitado(trayectoLinea, unaIncidencia.getIdParada());
 				}
@@ -123,6 +124,8 @@ public class JPMostrarTrayecto extends JPanel{
 		}
 	
 		g.setColor(Color.green);
+		
+		
 		
 		for(DTOCamino camino : trayectoLinea) {
 			
