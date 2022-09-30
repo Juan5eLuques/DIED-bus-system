@@ -233,7 +233,7 @@ public class JPBoletoCiudad extends JPanel {
 		}
 		else btnCheck.setEnabled(false);
 
-		for (Integer paradaP : paradasPosibles) { 
+		for (Integer paradaP : paradasPosibles) {
 			nodosCiudad.get(paradaP).setBorder((BorderFactory.createLineBorder(Color.RED)));
 		}
 		

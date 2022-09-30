@@ -23,6 +23,7 @@ import GUI.Componentes.LblText;
 import GUI.Componentes.TextFieldNumbers;
 import GUI.Componentes.TextFieldText;
 import system.gestores.GestorIncidencia;
+import system.gestores.GestorParada;
 
 public class JPRegistrarIncidencia extends JPanel {
 	
@@ -104,9 +105,11 @@ public class JPRegistrarIncidencia extends JPanel {
 					nuevaIncidencia.setFechaInicio(JDfechaInicio.getDate());
 					nuevaIncidencia.setFechaFin(JDFechaFin.getDate());
 					nuevaIncidencia.setDescripcion(TFDescripcion.getText());
-					nuevaIncidencia.setEstadoActual(true);			
+					nuevaIncidencia.setEstadoActual(false);			
 					
 					GestorIncidencia.registrarIncidencia(nuevaIncidencia);
+					GestorParada.cambiarEstadoParada(nuevaIncidencia.getIdParada(), false);
+					JOptionPane.showMessageDialog(null, "Incidencia registrada con éxito", null, JOptionPane.INFORMATION_MESSAGE);
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "La fecha incio debe ser anterior a la fecha fin", "Error", JOptionPane.WARNING_MESSAGE);

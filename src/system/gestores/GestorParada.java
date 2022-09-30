@@ -75,6 +75,10 @@ public class GestorParada {
 	public static DTOParada obtenerDTOParada(int idParada) {
 		return  ParadaDAO.obtenerDTOParada(idParada);
 	}
+	
+	public static void cambiarEstadoParada(int idParada, boolean estado) {
+		ParadaDAO.actualizarActiva(idParada, estado);
+	}
 
 
 

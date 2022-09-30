@@ -18,6 +18,7 @@ import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonIcono;
 import GUI.Componentes.BotonMenu;
 import GUI.JPanels.Boleto.JPBoleto;
+import GUI.JPanels.Menu.JPMenuCamino;
 import GUI.JPanels.Menu.JPMenuIncidencias;
 import GUI.JPanels.Menu.JPMenuLineas;
 import GUI.JPanels.Menu.JPMenuParada;
@@ -93,16 +94,19 @@ public class GUIMenu extends JFrame {
 		
 		BotonMenu btnCiudad = new BotonMenu("Mostrar Ciudad");
 		
+		BotonMenu btnCaminos = new BotonMenu("Caminos");
+		
 		BotonIcono botonBoleto = new BotonIcono("iconBoleto.png");
-		botonBoleto.setBounds(700,455,100,100);
+		botonBoleto.setBounds(700,480,100,100);
 		panelCentral.add(botonBoleto);
 		
 		agregarBoton(130, panelCentral,btnTrayectos);
 		agregarBoton(190, panelCentral,btnLineas);
 		agregarBoton(250, panelCentral,btnParadas);
-		agregarBoton(310, panelCentral,btnIncidencias);
-		agregarBoton(370, panelCentral,btnCiudad);
-		
+		agregarBoton(310, panelCentral,btnCaminos);
+		agregarBoton(370, panelCentral,btnIncidencias);
+		agregarBoton(430, panelCentral,btnCiudad);
+	
 		
 		btnTrayectos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -129,6 +133,15 @@ public class GUIMenu extends JFrame {
 			JPMenuParada menuParada = new JPMenuParada(panelCentral, panelLayout,lblTitulo);
 			panelLayout.add(menuParada, BorderLayout.CENTER);
 			menuParada.setVisible(true);
+			}
+		});
+		
+		btnCaminos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			JPMenuCamino menuCamino = new JPMenuCamino(panelCentral, panelLayout,lblTitulo);
+			panelLayout.add(menuCamino, BorderLayout.CENTER);
+			menuCamino.setVisible(true);
 			}
 		});
 		

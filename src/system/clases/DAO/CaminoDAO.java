@@ -239,6 +239,26 @@ public class CaminoDAO {
 				}
 			}
 
+		public static void guardarCamino(DTOCamino camino){
+			GestorDB gdb = GestorDB.getInstance();
+			Connection con = gdb.conec;
+			try {
+				PreparedStatement st;
+				st = con.prepareStatement("INSERT INTO APLICACION_BUS.CAMINO (idOrigen,idDestino,distancia,duracion, activa) values (?,?,?,?,?)");
+					st.setInt(1, camino.getIdOrigen());
+					st.setInt(2, camino.getIdDestino());
+					st.setDouble(3, camino.getDistancia());
+					st.setDouble(4, camino.getDuracion());
+					st.setBoolean(5, true);
+					st.executeUpdate();
+					st.close();
+			}
+				catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		
 			public static void eliminarCamino(DTOCamino unCamino) {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
