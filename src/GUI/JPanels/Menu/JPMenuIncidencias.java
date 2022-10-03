@@ -11,6 +11,7 @@ import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonMenu;
 import GUI.JPanels.Linea.JPEliminarLinea;
 import GUI.JPanels.Incidencia.JPRegistrarIncidencia;
+import GUI.JPanels.Incidencia.JPResolverIncidencia;
 import GUI.JPanels.Incidencia.JPVerIncidencias;
 
 public class JPMenuIncidencias extends JPanel {
@@ -29,10 +30,10 @@ public class JPMenuIncidencias extends JPanel {
 		this.setLayout(null);
 		BotonMenu btnVerIncidencias = new BotonMenu("Ver Incidencias");
 		BotonMenu btnRegistrarIncidencias = new BotonMenu("Registrar Incidencia");
-		BotonMenu btnEliminarIncidencia = new BotonMenu("Eliminar Incidencia");
+		BotonMenu btnResolverIncidencia = new BotonMenu("Resolver Incidencia");
 		agregarBoton(130, this,btnVerIncidencias);
 		agregarBoton(190, this,btnRegistrarIncidencias);
-		agregarBoton(250, this,btnEliminarIncidencia);
+		agregarBoton(250, this,btnResolverIncidencia);
 		
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -58,6 +59,16 @@ public class JPMenuIncidencias extends JPanel {
 				desabilitarMenu();
 				lblTitulo.setText("Registrar incidencia");
 				panelRegistrarIncidencia.setVisible(true);     
+			}
+		});
+		
+		btnResolverIncidencia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JPResolverIncidencia panelResolver = new JPResolverIncidencia(getPanel(), lblTitulo);
+				panelContent.add(panelResolver);
+				desabilitarMenu();
+				lblTitulo.setText("Registrar incidencia");
+				panelResolver.setVisible(true);     
 			}
 		});
 		

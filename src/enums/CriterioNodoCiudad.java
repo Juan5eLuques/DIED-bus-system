@@ -1,5 +1,5 @@
 package enums;
 
 public enum CriterioNodoCiudad {
-	ACTIONSETDESTINO, INFO, SETTRAYECTO;
+	ACTIONSETDESTINO, INFO, SETTRAYECTO,ELIMINAR;
 }

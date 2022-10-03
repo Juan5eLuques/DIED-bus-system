@@ -25,6 +25,7 @@ import GUI.JPanels.Menu.JPMenuParada;
 import GUI.JPanels.Menu.JPMenuTrayecto;
 import GUI.JPanels.Menu.JPMostrarCiudad;
 import GUI.JPanels.Trayecto.JPBoletoCiudad;
+import GUI.JPanels.Trayecto.JPMostrarTrayecto;
 
 
 public class GUIMenu extends JFrame {
@@ -111,7 +112,7 @@ public class GUIMenu extends JFrame {
 		btnTrayectos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
-			JPMenuTrayecto menuParada = new JPMenuTrayecto(panelCentral, panelLayout,lblTitulo);
+			JPMostrarTrayecto menuParada = new JPMostrarTrayecto(panelCentral,lblTitulo);
 			panelCentral.setVisible(false);
 			panelLayout.add(menuParada, BorderLayout.CENTER);
 			menuParada.setVisible(true);

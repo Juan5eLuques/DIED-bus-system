@@ -38,6 +38,7 @@ import system.clases.InformacionCamino;
 import system.clases.Parada;
 import system.gestores.GestorBoleto;
 import system.gestores.GestorCamino;
+import system.gestores.GestorGUI;
 import system.gestores.GestorParada;
 
 public class JPBoletoCiudad extends JPanel {
@@ -261,7 +262,7 @@ public class JPBoletoCiudad extends JPanel {
 		UbicacionParada U_Origen = new UbicacionParada(origen);
 		UbicacionParada U_Destino = new UbicacionParada(destino);
 		
-		g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+		GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.black);
 		}
 		
 		g.setColor(Color.green);
@@ -293,7 +294,7 @@ public class JPBoletoCiudad extends JPanel {
 				UbicacionParada U_Origen = new UbicacionParada(origen);
 				UbicacionParada U_Destino = new UbicacionParada(destino);
 				
-				g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+				GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.green);
 			
 				}
 			}
@@ -322,7 +323,7 @@ public class JPBoletoCiudad extends JPanel {
 				UbicacionParada U_Origen = new UbicacionParada(origen);
 				UbicacionParada U_Destino = new UbicacionParada(destino);
 			
-				g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+				GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.green);
 				}
 			}
 			
@@ -352,7 +353,7 @@ public class JPBoletoCiudad extends JPanel {
 							UbicacionParada U_Origen = new UbicacionParada(origen);
 							UbicacionParada U_Destino = new UbicacionParada(destino);
 						
-							g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+							GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.green);
 					
 						
 							}

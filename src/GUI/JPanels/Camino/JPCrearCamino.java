@@ -22,6 +22,7 @@ import GUI.Componentes.BotonNodo;
 import GUI.Componentes.TextFieldNumbers;
 import GUI.Componentes.UbicacionParada;
 import system.gestores.GestorCamino;
+import system.gestores.GestorGUI;
 import system.gestores.GestorParada;
 
 
@@ -128,9 +129,7 @@ public class JPCrearCamino extends JPanel{
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		for(DTOCamino camino : listaCaminos) {
-			
-			g.setColor(Color.black);	
+		for(DTOCamino camino : listaCaminos) {	
 	
 			DTOParada IDOrigen = new DTOParada();
 			DTOParada IDDestino = new DTOParada();
@@ -148,7 +147,7 @@ public class JPCrearCamino extends JPanel{
 			UbicacionParada U_Origen = new UbicacionParada(origen);
 			UbicacionParada U_Destino = new UbicacionParada(destino);
 			
-			g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+			GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.black);
 		
 			}
 		
@@ -172,7 +171,7 @@ public class JPCrearCamino extends JPanel{
 				UbicacionParada U_Origen = new UbicacionParada(origen);
 				UbicacionParada U_Destino = new UbicacionParada(destino);
 				
-				g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+				GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.green);
 			}
 	}
 
