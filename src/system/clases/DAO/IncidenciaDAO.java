@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import DTO.DTOAutobus;
 import DTO.DTOIncidencia;
@@ -28,7 +29,7 @@ public class IncidenciaDAO {
 				incidencia.setFechaInicio(rs.getDate("inicio"));
 				incidencia.setFechaFin(rs.getDate("fin"));
 				incidencia.setDescripcion(rs.getString("descripcion"));
-				incidencia.setEstadoActual(rs.getBoolean("resuelta"));
+				incidencia.setResuelta(rs.getBoolean("resuelta"));
 				incidencias.add(incidencia);
 			}
 				rs.close();
@@ -57,7 +58,7 @@ public class IncidenciaDAO {
 				incidencia.setFechaInicio(rs.getDate("inicio"));
 				incidencia.setFechaFin(rs.getDate("fin"));
 				incidencia.setDescripcion(rs.getString("descripcion"));
-				incidencia.setEstadoActual(rs.getBoolean("resuelta"));
+				incidencia.setResuelta(rs.getBoolean("resuelta"));
 			}
 				rs.close();
 				con.close();
@@ -70,7 +71,7 @@ public class IncidenciaDAO {
 	}
 
 	public static ArrayList<DTOIncidencia> obtenerActivas(){
-		List<DTOIncidencia> listaActivas = obtenerTodas().stream().filter(incidencia->incidencia.isEstadoActual()==true).toList();
+		List<DTOIncidencia> listaActivas = obtenerTodas().stream().filter(incidencia->!incidencia.isResuelta()).collect(Collectors.toList());
 		return new ArrayList<DTOIncidencia> (listaActivas);
 	}
 	
@@ -88,7 +89,7 @@ public class IncidenciaDAO {
 			st.setDate(3, fechaInicio);
 			st.setDate(4, fechaFin);
 			st.setString(5, nueva.getDescripcion());
-			st.setBoolean(6, nueva.isEstadoActual());
+			st.setBoolean(6, nueva.isResuelta());
 			st.executeUpdate();
 			st.close();
 			con.close();

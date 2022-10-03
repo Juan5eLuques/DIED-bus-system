@@ -8,7 +8,7 @@ public class DTOIncidencia {
 	private Date fechaInicio;
 	private Date fechaFin;
 	private String descripcion;
-	private boolean estadoActual;
+	private boolean resuelta;
 	
 	public Date getFechaInicio() {
 		return fechaInicio;
@@ -28,11 +28,11 @@ public class DTOIncidencia {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public boolean isEstadoActual() {
-		return estadoActual;
+	public boolean isResuelta() {
+		return resuelta;
 	}
-	public void setEstadoActual(boolean estadoActual) {
-		this.estadoActual = estadoActual;
+	public void setResuelta(boolean resuelta) {
+		this.resuelta = resuelta;
 	}
 	public int getIdIncidencia() {
 		return idIncidencia;

@@ -28,7 +28,7 @@ public class GestorIncidencia {
 		public static void registrarIncidencia(DTOIncidencia nueva) {
 			IncidenciaDAO.registrarIncidencia(nueva);
 
-			if (nueva.isEstadoActual()){
+			if (!nueva.isResuelta()){
 				ParadaDAO.actualizarActiva(nueva.getIdParada(),false);
 			}
 		}

@@ -61,7 +61,7 @@ public class JPVerIncidencias extends JPanel {
 		matrizInfo[2] = unaIncidencia.getFechaInicio();
 		matrizInfo[3] = unaIncidencia.getFechaFin();
 		matrizInfo[4] = unaIncidencia.getDescripcion();
-		matrizInfo[5] = unaIncidencia.isEstadoActual();
+		matrizInfo[5] = unaIncidencia.isResuelta();
 		
 	
 		

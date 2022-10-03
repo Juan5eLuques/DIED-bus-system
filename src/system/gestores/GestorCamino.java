@@ -1,5 +1,9 @@
 package system.gestores;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Polygon;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -116,34 +120,41 @@ public class GestorCamino {
 		}
 	}
 	//Devuelve un camino que esquiva la incidencia, uniendo la primer parte habilitada, el desvio calculado y la segunda parte habilitada
-	public static ArrayList<DTOCamino> caminoHabilitado (ArrayList<DTOCamino> trayectoRoto, int idParadaRota){
-		ArrayList<DTOCamino> primerParte = new ArrayList<>(); //Guarda la primer parte habilitada
-		ArrayList<DTOCamino> segundaParte = new ArrayList<>(); //Guarda la segunda parte habilitada
-		ArrayList<DTOCamino> caminosInactivos = new ArrayList<>(); //Guarda los caminos que hay que reemplazar
-		ArrayList<DTOCamino> ret = new ArrayList<>(); //Variable de retorno
+	public static ArrayList<ArrayList<DTOCamino>> caminoHabilitado (ArrayList<DTOCamino> trayectoRoto, int idParadaRota){
+		ArrayList<ArrayList<DTOCamino>> ret = new ArrayList<>(); //Variable de retorno
+		ArrayList<DTOCamino> caminoHabilitado = new ArrayList<DTOCamino> ();
 		//Separa el camino en las dos partes habilitadas e identifica las paradas inactivas por la incidencia
-		caminoSplit(trayectoRoto, primerParte, segundaParte, idParadaRota, caminosInactivos);
-
+		ArrayList<ArrayList<DTOCamino>> partesCamino = caminoSplit(trayectoRoto, idParadaRota);
+		ArrayList<DTOCamino> primerParte = partesCamino.get(0); //Guarda la primer parte habilitada
+		ArrayList<DTOCamino> segundaParte = partesCamino.get(1); //Guarda la segunda parte habilitada
+		ArrayList<DTOCamino> caminosInactivos = partesCamino.get(2); //Guarda los caminos que hay que reemplazar
+		System.out.println("GestorCamino : tamaño completo: " + trayectoRoto.size());
+		System.out.println("GestorCamino : tamaño primerParte: " + primerParte.size());
+		System.out.println("GestorCamino : tamaño segundaParte: " + segundaParte.size());
+		System.out.println("GestorCamino : tamaño ParteInactiva: " + caminosInactivos.size());
 		ArrayList<DTOCamino> desvio = recalcularCamino(caminosInactivos.get(0), caminosInactivos.get(1));
 
-		ret.addAll(primerParte);
-		ret.addAll(desvio);
-		ret.addAll(segundaParte);
+		caminoHabilitado.addAll(primerParte);
+		caminoHabilitado.addAll(desvio);
+		caminoHabilitado.addAll(segundaParte);
 
+		//Devuelve en pos 0 el camino recalculado
+		//Devuelve en pos 1 el camino que fue reemplazado
+		ret.add(caminoHabilitado);
+		ret.add(caminosInactivos);
 
 		return ret;
 	}
 
 	//Dado el trayecto y la parada inactiva, devuelve las dos partes del camino activas e identifica los caminos inactivos
-	public static void caminoSplit (ArrayList<DTOCamino> caminoCompleto, 
-	ArrayList<DTOCamino> primerParte, ArrayList<DTOCamino> segundaParte, int idParadaRota,
-	ArrayList<DTOCamino> caminosInactivos){
-		primerParte.clear();
-		segundaParte.clear();
-		caminosInactivos.clear();
+	public static ArrayList<ArrayList<DTOCamino>> caminoSplit (ArrayList<DTOCamino> caminoCompleto,  int idParadaRota){
+		ArrayList<ArrayList<DTOCamino>> ret = new  ArrayList<ArrayList<DTOCamino>>();
+		ArrayList<DTOCamino> primerParte = new ArrayList<DTOCamino>();
+		ArrayList<DTOCamino> segundaParte = new ArrayList<DTOCamino>();
+		ArrayList<DTOCamino> caminosInactivos = new ArrayList<DTOCamino>();
 		boolean splitFlag = false;
 		for (DTOCamino unCamino: caminoCompleto){
-			if(unCamino.getIdOrigen() != idParadaRota || unCamino.getIdDestino() != idParadaRota){
+			if(unCamino.getIdOrigen() != idParadaRota && unCamino.getIdDestino() != idParadaRota){
 				if(splitFlag){
 					segundaParte.add(unCamino);
 				}
@@ -156,6 +167,10 @@ public class GestorCamino {
 				splitFlag = true;
 			}
 		}
+		ret.add(primerParte);
+		ret.add(segundaParte);
+		ret.add(caminosInactivos);
+		return ret;
 	}
 
 	private static ArrayList<DTOCamino> filtrarDeshabilitados (ArrayList<DTOCamino> listaCaminos){
@@ -181,7 +196,7 @@ public class GestorCamino {
 
 	public static void main(String[] argc) {
 		ArrayList<DTOCamino> trayecto= trayectoLinea(1);
-		ArrayList<DTOCamino> recalculado = recalcularCamino(trayecto.get(5), trayecto.get(6));
+		//ArrayList<DTOCamino> recalculado = recalcularCamino(trayecto.get(5), trayecto.get(6));
 		//		ArrayList<DTOCamino> aux = CaminoDAO.obtenerCaminosDesdeParada(81);
 		//	    aux = filtrarDeshabilitados(aux);
 		//		for (DTOCamino unCamino : aux) {
