@@ -105,7 +105,7 @@ public class JPRegistrarIncidencia extends JPanel {
 					nuevaIncidencia.setFechaInicio(JDfechaInicio.getDate());
 					nuevaIncidencia.setFechaFin(JDFechaFin.getDate());
 					nuevaIncidencia.setDescripcion(TFDescripcion.getText());
-					nuevaIncidencia.setEstadoActual(false);			
+					nuevaIncidencia.setResuelta(false);			
 					
 					GestorIncidencia.registrarIncidencia(nuevaIncidencia);
 					GestorParada.cambiarEstadoParada(nuevaIncidencia.getIdParada(), false);

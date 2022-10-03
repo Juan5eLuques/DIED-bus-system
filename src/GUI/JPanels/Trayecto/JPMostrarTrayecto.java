@@ -18,6 +18,7 @@ import GUI.Componentes.UbicacionParada;
 import enums.CriterioNodoCiudad;
 import system.clases.DAO.AutobusDAO;
 import system.gestores.GestorCamino;
+import system.gestores.GestorGUI;
 import system.gestores.GestorIncidencia;
 import system.gestores.GestorParada;
 
@@ -27,6 +28,7 @@ public class JPMostrarTrayecto extends JPanel{
 	ArrayList<DTOCamino> listaCaminos;
 	ArrayList<String> lineasArray;
 	ArrayList<DTOCamino> trayectoLinea = new ArrayList<DTOCamino>();
+	ArrayList<DTOCamino> trayectoReemplazado = new ArrayList<DTOCamino> ();
 	
 	private static final long serialVersionUID = 1L;
 
@@ -77,9 +79,10 @@ public class JPMostrarTrayecto extends JPanel{
 			//Para cada incidencia, busca si forma parte del trayecto seleccionado
 			//Si forma parte del trayecto, calcula un camino habilitado
 			for (DTOIncidencia unaIncidencia : incidenciasActivas){
-				System.out.println(unaIncidencia.getIdIncidencia());
-				if (GestorCamino.paradaPresente(trayectoLinea, unaIncidencia.getIdParada())){
-					trayectoLinea = GestorCamino.caminoHabilitado(trayectoLinea, unaIncidencia.getIdParada());
+				if (GestorCamino.paradaPresente(trayectoLinea, unaIncidencia.getIdParada())){			
+					ArrayList<ArrayList<DTOCamino>> caminosAuxiliares =  GestorCamino.caminoHabilitado(trayectoLinea, unaIncidencia.getIdParada());
+					trayectoLinea = caminosAuxiliares.get(0);
+					trayectoReemplazado = caminosAuxiliares.get(1);
 				}
 			}
 			revalidate();
@@ -100,7 +103,6 @@ public class JPMostrarTrayecto extends JPanel{
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		g.setColor(Color.black);
 		
 		for(DTOCamino camino : listaCaminos) {
 		
@@ -120,12 +122,10 @@ public class JPMostrarTrayecto extends JPanel{
 		UbicacionParada U_Origen = new UbicacionParada(origen);
 		UbicacionParada U_Destino = new UbicacionParada(destino);
 		
-		g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+		GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.black);
+		//g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
 		}
 	
-		g.setColor(Color.green);
-		
-		
 		
 		for(DTOCamino camino : trayectoLinea) {
 			
@@ -145,7 +145,31 @@ public class JPMostrarTrayecto extends JPanel{
 			UbicacionParada U_Origen = new UbicacionParada(origen);
 			UbicacionParada U_Destino = new UbicacionParada(destino);
 			
-			g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+			GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.green);
+			//g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+			}
+		
+		
+		for(DTOCamino camino : trayectoReemplazado) {
+			
+			DTOParada IDOrigen = new DTOParada();
+			DTOParada IDDestino = new DTOParada();
+			DTOParada origen,destino;
+			
+			IDOrigen.setNroParada(camino.getIdOrigen());
+			IDDestino.setNroParada(camino.getIdDestino());
+		
+			int posO = listaParadas.indexOf(IDOrigen);
+			int posD = listaParadas.indexOf(IDDestino);
+			
+			origen = listaParadas.get(posO);
+			destino = listaParadas.get(posD);
+			
+			UbicacionParada U_Origen = new UbicacionParada(origen);
+			UbicacionParada U_Destino = new UbicacionParada(destino);
+			
+			GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.red);
+			//g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
 			}
 		
 	}
