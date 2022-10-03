@@ -104,7 +104,7 @@ public class IncidenciaDAO {
 		Connection con = gdb.conec;
 		
 		try {
-			PreparedStatement st = con.prepareStatement("UPDATE aplicacion_bus.incidencia SET resuelta=? WHERE id = ?");
+			PreparedStatement st = con.prepareStatement("UPDATE aplicacion_bus.incidencias SET resuelta=? WHERE id = ?");
 			st.setBoolean(1, resuelta);
 			st.setInt(2, idIncidencia);
 			st.executeUpdate();

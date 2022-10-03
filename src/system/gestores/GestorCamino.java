@@ -49,6 +49,10 @@ public class GestorCamino {
 		return CaminoDAO.obtenerCaminosDesdeParada(idParada);
 	}
 
+	public static void eliminarCamino(DTOCamino camino) {
+		CaminoDAO.eliminarCamino(camino);
+	}
+	
 	public static ArrayList<DTOCamino> trayectoLinea(int idLinea){
 		try {
 			return CaminoDAO.obtenerCaminosDeUnaLinea(idLinea);
@@ -128,10 +132,6 @@ public class GestorCamino {
 		ArrayList<DTOCamino> primerParte = partesCamino.get(0); //Guarda la primer parte habilitada
 		ArrayList<DTOCamino> segundaParte = partesCamino.get(1); //Guarda la segunda parte habilitada
 		ArrayList<DTOCamino> caminosInactivos = partesCamino.get(2); //Guarda los caminos que hay que reemplazar
-		System.out.println("GestorCamino : tamaño completo: " + trayectoRoto.size());
-		System.out.println("GestorCamino : tamaño primerParte: " + primerParte.size());
-		System.out.println("GestorCamino : tamaño segundaParte: " + segundaParte.size());
-		System.out.println("GestorCamino : tamaño ParteInactiva: " + caminosInactivos.size());
 		ArrayList<DTOCamino> desvio = recalcularCamino(caminosInactivos.get(0), caminosInactivos.get(1));
 
 		caminoHabilitado.addAll(primerParte);

@@ -25,6 +25,10 @@ public class GestorIncidencia {
 			return IncidenciaDAO.obtenerTodas();
 		}
 		
+		public static DTOIncidencia obtenerIncidencia(int idIncidencia) {
+			return IncidenciaDAO.obtenerIncidencia(idIncidencia);
+		}
+		
 		public static void registrarIncidencia(DTOIncidencia nueva) {
 			IncidenciaDAO.registrarIncidencia(nueva);
 
@@ -39,6 +43,10 @@ public class GestorIncidencia {
 
 		public static boolean incidenciaExiste(int idIncidencia){
 			return (IncidenciaDAO.obtenerIncidencia(idIncidencia).getIdParada() != -1);
+		}
+		
+		public static void solucionarIncidencia(int idIncidencia) {
+			IncidenciaDAO.cambiarEstado(idIncidencia, true);
 		}
 		
 	}

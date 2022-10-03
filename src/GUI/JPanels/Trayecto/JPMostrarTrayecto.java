@@ -34,7 +34,24 @@ public class JPMostrarTrayecto extends JPanel{
 
 	public JPMostrarTrayecto(JPanel panelManipular, JLabel lblTitulo) {
 		
+		lblTitulo.setText("VER TRAYECTOS");
+		
 		lineasArray = AutobusDAO.obtenerNombresDeLineas();
+		
+		JComboBox lineas = new JComboBox(lineasArray.toArray());
+		
+		trayectoLinea = GestorCamino.trayectoLinea(lineas.getSelectedItem().toString());
+		
+		ArrayList<DTOIncidencia> incidenciasActivas= GestorIncidencia.obtenerActivas();
+		
+		for (DTOIncidencia unaIncidencia : incidenciasActivas){
+			if (GestorCamino.paradaPresente(trayectoLinea, unaIncidencia.getIdParada())){
+				ArrayList<ArrayList<DTOCamino>> caminosAuxiliares =  GestorCamino.caminoHabilitado(trayectoLinea, unaIncidencia.getIdParada());
+				trayectoLinea = caminosAuxiliares.get(0);
+				trayectoReemplazado = caminosAuxiliares.get(1);
+			}
+		}
+			
 		panelManipular.setVisible(false);
 		BotonAtras boton = new BotonAtras(true);
 		BotonIcono botonVerTrayecto = new BotonIcono("iconCaminoFrame.png");
@@ -43,11 +60,8 @@ public class JPMostrarTrayecto extends JPanel{
 		lblHelper.setBounds(50,350,100,30);
 		lblHelper.setForeground(Color.white);
 		lblHelper.setText("Ver trayecto");
-		JComboBox lineas = new JComboBox(lineasArray.toArray());
 		lineas.setForeground(Color.black);
 		lineas.setBounds(30,200,120,30);
-		
-		trayectoLinea = GestorCamino.trayectoLinea(lineas.getSelectedItem().toString());
 		
 		this.add(boton);
 		this.setBackground(new Color(32, 83, 117));
@@ -56,6 +70,7 @@ public class JPMostrarTrayecto extends JPanel{
 		
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblTitulo.setText("SISTEMA AUTOBUS");
 				panelManipular.setVisible(true);
 				desabilitarMenu();
 			}
@@ -73,13 +88,14 @@ public class JPMostrarTrayecto extends JPanel{
 		
 		botonVerTrayecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			trayectoReemplazado = new ArrayList<DTOCamino>();
 			trayectoLinea = GestorCamino.trayectoLinea(lineas.getSelectedItem().toString());
 			//Carga una lista de todas las incidencias activas
 			ArrayList<DTOIncidencia> incidenciasActivas= GestorIncidencia.obtenerActivas();
 			//Para cada incidencia, busca si forma parte del trayecto seleccionado
 			//Si forma parte del trayecto, calcula un camino habilitado
 			for (DTOIncidencia unaIncidencia : incidenciasActivas){
-				if (GestorCamino.paradaPresente(trayectoLinea, unaIncidencia.getIdParada())){			
+				if (GestorCamino.paradaPresente(trayectoLinea, unaIncidencia.getIdParada())){	
 					ArrayList<ArrayList<DTOCamino>> caminosAuxiliares =  GestorCamino.caminoHabilitado(trayectoLinea, unaIncidencia.getIdParada());
 					trayectoLinea = caminosAuxiliares.get(0);
 					trayectoReemplazado = caminosAuxiliares.get(1);
@@ -102,8 +118,7 @@ public class JPMostrarTrayecto extends JPanel{
 
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
-		
+	
 		for(DTOCamino camino : listaCaminos) {
 		
 		DTOParada IDOrigen = new DTOParada();
@@ -123,7 +138,7 @@ public class JPMostrarTrayecto extends JPanel{
 		UbicacionParada U_Destino = new UbicacionParada(destino);
 		
 		GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.black);
-		//g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+		
 		}
 	
 		
@@ -146,7 +161,7 @@ public class JPMostrarTrayecto extends JPanel{
 			UbicacionParada U_Destino = new UbicacionParada(destino);
 			
 			GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.green);
-			//g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+			
 			}
 		
 		
@@ -169,7 +184,7 @@ public class JPMostrarTrayecto extends JPanel{
 			UbicacionParada U_Destino = new UbicacionParada(destino);
 			
 			GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.red);
-			//g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+			
 			}
 		
 	}

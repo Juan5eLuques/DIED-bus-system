@@ -24,7 +24,7 @@ public class JPVerIncidencias extends JPanel {
 	
 	public JPVerIncidencias(JPanel panelManipular, JLabel lblTitulo) {
 	
-	lblTitulo.setText("Listado de incidencias");
+	lblTitulo.setText("VER INCIDENCIAS");
 	
 	BotonAtras boton = new BotonAtras(true);
 	this.add(boton);

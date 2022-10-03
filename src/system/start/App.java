@@ -14,7 +14,6 @@ public class App {
 	public static void main( String[] args ){
 
 		try {
-
 			GestorDB gdb = GestorDB.getInstance();
 			Connection con = gdb.crearConexion();
 			JOptionPane.showMessageDialog(null, "Base de datos conectada.", "Conexión establecida", JOptionPane.INFORMATION_MESSAGE);

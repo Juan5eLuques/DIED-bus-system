@@ -17,6 +17,7 @@ import GUI.Componentes.BotonNodoTrayecto;
 import GUI.Componentes.UbicacionParada;
 import GUI.JPanels.Linea.JPAgregarLinea;
 import system.gestores.GestorCamino;
+import system.gestores.GestorGUI;
 import system.gestores.GestorParada;
 
 public class JPGuardarTrayecto extends JPanel {
@@ -116,6 +117,7 @@ public class JPGuardarTrayecto extends JPanel {
 	}
 
 	protected void paintComponent(Graphics g) {
+		
 		super.paintComponent(g);
 		
 		g.setColor(Color.black);
@@ -138,13 +140,14 @@ public class JPGuardarTrayecto extends JPanel {
 		UbicacionParada U_Origen = new UbicacionParada(origen);
 		UbicacionParada U_Destino = new UbicacionParada(destino);
 		
-		g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+		GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.black);
+		
 		}
 		
 		
 		for(DTOCamino camino : trayectoLinea) {
 			
-			g.setColor(Color.green);
+			
 			DTOParada IDOrigen = new DTOParada();
 			DTOParada IDDestino = new DTOParada();
 			DTOParada origen,destino;
@@ -161,7 +164,7 @@ public class JPGuardarTrayecto extends JPanel {
 			UbicacionParada U_Origen = new UbicacionParada(origen);
 			UbicacionParada U_Destino = new UbicacionParada(destino);
 			
-			g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+			GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.green);
 			}
 		
 			if (listaParadasTrayecto.size()!=0) {

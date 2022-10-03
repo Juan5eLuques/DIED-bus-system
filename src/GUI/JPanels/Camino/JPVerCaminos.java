@@ -24,7 +24,6 @@ public class JPVerCaminos extends JPanel{
 	ArrayList<DTOCamino> caminos = GestorCamino.obtenerCaminos();
 	
 	public JPVerCaminos(JPanel panelManipular, JLabel lblTitulo) {
-
 		
 		JScrollPane scroll = new JScrollPane();
 		scroll.setBounds(50,150,800,350);

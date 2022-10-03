@@ -35,11 +35,12 @@ public class BotonNodoTrayecto extends JLabel {
 		this.setBackground(Color.white);
 		this.setOpaque(true);
 		int calle = Integer.parseInt(parada.getCalle().substring(6));
+		
 		if(calle%2==0) {
-			this.setBounds((calle*25)+175,(((parada.getNroCalle()/10)*5)+20),20,20);
+			this.setBounds((calle*25)+190,(((parada.getNroCalle()/10)*5)+20),20,20);
 		}
 		else {
-			this.setBounds((((parada.getNroCalle()/10)*5)+150),(calle*25)+20,20,20);
+			this.setBounds((((parada.getNroCalle()/10)*5)+165),(calle*25)+20,20,20);
 		}
 		
 		this.addMouseListener(new MouseListener() {

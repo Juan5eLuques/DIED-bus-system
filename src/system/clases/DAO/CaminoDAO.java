@@ -259,18 +259,16 @@ public class CaminoDAO {
 				}
 			}
 		
-			public static void eliminarCamino(DTOCamino unCamino) {
+		public static void eliminarCamino(DTOCamino unCamino) {
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;
 		try {
 			PreparedStatement st = con.prepareStatement("DELETE FROM aplicacion_bus.camino WHERE idorigen=? AND iddestino=?");
 			st.setInt(1,unCamino.getIdOrigen());
 			st.setInt(2,unCamino.getIdDestino());
-			if(st.execute()!=true) {
-				JOptionPane.showMessageDialog(null, "Ocurrion un error, la <Parada> no existe.", "Error", JOptionPane.WARNING_MESSAGE);
-				st.close();
-				con.close();
-			}
+			st.executeUpdate();
+			st.close();
+			con.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

@@ -31,7 +31,7 @@ public class JPVerParadas extends JPanel {
 	
 	public JPVerParadas(JPanel panelManipular, JLabel lblTitulo) {
 	
-		lblTitulo.setText("Listado de paradas");
+		lblTitulo.setText("VER PARADAS");
 		
 		BotonAtras boton = new BotonAtras(true);
 		this.add(boton);
