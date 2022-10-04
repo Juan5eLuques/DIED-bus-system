@@ -28,7 +28,7 @@ public class JPMostrarTrayecto extends JPanel{
 	ArrayList<DTOCamino> listaCaminos;
 	ArrayList<String> lineasArray;
 	ArrayList<DTOCamino> trayectoLinea = new ArrayList<DTOCamino>();
-	ArrayList<DTOCamino> trayectoReemplazado = new ArrayList<DTOCamino> ();
+	ArrayList<ArrayList<DTOCamino>> trayectoReemplazado = new ArrayList<ArrayList<DTOCamino>> ();
 	
 	private static final long serialVersionUID = 1L;
 
@@ -48,7 +48,7 @@ public class JPMostrarTrayecto extends JPanel{
 			if (GestorCamino.paradaPresente(trayectoLinea, unaIncidencia.getIdParada())){
 				ArrayList<ArrayList<DTOCamino>> caminosAuxiliares =  GestorCamino.caminoHabilitado(trayectoLinea, unaIncidencia.getIdParada());
 				trayectoLinea = caminosAuxiliares.get(0);
-				trayectoReemplazado = caminosAuxiliares.get(1);
+				trayectoReemplazado.add(caminosAuxiliares.get(1));
 			}
 		}
 			
@@ -88,7 +88,7 @@ public class JPMostrarTrayecto extends JPanel{
 		
 		botonVerTrayecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			trayectoReemplazado = new ArrayList<DTOCamino>();
+			trayectoReemplazado.clear();
 			trayectoLinea = GestorCamino.trayectoLinea(lineas.getSelectedItem().toString());
 			//Carga una lista de todas las incidencias activas
 			ArrayList<DTOIncidencia> incidenciasActivas= GestorIncidencia.obtenerActivas();
@@ -98,7 +98,7 @@ public class JPMostrarTrayecto extends JPanel{
 				if (GestorCamino.paradaPresente(trayectoLinea, unaIncidencia.getIdParada())){	
 					ArrayList<ArrayList<DTOCamino>> caminosAuxiliares =  GestorCamino.caminoHabilitado(trayectoLinea, unaIncidencia.getIdParada());
 					trayectoLinea = caminosAuxiliares.get(0);
-					trayectoReemplazado = caminosAuxiliares.get(1);
+					trayectoReemplazado.add(caminosAuxiliares.get(1));
 				}
 			}
 			revalidate();
@@ -165,7 +165,8 @@ public class JPMostrarTrayecto extends JPanel{
 			}
 		
 		
-		for(DTOCamino camino : trayectoReemplazado) {
+		for(ArrayList<DTOCamino> trayecto : trayectoReemplazado) {
+			for (DTOcamino camino : trayecto){
 			
 			DTOParada IDOrigen = new DTOParada();
 			DTOParada IDDestino = new DTOParada();
@@ -186,7 +187,7 @@ public class JPMostrarTrayecto extends JPanel{
 			GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.red);
 			
 			}
-		
+		}
 	}
 	
 }
