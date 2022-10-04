@@ -132,11 +132,19 @@ public class GestorCamino {
 		ArrayList<DTOCamino> primerParte = partesCamino.get(0); //Guarda la primer parte habilitada
 		ArrayList<DTOCamino> segundaParte = partesCamino.get(1); //Guarda la segunda parte habilitada
 		ArrayList<DTOCamino> caminosInactivos = partesCamino.get(2); //Guarda los caminos que hay que reemplazar
+		if (primerParte.size() == 0){
+			caminoHabilitado = segundaParte;
+		}
+		else if (segundaParte.size() == 0){
+			caminoHabilitado = primerParte;
+		}
+		else{
 		ArrayList<DTOCamino> desvio = recalcularCamino(caminosInactivos.get(0), caminosInactivos.get(1));
 
 		caminoHabilitado.addAll(primerParte);
 		caminoHabilitado.addAll(desvio);
 		caminoHabilitado.addAll(segundaParte);
+		}
 
 		//Devuelve en pos 0 el camino recalculado
 		//Devuelve en pos 1 el camino que fue reemplazado
