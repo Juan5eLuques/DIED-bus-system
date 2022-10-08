@@ -260,7 +260,6 @@ public class AutobusDAO {
 	
 	public static void guardarTrayecto(int idAutobus, ArrayList<DTOCamino> listaCaminos){
 		int idTrayecto = obtenerIDTrayecto(idAutobus);
-		System.out.println(idTrayecto);
 		CaminoDAO.guardarTrayecto(listaCaminos, idTrayecto);
 	}
 	

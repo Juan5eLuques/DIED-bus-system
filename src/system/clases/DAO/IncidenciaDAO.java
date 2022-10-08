@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,6 +43,24 @@ public class IncidenciaDAO {
 		return incidencias;
 	}
 
+	public static void verificarIncidencias() {
+		GestorDB gdb = GestorDB.getInstance();
+		Connection con = gdb.conec;
+		try {
+			PreparedStatement st = con.prepareStatement("SELECT * FROM aplicacion_bus.INCIDENCIAS");
+			ResultSet rs = st.executeQuery();
+			Date date = new Date(System.currentTimeMillis());
+			while(rs.next()) {
+				if(rs.getDate("fin").before(date)) {
+					IncidenciaDAO.cambiarEstado(rs.getInt("id"), true);
+				}
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static DTOIncidencia obtenerIncidencia(int idIncidencia){
 		GestorDB gdb = GestorDB.getInstance();
 		Connection con = gdb.conec;

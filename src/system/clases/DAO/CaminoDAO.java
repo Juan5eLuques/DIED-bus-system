@@ -30,7 +30,23 @@ public class CaminoDAO {
 		}
 		return null;
 	}
-
+		
+		public static void actualizarDatosCamino(DTOCamino camino) {
+			GestorDB gdb = GestorDB.getInstance();
+			Connection con = gdb.conec;
+			try {
+				PreparedStatement st = con.prepareStatement("UPDATE aplicacion_bus.camino SET duracion=?, distancia=? WHERE idOrigen = ? AND idDestino = ?");
+				st.setDouble(1, camino.getDuracion());
+				st.setDouble(2, camino.getDistancia());
+				st.setInt(3, camino.getIdOrigen());
+				st.setInt(4, camino.getIdDestino());
+				st.executeUpdate();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+		
 		//Dado un DTO de un camino, lo transforma a objeto camino y lo devuelve
 		public static Camino transformarACamino(DTOCamino unCamino) {
 		Camino nuevoCamino = new Camino();
@@ -281,7 +297,7 @@ public class CaminoDAO {
 			eliminarCamino(unCamino);
 		}
 	}
-
+	
 	//Elimina todos los caminos asociados a una parada
 	public static void eliminarCaminosConParada (int idParada){
 		ArrayList<DTOCamino> listaCaminos = null;

@@ -173,24 +173,24 @@ public class JPGuardarTrayecto extends JPanel {
 
 			for(DTOCamino camino : listaPosibles) {
 			
-			g.setColor(Color.red);
-			DTOParada IDOrigen = new DTOParada();
-			DTOParada IDDestino = new DTOParada();
-			DTOParada origen,destino;
-			
-			IDOrigen.setNroParada(camino.getIdOrigen());
-			IDDestino.setNroParada(camino.getIdDestino());
-		
-			int posO = listaParadas.indexOf(IDOrigen);
-			int posD = listaParadas.indexOf(IDDestino);
-			
-			origen = listaParadas.get(posO);
-			destino = listaParadas.get(posD);
-			
-			UbicacionParada U_Origen = new UbicacionParada(origen);
-			UbicacionParada U_Destino = new UbicacionParada(destino);
-			
-			g.drawLine(U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY());
+					DTOParada IDOrigen = new DTOParada();
+					DTOParada IDDestino = new DTOParada();
+					DTOParada origen,destino;
+					
+					IDOrigen.setNroParada(camino.getIdOrigen());
+					IDDestino.setNroParada(camino.getIdDestino());
+				
+					int posO = listaParadas.indexOf(IDOrigen);
+					int posD = listaParadas.indexOf(IDDestino);
+					
+					origen = listaParadas.get(posO);
+					destino = listaParadas.get(posD);
+					
+					UbicacionParada U_Origen = new UbicacionParada(origen);
+					UbicacionParada U_Destino = new UbicacionParada(destino);
+					
+					GestorGUI.dibujarCamino(g, U_Origen.getX(), U_Origen.getY(), U_Destino.getX(), U_Destino.getY(), Color.red);
+					
 				}
 			}
 	}

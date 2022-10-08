@@ -166,7 +166,7 @@ public class JPMostrarTrayecto extends JPanel{
 		
 		
 		for(ArrayList<DTOCamino> trayecto : trayectoReemplazado) {
-			for (DTOcamino camino : trayecto){
+			for (DTOCamino camino : trayecto){
 			
 			DTOParada IDOrigen = new DTOParada();
 			DTOParada IDDestino = new DTOParada();

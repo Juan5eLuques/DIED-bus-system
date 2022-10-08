@@ -31,6 +31,7 @@ public class GestorIncidencia {
 		
 		public static void registrarIncidencia(DTOIncidencia nueva) {
 			IncidenciaDAO.registrarIncidencia(nueva);
+//			GestorParada.cambiarEstadoParada(nueva.getIdParada(), !nueva.isResuelta());
 
 			if (!nueva.isResuelta()){
 				ParadaDAO.actualizarActiva(nueva.getIdParada(),false);
@@ -40,7 +41,11 @@ public class GestorIncidencia {
 		public static ArrayList<DTOIncidencia> obtenerActivas(){
 			return IncidenciaDAO.obtenerActivas();
 		}
-
+		
+		public static void actualizarIncidencias() {
+			IncidenciaDAO.verificarIncidencias();
+		}
+		
 		public static boolean incidenciaExiste(int idIncidencia){
 			return (IncidenciaDAO.obtenerIncidencia(idIncidencia).getIdParada() != -1);
 		}
