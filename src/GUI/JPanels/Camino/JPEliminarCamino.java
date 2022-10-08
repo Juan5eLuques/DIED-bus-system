@@ -109,8 +109,8 @@ public class JPEliminarCamino extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				GestorCamino.eliminarCamino(caminoSeleccionado);
 				JOptionPane.showMessageDialog(null, "Camino eliminado con exito", null, JOptionPane.INFORMATION_MESSAGE);
-				revalidate();
-				repaint();
+				listaCaminos = GestorCamino.obtenerCaminos();
+				resetPanel();
 			}
 		});
 	}
@@ -272,6 +272,23 @@ public void listenerEliminar(BotonNodo parada) {
 	parada.addMouseListener(setearActionDestino);
 }
 
+		public void resetPanel() {
+			nodosCiudad.get(caminoSeleccionado.getIdOrigen()).resetColor();
+			nodosCiudad.get(caminoSeleccionado.getIdDestino()).resetColor();
+			listaPosiblesCaminos = new ArrayList<DTOCamino>();
+			caminoSeleccionado.setIdOrigen(0);
+			caminoSeleccionado.setIdDestino(0);
+			btnCheck.setEnabled(false);
+			botonDelete.setEnabled(false);
+			for (int i=0;i<listaParadas.size();i++) {
+				BotonNodo btn = nodosCiudad.get(listaParadas.get(i).getNroParada());
+				btn.limpiarActions();
+				listenerPosibles(btn);
+			}
+			repaint();
+			revalidate();
+		}
+	
 
 		public void deshabilitar() {
 			this.setVisible(false);

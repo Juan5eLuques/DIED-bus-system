@@ -49,20 +49,20 @@ public class JPRegistrarIncidencia extends JPanel {
 		JDFechaFin.setBounds(410,282,300,30);
 		TFDescripcion.setBounds(410,332,300,30);
 		
-		LblText lblNroLinea = new LblText("IDIncidencia : ", fuente);
-		lblNroLinea.setBounds(200, 130, 300, 30);
+		LblText lblIDIncidencia = new LblText("IDIncidencia : ", fuente);
+		lblIDIncidencia.setBounds(190, 130, 300, 30);
 		
-		LblText lblNombre = new LblText("IDParadaAfectada : ",fuente);
-		lblNombre.setBounds(200, 180, 300, 30);
+		LblText lblIDParada = new LblText("IDParadaAfectada : ",fuente);
+		lblIDParada.setBounds(158, 180, 300, 30);
 	
-		LblText lblColor = new LblText("FechaInicio : ",fuente);
-		lblColor.setBounds(200, 230, 300, 30);
+		LblText lblIncio= new LblText("FechaInicio : ",fuente);
+		lblIncio.setBounds(194, 230, 300, 30);
 		
-		LblText lblTipo = new LblText("FechaFin : ",fuente);
-		lblTipo.setBounds(200, 280, 300, 30);
+		LblText lblFinal = new LblText("FechaFin : ",fuente);
+		lblFinal.setBounds(207, 280, 300, 30);
 		
-		LblText lblPasajeros = new LblText("Descripcion : ",fuente);
-		lblPasajeros.setBounds(200, 330, 300, 30);
+		LblText lblDescripcion = new LblText("Descripcion : ",fuente);
+		lblDescripcion.setBounds(190, 330, 300, 30);
 		
 		
 		BotonIcono botonGuardar = new BotonIcono("iconGuardar.png");
@@ -75,11 +75,11 @@ public class JPRegistrarIncidencia extends JPanel {
 		this.add(JDFechaFin);
 		this.add(TFDescripcion);
 
-		this.add(lblNroLinea);
-		this.add(lblNombre);
-		this.add(lblColor);
-		this.add(lblTipo);
-		this.add(lblPasajeros);
+		this.add(lblIDIncidencia);
+		this.add(lblIDParada);
+		this.add(lblIncio);
+		this.add(lblFinal);
+		this.add(lblDescripcion);
 		 
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -110,6 +110,7 @@ public class JPRegistrarIncidencia extends JPanel {
 					GestorIncidencia.registrarIncidencia(nuevaIncidencia);
 					GestorParada.cambiarEstadoParada(nuevaIncidencia.getIdParada(), false);
 					JOptionPane.showMessageDialog(null, "Incidencia registrada con éxito", null, JOptionPane.INFORMATION_MESSAGE);
+					if ( nuevaIncidencia.getFechaFin().before(new Date(System.currentTimeMillis()))) GestorIncidencia.actualizarIncidencias();
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "La fecha incio debe ser anterior a la fecha fin", "Error", JOptionPane.WARNING_MESSAGE);

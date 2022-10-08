@@ -31,7 +31,7 @@ public class JPCrearCamino extends JPanel{
 	Map <Integer, BotonNodo> nodosCiudad = new HashMap<Integer, BotonNodo>();
 	ArrayList<DTOParada> listaParadas;
 	ArrayList<DTOCamino> listaCaminos;
-	DTOCamino nuevoCamino = new DTOCamino();
+	DTOCamino nuevoCamino;
 	boolean setOrigen = false;
 	BotonIcono btnCheck = new BotonIcono("iconCheck.png");
 	BotonIcono botonGuardar = new BotonIcono("iconGuardar.png");
@@ -43,6 +43,8 @@ public class JPCrearCamino extends JPanel{
 	public JPCrearCamino(JPanel panelManipular, JLabel lblTitulo) {
 		
 		Font fontLbl = new Font("Century Gothic", Font.BOLD, 15);
+		
+		nuevoCamino = new DTOCamino();
 		
 		lblTitulo.setText("CREAR CAMINO");
 		this.setBackground(new Color(32, 83, 117));
@@ -113,10 +115,16 @@ public class JPCrearCamino extends JPanel{
 					 JOptionPane.showMessageDialog(null, "El camino ya existe",null, JOptionPane.INFORMATION_MESSAGE);
 				}
 				else {
+					lblDistancia.setVisible(false);
+					lblDuracion.setVisible(false);
+					textFieldDistancia.setVisible(false);
+					textFieldDuracion.setVisible(false);
 					nuevoCamino.setDistancia(Integer.parseInt(textFieldDistancia.getText()));
 					nuevoCamino.setDuracion(Integer.parseInt(textFieldDuracion.getText()));
 					GestorCamino.guardarCamino(nuevoCamino);
 					JOptionPane.showMessageDialog(null, "Camino guardado con exito ! ",null, JOptionPane.INFORMATION_MESSAGE);
+					listaParadas = GestorParada.obtenerTodas();
+					listaCaminos = GestorCamino.obtenerCaminos();
 					resetPanel();
 				}
 			}
@@ -182,9 +190,9 @@ public class JPCrearCamino extends JPanel{
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					if (setOrigen == false) {
-					if (nuevo.getIdOrigen()!=0) {
-					nodosCiudad.get(nuevo.getIdOrigen()).resetColor();
-					}
+						if (nuevo.getIdOrigen()!=0) {
+							nodosCiudad.get(nuevo.getIdOrigen()).resetColor();
+						}
 					nuevo.setIdOrigen(parada.infoParada().getNroParada());
 					parada.setBorder((BorderFactory.createLineBorder(Color.green)));
 					btnCheck.setEnabled(true);
@@ -256,15 +264,17 @@ public class JPCrearCamino extends JPanel{
 	public void resetPanel() {
 		nodosCiudad.get(nuevoCamino.getIdOrigen()).setBorder(BorderFactory.createLineBorder(Color.black));
 		nodosCiudad.get(nuevoCamino.getIdDestino()).setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		for (DTOCamino camino : listaCaminos ) {
-			System.out.println(camino.getIdOrigen() + " --- > " + camino.getIdDestino());
-		}
-		
+		textFieldDistancia.setText("");
+		textFieldDuracion.setText("");
+		nuevoCamino.setIdDestino(0);
+		nuevoCamino.setIdOrigen(0);
 		this.setOrigen = false;
 		botonGuardar.setEnabled(false);
 		btnCheck.setEnabled(false);
-		nuevoCamino = new DTOCamino();
+		repaint();
+		revalidate();
+		
+		
 	}
 	
 }

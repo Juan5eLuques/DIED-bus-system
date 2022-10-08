@@ -36,6 +36,14 @@ public class GestorCamino {
 	public static void eliminarCaminosConParada (int idParada){
 		CaminoDAO.eliminarCaminosConParada(idParada);
 	}
+	
+	public static DTOCamino obtenerCamino(int idOrigen, int idDestino) {
+		return CaminoDAO.obtenerUnCamino(idOrigen, idDestino);
+	}
+	
+	public static void actualizarDatosCamino( DTOCamino nuevo) {
+		CaminoDAO.actualizarDatosCamino(nuevo);
+	}
 
 	public static void guardarCamino(DTOCamino camino) {
 		CaminoDAO.guardarCamino(camino);

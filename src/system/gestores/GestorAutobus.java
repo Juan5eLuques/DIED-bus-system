@@ -28,7 +28,7 @@ public class GestorAutobus {
 	
 	public static void crearAutobus(DTOAutobus datosAutobus, ArrayList<DTOCamino> trayecto) {
 		if (AutobusDAO.existeNroAutobus(datosAutobus)) {
-			JOptionPane.showMessageDialog(null, "El nï¿½mero de la linea ya existe en la base de datos", null, JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "El número de la linea ya existe en la base de datos", null, JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
 			AutobusDAO.setearDatosAutobus(datosAutobus);

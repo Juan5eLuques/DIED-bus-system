@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import GUI.Componentes.BotonAtras;
 import GUI.Componentes.BotonMenu;
 import GUI.JPanels.Camino.JPCrearCamino;
+import GUI.JPanels.Camino.JPEditarCamino;
 import GUI.JPanels.Camino.JPEliminarCamino;
 import GUI.JPanels.Camino.JPVerCaminos;
 import GUI.JPanels.Linea.JPVerLineas;
@@ -61,6 +62,16 @@ public class JPMenuCamino extends JPanel{
 				desabilitarMenu();
 				lblTitulo.setText("CREAR CAMINO");
 				panelCrearCamino.setVisible(true);
+			}
+		});
+		
+		btnEditarCamino.addActionListener(new ActionListener ( ) {
+			public void actionPerformed(ActionEvent e) {
+				JPEditarCamino panelEditarCamino = new JPEditarCamino(getPanel(), lblTitulo);
+				panelContent.add(panelEditarCamino);
+				desabilitarMenu();
+				lblTitulo.setText("EDITAR CAMINO");
+				panelEditarCamino.setVisible(true);
 			}
 		});
 		

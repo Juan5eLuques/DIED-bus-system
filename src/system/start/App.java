@@ -1,12 +1,15 @@
 package system.start;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
 
 import GUI.GUIMenu;
 import system.gestores.GestorDB;
+import system.gestores.GestorIncidencia;
 
 
 public class App {
@@ -14,6 +17,7 @@ public class App {
 	public static void main( String[] args ){
 
 		try {
+			GestorIncidencia.actualizarIncidencias();
 			GestorDB gdb = GestorDB.getInstance();
 			Connection con = gdb.crearConexion();
 			JOptionPane.showMessageDialog(null, "Base de datos conectada.", "Conexión establecida", JOptionPane.INFORMATION_MESSAGE);
