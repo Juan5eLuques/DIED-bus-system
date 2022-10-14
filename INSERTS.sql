@@ -134,7 +134,7 @@ INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(121,'TRUE',
 INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(122,'TRUE','CALLE 12',200);
 INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(123,'TRUE','CALLE 12',300);
 INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(124,'TRUE','CALLE 12',400);
-INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(125,'TRUE','CALLE 12',500);
+INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(125,'FALSE','CALLE 12',500);
 INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(126,'TRUE','CALLE 12',600);
 INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(127,'TRUE','CALLE 12',700);
 INSERT INTO APLICACION_BUS.PARADA (id, activa, calle, numero) values(128,'TRUE','CALLE 12',800);
@@ -639,7 +639,7 @@ INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, act
 INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (207,160,200,2,'true');
 INSERT INTO APLICACION_BUS.CAMINO (idOrigen, idDestino, distancia, duracion, activa) values (209,200,200,2,'true');
 
-INSERT INTO APLICACION_BUS.LINEA (nombre, color, tipo, asientos, parados, wifi, aire) values ('Linea E1','Amarillo','Economico',40,30,'false','false');
+INSERT INTO APLICACION_BUS.LINEA (nombre, color, tipo, asientos, parados, wifi, aire) values ('Linea E1','Amarillo','Economico',35,30,'false','false');
 INSERT INTO APLICACION_BUS.TRAYECTO (idLinea) values (1);
 
 INSERT INTO APLICACION_BUS.LINEA (nombre, color, tipo, asientos, parados, wifi, aire) values ('Linea E2','Amarillo','Economico',40,20,'false','false');
@@ -648,8 +648,17 @@ INSERT INTO APLICACION_BUS.TRAYECTO (idLinea) values (2);
 INSERT INTO APLICACION_BUS.LINEA (nombre, color, tipo, asientos, parados, wifi, aire) values ('Linea S1','Plateado','Superior',40,0,'true','false');
 INSERT INTO APLICACION_BUS.TRAYECTO (idLinea) values (3);
 
-INSERT INTO APLICACION_BUS.LINEA (nombre, color, tipo, asientos, parados, wifi, aire) values ('Linea S2','Plateado','Superior',40,0,'false','true');
+INSERT INTO APLICACION_BUS.LINEA (nombre, color, tipo, asientos, parados, wifi, aire) values ('Linea S2','Plateado','Superior',45,0,'false','true');
 INSERT INTO APLICACION_BUS.TRAYECTO (idLinea) values (4);
+
+INSERT INTO APLICACION_BUS.LINEA (nombre, color, tipo, asientos, parados, wifi, aire) values ('Linea S3','Rojo','Superior',30,0,'true','true');
+INSERT INTO APLICACION_BUS.TRAYECTO (idLinea) values (5);
+
+INSERT INTO APLICACION_BUS.LINEA (nombre, color, tipo, asientos, parados, wifi, aire) values ('Linea B','Verde','Economico',35,10,'false','false');
+INSERT INTO APLICACION_BUS.TRAYECTO (idLinea) values (6);
+
+INSERT INTO APLICACION_BUS.LINEA (nombre, color, tipo, asientos, parados, wifi, aire) values ('Linea C','Azul','Superior',20,0,'true','false');
+INSERT INTO APLICACION_BUS.TRAYECTO (idLinea) values (7);
 
 --LINEA E1
 INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (32,21,1,1);
@@ -747,3 +756,78 @@ INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) 
 INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (93,94,4,13);
 INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (94,95,4,14);
 
+-- Linea S3
+
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (195,194,5,1);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (194,69,5,2);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (69,68,5,3);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (68,67,5,4);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (67,66,5,5);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (66,65,5,6);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (65,94,5,7);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (94,85,5,8);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (85,86,5,9);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (86,135,5,10);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (135,136,5,11);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (136,127,5,12);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (127,128,5,13);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (128,177,5,14);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (177,178,5,15);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (178,179,5,16);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (179,180,5,17);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (180,209,5,18);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (209,200,5,19);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (200,199,5,20);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (199,198,5,21);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (198,197,5,22);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (197,196,5,23);
+
+-- Linea B
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (1,2,6,1);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (2,51,6,2);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (51,22,6,3);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (22,21,6,4);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (21,12,6,5);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (12,13,6,6);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (13,14,6,7);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (14,15,6,8);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (15,16,6,9);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (16,121,6,10);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (121,122,6,11);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (122,57,6,12);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (57,58,6,13);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (58,163,6,14);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (163,78,6,15);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (78,77,6,16);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (77,76,6,17);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (76,103,6,18);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (103,102,6,19);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (102,35,6,20);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (35,82,6,21);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (82,83,6,22);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (83,74,6,23);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (74,63,6,24);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (63,62,6,25);
+
+
+-- Linea C
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (27,132,7,1);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (132,133,7,2);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (133,66,7,3);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (66,65,7,4);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (65,94,7,5);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (94,85,7,6);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (85,86,7,7);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (86,135,7,8);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (135,136,7,9);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (136,127,7,10);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (127,128,7,11);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (128,129,7,12);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (129,196,7,13);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (196,109,7,14);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (109,108,7,15);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (108,155,7,16);
+INSERT INTO APLICACION_BUS.CAMINOTRAYECTO (idOrigen,idDestino,idTrayecto,orden) values (155,88,7,17);
+
+INSERT INTO aplicacion_bus.incidencias(id, idparada, inicio, fin, descripcion, resuelta) VALUES (1, 96, '11-10-2022','13-10-2022','Calle cortada', true);
+INSERT INTO aplicacion_bus.incidencias(id, idparada, inicio, fin, descripcion, resuelta) VALUES (2, 125, '11-10-2022','13-11-2022','Parada inhabilitada por refacciones', false);
