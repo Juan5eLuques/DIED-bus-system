@@ -48,8 +48,8 @@ public class GUIInfoTrayecto extends JFrame {
 		LblText lblInicio= new LblText("Punto inicial: " +infoCamino.getParadaInicial()+"");
 		LblText lblFinal= new LblText("Punto final: " +infoCamino.getParadaFinal()+"");
 		LblText lblCosto = new LblText("Costo: ");
-		LblText lblDuracion= new LblText("Duracion: " +infoCamino.getDuracion()+"");
-		LblText lblDistancia = new LblText("Distancia: " +infoCamino.getDistancia()+"");
+		LblText lblDuracion= new LblText("Duracion: " +infoCamino.getDuracion()+" m");
+		LblText lblDistancia = new LblText("Distancia: " +infoCamino.getDistancia()+"Km");
 		LblText lblPrice = new LblText("$"+infoCamino.getCosto(),new Font("Ebrima", Font.BOLD,70));
 		
 		lblAutobus.setBounds(50,15,250,30);
