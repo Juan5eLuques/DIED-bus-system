@@ -2,8 +2,6 @@
 
 Sistema de recorridos de autobuses. 
 
-Proyecto en estado incompleto, sin las funcionalidades de trayectorias de autobuses.
-
 *CREAR BASE DE DATOS*
 
 #POSTGRESQL db-password : root
